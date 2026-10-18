@@ -1,5 +1,5 @@
 import { site, fullAddress } from "@/data/site";
-import { media } from "@/config/media";
+import { media, webpSrcSet } from "@/config/media";
 import ContactForm from "@/components/ContactForm";
 import { Icon } from "@/components/Icon";
 
@@ -7,10 +7,14 @@ import { Icon } from "@/components/Icon";
 export default function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="on-dark relative overflow-hidden bg-forest-ink text-cream">
-      <img src={media.cta} alt="" aria-hidden="true" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-30" onError={(e) => ((e.target as HTMLImageElement).style.display = "none")} />
+      {/* Decorative texture: desktop only (on phones it is barely visible, so it isn't downloaded) */}
+      <picture>
+        <source type="image/webp" srcSet={webpSrcSet(media.cta)} sizes="100vw" />
+        <img src={media.cta} alt="" aria-hidden="true" loading="lazy" decoding="async" className="absolute inset-0 hidden h-full w-full object-cover opacity-30 md:block" onError={(e) => ((e.target as HTMLImageElement).style.display = "none")} />
+      </picture>
       <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgb(var(--forest-ink-rgb)/0.86)_0%,rgb(var(--forest-deep-rgb)/0.92)_100%)]" />
 
-      <div className="container-royal section relative grid gap-16 lg:grid-cols-12">
+      <div className="container-royal section relative grid gap-12 sm:gap-16 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <p data-reveal className="eyebrow mb-5 text-gold-light">
             Get in touch
@@ -23,7 +27,7 @@ export default function Contact() {
           </p>
           <ContactDetails />
         </div>
-        <div data-reveal data-reveal-delay="0.15" className="rounded-3xl border border-white/15 bg-white/[0.05] p-6 backdrop-blur-md sm:p-10 lg:col-span-6 lg:col-start-7">
+        <div data-reveal data-reveal-delay="0.15" className="rounded-3xl border border-white/15 bg-forest-ink/60 p-5 sm:p-10 lg:col-span-6 lg:col-start-7">
           <ContactForm tone="dark" />
         </div>
       </div>

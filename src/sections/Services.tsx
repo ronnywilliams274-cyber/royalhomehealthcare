@@ -13,7 +13,7 @@ export default function Services() {
   return (
     <section id="services" aria-labelledby="services-title" className="bg-linen">
       <div className="container-royal section">
-        <div className="mb-16 grid gap-6 lg:mb-20 lg:grid-cols-12 lg:items-end">
+        <div className="mb-12 grid gap-6 sm:mb-16 lg:mb-20 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <p data-reveal className="eyebrow mb-5 text-gold-ink">
               What we offer
@@ -34,26 +34,26 @@ export default function Services() {
             </h3>
             <p className="max-w-md text-moss">{categories.nursing.blurb}</p>
           </div>
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {nursing.map((s, i) => (
               <li key={s.slug} data-reveal data-reveal-delay={String((i % 3) * 0.06)}>
-                <ServiceCard s={s} headingLevel={4} />
+                <ServiceCard s={s} headingLevel={4} mobileCompact />
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="mt-20">
+        <div className="mt-14 sm:mt-20">
           <div className="mb-6 flex flex-wrap items-baseline justify-between gap-3">
             <h3 id="cat-programs" className="font-serif-display text-3xl font-semibold text-forest">
               {categories.programs.label}
             </h3>
             <p className="max-w-md text-moss">{categories.programs.blurb}</p>
           </div>
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <ul className="grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
             {programs.map((s, i) => (
               <li key={s.slug} data-reveal data-reveal-delay={String((i % 4) * 0.06)}>
-                <ServiceCard s={s} headingLevel={4} />
+                <ServiceCard s={s} headingLevel={4} mobileCompact />
               </li>
             ))}
             <li data-reveal data-reveal-delay="0.18">
@@ -75,7 +75,7 @@ export default function Services() {
           </ul>
         </div>
 
-        <div data-reveal className="mt-20 rounded-3xl border border-forest/10 bg-white p-7 sm:p-10">
+        <div data-reveal className="mt-14 rounded-3xl sm:mt-20 border border-forest/10 bg-white p-7 sm:p-10">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-4">
               <h3 className="font-serif-display text-3xl font-semibold text-forest">{categories.core.label}</h3>

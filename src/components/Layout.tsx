@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Outlet, useLocation } from "react-router";
 import Nav from "@/components/Nav";
 import Footer from "@/sections/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
-import { useLenis, scrollToTopInstant, scrollToElement } from "@/hooks/useLenis";
+import { scrollToTopInstant, scrollToElement } from "@/hooks/scroll";
 import { useScrollAnimations } from "@/hooks/useScrollAnimations";
 import { getRouteMeta } from "@/routes";
 
@@ -17,7 +17,16 @@ import { getRouteMeta } from "@/routes";
  */
 export default function Layout() {
   const { pathname, hash } = useLocation();
-  useLenis();
+  const lastPath = useRef(pathname);
+
+  // New page: jump to the top *before* paint, so the reveal system measures the right positions
+  // and the visitor never sees the old scroll position flash.
+  useIsoLayoutEffect(() => {
+    if (lastPath.current === pathname) return;
+    lastPath.current = pathname;
+    if (!hash) scrollToTopInstant();
+  }, [pathname, hash]);
+
   const mainRef = useScrollAnimations<HTMLDivElement>(pathname);
   const [announcement, setAnnouncement] = useState("");
   const firstRender = useRef(true);
@@ -45,7 +54,6 @@ export default function Layout() {
 
     if (isFirst) return; // initial page load: leave focus where the browser puts it
 
-    scrollToTopInstant();
     const heading = document.querySelector<HTMLElement>("main h1");
     focusElement(heading ?? document.getElementById("main"));
     setAnnouncement(`${meta.name} page`);
@@ -72,6 +80,8 @@ export default function Layout() {
     </>
   );
 }
+
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 function focusElement(el: HTMLElement | null) {
   if (!el) return;

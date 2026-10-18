@@ -1,7 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  // The unused shadcn/ui kit in src/components/ui is excluded so its classes don't bloat the CSS.
+  // If you start using one of those components, remove the "!" line.
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', '!./src/components/ui/**'],
+  // Hover styles apply only on devices that can really hover (mouse/trackpad). On phones this
+  // prevents "stuck" hover states after a tap.
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       fontFamily: {

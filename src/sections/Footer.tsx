@@ -4,6 +4,7 @@ import { site } from "@/data/site";
 import { servicesIn } from "@/data/services";
 import { Icon } from "@/components/Icon";
 import { setUserMotionOff, useUserMotionOff } from "@/hooks/useMotion";
+import { ThemeSwatches } from "@/components/ThemeSwitcher";
 
 const company = [
   { label: "About us", to: "/about" },
@@ -25,8 +26,8 @@ export default function Footer() {
   return (
     <footer className="on-dark bg-forest-ink pb-28 text-cream md:pb-10">
       <div className="container-royal border-t border-white/10 pt-16">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-12 lg:gap-12">
+          <div className="col-span-2 lg:col-span-4">
             <Link to="/" className="inline-flex items-center gap-3" aria-label={`${site.shortName} home`}>
               <Crest className="h-10 w-10 text-gold-light" />
               <span aria-hidden="true" className="font-serif-display text-2xl font-medium">
@@ -63,10 +64,10 @@ export default function Footer() {
 
           <nav aria-label="Skilled nursing services" className="lg:col-span-3">
             <h2 className="eyebrow mb-5 text-gold-light">Skilled nursing</h2>
-            <ul className="space-y-2.5">
+            <ul className="space-y-1">
               {servicesIn("nursing").map((s) => (
                 <li key={s.slug}>
-                  <Link to={`/services/${s.slug}`} className="text-cream/90 underline-offset-4 hover:text-white hover:underline">
+                  <Link to={`/services/${s.slug}`} className="inline-block py-1.5 text-cream/90 underline-offset-4 hover:text-white hover:underline">
                     {s.navTitle ?? s.title}
                   </Link>
                 </li>
@@ -76,10 +77,10 @@ export default function Footer() {
 
           <nav aria-label="Care programs" className="lg:col-span-3">
             <h2 className="eyebrow mb-5 text-gold-light">Care programs</h2>
-            <ul className="space-y-2.5">
+            <ul className="space-y-1">
               {servicesIn("programs").map((s) => (
                 <li key={s.slug}>
-                  <Link to={`/services/${s.slug}`} className="text-cream/90 underline-offset-4 hover:text-white hover:underline">
+                  <Link to={`/services/${s.slug}`} className="inline-block py-1.5 text-cream/90 underline-offset-4 hover:text-white hover:underline">
                     {s.navTitle ?? s.title}
                   </Link>
                 </li>
@@ -87,12 +88,12 @@ export default function Footer() {
             </ul>
           </nav>
 
-          <nav aria-label="Company" className="lg:col-span-2">
+          <nav aria-label="Company" className="col-span-2 sm:col-span-1 lg:col-span-2">
             <h2 className="eyebrow mb-5 text-gold-light">Company</h2>
-            <ul className="space-y-2.5">
+            <ul className="space-y-1">
               {company.map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-cream/90 underline-offset-4 hover:text-white hover:underline">
+                  <Link to={l.to} className="inline-block py-1.5 text-cream/90 underline-offset-4 hover:text-white hover:underline">
                     {l.label}
                   </Link>
                 </li>
@@ -107,7 +108,11 @@ export default function Footer() {
             {site.licenseNumber && <> California license #{site.licenseNumber}.</>}
             {site.medicare.ccn && <> Medicare CCN {site.medicare.ccn}.</>}
           </p>
-          <div className="lg:col-span-4 lg:text-right">
+          <div className="flex flex-wrap items-center gap-4 lg:col-span-4 lg:justify-end">
+            <div className="flex items-center gap-3 sm:hidden">
+              <span className="text-cream/85">Colour theme</span>
+              <ThemeSwatches />
+            </div>
             <button
               type="button"
               onClick={() => setUserMotionOff(!motionOff)}
@@ -124,10 +129,10 @@ export default function Footer() {
           <p>
             © <span suppressHydrationWarning>{new Date().getFullYear()}</span> {site.name} All rights reserved.
           </p>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          <ul className="flex flex-wrap gap-x-6 gap-y-1">
             {legal.map((l) => (
               <li key={l.to}>
-                <Link to={l.to} className="underline underline-offset-4 hover:text-white">
+                <Link to={l.to} className="inline-block py-1.5 underline underline-offset-4 hover:text-white">
                   {l.label}
                 </Link>
               </li>

@@ -181,10 +181,10 @@ export default function ServiceDetailPage() {
             <h2 id="related-title" className="h-display text-h2 mb-10 text-forest">
               Related services
             </h2>
-            <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
               {related.map((r) => (
                 <li key={r.slug}>
-                  <ServiceCard s={r} />
+                  <ServiceCard s={r} mobileCompact />
                 </li>
               ))}
             </ul>

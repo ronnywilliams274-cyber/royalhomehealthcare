@@ -9,6 +9,7 @@ import { StaticRouter } from "react-router";
 import App from "./App";
 import { allRoutes, notFoundRoute, getRouteMeta, type RouteMeta } from "./routes";
 import { site } from "./data/site";
+import { imageVariants } from "./config/media";
 
 export function render(url: string): string {
   return renderToString(
@@ -20,5 +21,5 @@ export function render(url: string): string {
   );
 }
 
-export { allRoutes, notFoundRoute, getRouteMeta, site };
+export { allRoutes, notFoundRoute, getRouteMeta, site, imageVariants };
 export type { RouteMeta };

@@ -1,108 +1,88 @@
-import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "./useLenis";
-import { useMotionOff } from "./useMotion";
+import { useEffect, useLayoutEffect, useRef } from "react";
+import { isMotionOff, useMotionOff } from "./useMotion";
+
+// useLayoutEffect in the browser (runs before paint, so nothing flickers), useEffect on the server.
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /**
- * GSAP ScrollTrigger reveals for every [data-reveal] element inside the returned ref.
- * Re-runs whenever `key` changes (pass the current pathname).
+ * Lightweight scroll reveals for every [data-reveal] element inside the returned ref.
  *
- * Accessibility: content is never hidden from screen readers, reveals are skipped when
- * motion is off, and an element that receives keyboard focus is revealed immediately.
+ * Performance: one IntersectionObserver for the whole page and pure CSS transitions on
+ * opacity/transform, which run on the GPU compositor. Nothing runs while you scroll (no scroll
+ * listeners, no per-frame JavaScript), so it stays smooth on low-end phones.
+ *
+ * Content is never hidden before this code runs: the page is fully visible as prerendered
+ * HTML, then only the parts still *below the fold* are prepared for their reveal
+ * (the html.reveal-ready class in index.css).
+ *
+ * Accessibility: content is never hidden from screen readers; reveals are skipped when motion
+ * is off (OS setting or the footer "Reduce motion" switch); anything that receives keyboard
+ * focus is shown immediately. Re-runs when `key` (the pathname) changes.
  */
 export function useScrollAnimations<T extends HTMLElement>(key: string) {
   const ref = useRef<T>(null);
   const motionOff = useMotionOff();
 
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     const root = ref.current;
     if (!root) return;
+    const els = Array.from(root.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-revealed)"));
+    const reveal = (el: HTMLElement) => el.classList.add("is-revealed");
 
-    const ctx = gsap.context(() => {
-      const els = gsap.utils.toArray<HTMLElement>("[data-reveal]");
-      const imgWraps = gsap.utils.toArray<HTMLElement>("[data-image-reveal]");
+    // Read the live preference (during hydration the hook value is still the server default).
+    if (isMotionOff() || !("IntersectionObserver" in window)) {
+      els.forEach((el) => el.classList.add("is-revealed", "no-anim"));
+      return;
+    }
 
-      if (motionOff) {
-        gsap.set(els, { clearProps: "opacity,transform" });
-        return;
+    // Anything already on screen (or scrolled past) stays visible without animating.
+    // Measure each element's *section* first: sections far below the fold are not laid out yet
+    // (content-visibility: auto), and measuring their children would force that work early.
+    const vh = window.innerHeight;
+    const pending: HTMLElement[] = [];
+    const sectionTop = new Map<Element, number>();
+    for (const el of els) {
+      const sec = el.closest("section") ?? el;
+      let top = sectionTop.get(sec);
+      if (top === undefined) {
+        top = sec.getBoundingClientRect().top;
+        sectionTop.set(sec, top);
       }
+      if (top > vh) pending.push(el);
+      else if (el.getBoundingClientRect().top < vh * 0.92) el.classList.add("is-revealed", "no-anim");
+      else pending.push(el);
+    }
+    document.documentElement.classList.add("reveal-ready");
 
-      els.forEach((el) => {
-        const delay = parseFloat(el.dataset.revealDelay || "0");
-        gsap.fromTo(
-          el,
-          { opacity: 0, y: 26, scale: 0.985 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.85,
-            delay,
-            ease: "power3.out",
-            clearProps: "transform",
-            scrollTrigger: { trigger: el, start: "top 91%", once: true },
-          }
-        );
-      });
+    // Shorter stagger on small screens so content arrives quickly while scrolling.
+    const small = window.matchMedia("(max-width: 767px)").matches;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const el = e.target as HTMLElement;
+          const delay = Math.min(parseFloat(el.dataset.revealDelay || "0"), 0.3) * (small ? 0.5 : 1);
+          if (delay) el.style.transitionDelay = `${delay}s`;
+          reveal(el);
+          io.unobserve(el);
+        }
+      },
+      { rootMargin: "0px 0px -6% 0px", threshold: 0 }
+    );
+    pending.forEach((el) => io.observe(el));
 
-      // Editorial image zoom-out reveal on both mobile and desktop
-      imgWraps.forEach((wrap) => {
-        const img = wrap.querySelector("img");
-        if (!img) return;
-        gsap.fromTo(
-          img,
-          { scale: 1.08 },
-          {
-            scale: 1,
-            duration: 1.25,
-            ease: "power2.out",
-            clearProps: "transform",
-            scrollTrigger: { trigger: wrap, start: "top 88%", once: true },
-          }
-        );
-      });
-
-      // Mobile-specific scroll highlight for cards and process steps
-      const isMobileViewport = window.matchMedia("(max-width: 767px)").matches;
-      if (isMobileViewport) {
-        gsap.utils.toArray<HTMLElement>("[data-mobile-card]").forEach((card) => {
-          ScrollTrigger.create({
-            trigger: card,
-            start: "top 68%",
-            end: "bottom 32%",
-            toggleClass: { targets: card, className: "mobile-card-active" },
-          });
-        });
-
-        gsap.utils.toArray<HTMLElement>("[data-mobile-step]").forEach((step) => {
-          ScrollTrigger.create({
-            trigger: step,
-            start: "top 65%",
-            end: "bottom 35%",
-            toggleClass: { targets: step, className: "mobile-step-active" },
-          });
-        });
-      }
-    }, root);
-
-    // A keyboard user tabbing into not-yet-revealed content sees it at once.
     const onFocusIn = (e: FocusEvent) => {
       const target = (e.target as HTMLElement | null)?.closest<HTMLElement>("[data-reveal]");
-      if (target && getComputedStyle(target).opacity !== "1") {
-        gsap.to(target, { opacity: 1, y: 0, duration: 0.2, overwrite: true });
+      if (target && !target.classList.contains("is-revealed")) {
+        target.classList.add("is-revealed", "no-anim");
+        io.unobserve(target);
       }
     };
     root.addEventListener("focusin", onFocusIn);
 
-    // Layout can shift once fonts/images load.
-    const refresh = () => ScrollTrigger.refresh();
-    window.addEventListener("load", refresh);
-    const t = window.setTimeout(refresh, 600);
-
     return () => {
+      io.disconnect();
       root.removeEventListener("focusin", onFocusIn);
-      window.removeEventListener("load", refresh);
-      window.clearTimeout(t);
-      ctx.revert();
     };
   }, [key, motionOff]);
 

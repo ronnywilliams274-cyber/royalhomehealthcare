@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { gsap } from "@/hooks/useLenis";
 import { isMotionOff } from "@/hooks/useMotion";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
@@ -20,25 +19,34 @@ export default function Stats() {
 
   useEffect(() => {
     const root = ref.current;
-    if (!root || isMotionOff()) return;
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray<HTMLElement>("[data-count]").forEach((el) => {
-        const target = parseInt(el.dataset.count || "0", 10);
-        if (target < 2) return;
-        const obj = { n: 0 };
-        el.textContent = "0";
-        gsap.to(obj, {
-          n: target,
-          duration: 1.4,
-          ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 90%", once: true },
-          onUpdate: () => {
-            el.textContent = String(Math.round(obj.n));
-          },
-        });
-      });
-    }, root);
-    return () => ctx.revert();
+    if (!root || isMotionOff() || !("IntersectionObserver" in window)) return;
+    const els = Array.from(root.querySelectorAll<HTMLElement>("[data-count]")).filter(
+      (el) => parseInt(el.dataset.count || "0", 10) >= 2
+    );
+    let raf = 0;
+    // Count up once, when the numbers scroll into view. A few frames of text updates; nothing else.
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        const start = performance.now();
+        const dur = 1200;
+        const step = (now: number) => {
+          const t = Math.min(1, (now - start) / dur);
+          const eased = 1 - Math.pow(1 - t, 3);
+          for (const el of els) el.textContent = String(Math.round(parseInt(el.dataset.count!, 10) * eased));
+          if (t < 1) raf = requestAnimationFrame(step);
+        };
+        raf = requestAnimationFrame(step);
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(root);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+      els.forEach((el) => (el.textContent = el.dataset.count!));
+    };
   }, []);
 
   return (

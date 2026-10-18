@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Icon } from "@/components/Icon";
-
-export type ThemeId = "sage" | "coastal" | "azure";
+import { setTheme, useTheme, type ThemeId } from "@/hooks/useTheme";
 
 interface ThemeOption {
   id: ThemeId;
@@ -39,26 +38,38 @@ const THEMES: ThemeOption[] = [
   },
 ];
 
-const STORAGE_KEY = "rhhc-color-theme";
+/** Compact swatch row, used in the footer on phones (the floating switcher is hidden there). */
+export function ThemeSwatches() {
+  const theme = useTheme();
+  return (
+    <div role="group" aria-label="Colour theme" className="flex items-center gap-2">
+      {THEMES.map((t) => {
+        const active = t.id === theme;
+        return (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() => setTheme(t.id)}
+            aria-label={`${t.name} theme`}
+            aria-pressed={active}
+            className={`flex h-11 w-11 items-center justify-center rounded-full border-2 transition-transform active:scale-90 ${
+              active ? "border-gold-light" : "border-white/25"
+            }`}
+          >
+            <span className="flex h-7 w-7 items-center justify-center rounded-full" style={{ backgroundColor: t.primary }}>
+              <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: t.accent }} />
+            </span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState<ThemeId>("sage");
+  const theme = useTheme();
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY) as ThemeId | null;
-      if (saved && THEMES.some((t) => t.id === saved)) {
-        setTheme(saved);
-        document.documentElement.setAttribute("data-theme", saved);
-      } else {
-        document.documentElement.setAttribute("data-theme", "sage");
-      }
-    } catch {
-      document.documentElement.setAttribute("data-theme", "sage");
-    }
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -76,28 +87,20 @@ export default function ThemeSwitcher() {
     };
   }, [open]);
 
-  const applyTheme = (id: ThemeId) => {
-    setTheme(id);
-    document.documentElement.setAttribute("data-theme", id);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, id);
-    } catch {
-      // ignore storage errors
-    }
-  };
+  const applyTheme = (id: ThemeId) => setTheme(id);
 
   const current = THEMES.find((t) => t.id === theme) ?? THEMES[0];
 
   return (
     <div
       ref={wrapRef}
-      className="no-print fixed bottom-[4.75rem] right-3.5 z-50 sm:bottom-6 sm:right-6"
+      className="no-print fixed bottom-6 right-6 z-50 hidden sm:block [@media(max-height:520px)]:!hidden"
     >
       {open && (
         <div
           role="dialog"
           aria-label="Choose color theme"
-          className="mb-2.5 w-64 rounded-2xl border border-forest/20 bg-white/80 p-3 shadow-[0_20px_50px_-15px_rgb(var(--forest-ink-rgb)/0.35)] backdrop-blur-xl"
+          className="mb-2.5 w-64 rounded-2xl border border-forest/20 bg-white p-3 shadow-[0_20px_50px_-15px_rgb(var(--forest-ink-rgb)/0.35)]"
         >
           <div className="mb-2 flex items-center justify-between px-1.5">
             <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-moss">
@@ -124,7 +127,7 @@ export default function ThemeSwitcher() {
                     setOpen(false);
                   }}
                   aria-pressed={active}
-                  className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-200 active:scale-[0.98] ${
+                  className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left transition-colors duration-200 active:scale-[0.98] ${
                     active
                       ? "bg-forest text-cream shadow-sm"
                       : "bg-white/60 text-charcoal hover:bg-white"
@@ -155,7 +158,7 @@ export default function ThemeSwitcher() {
       )}
 
       {/* Floating transparent pill button with direct swatch dots + menu toggle */}
-      <div className="flex items-center gap-1.5 rounded-full border border-forest/20 bg-white/65 p-1.5 shadow-[0_12px_34px_-8px_rgb(var(--forest-ink-rgb)/0.32)] backdrop-blur-xl transition-all duration-300 hover:bg-white/85">
+      <div className="flex items-center gap-1.5 rounded-full border border-forest/20 bg-white/95 p-1.5 shadow-[0_12px_34px_-8px_rgb(var(--forest-ink-rgb)/0.32)] transition-colors duration-300 hover:bg-white">
         {THEMES.map((t) => {
           const active = t.id === theme;
           return (

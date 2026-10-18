@@ -25,7 +25,7 @@ export default function Process() {
   return (
     <section aria-labelledby="process-title" className="bg-cream">
       <div className="container-royal section">
-        <div className="mb-14 grid gap-6 lg:grid-cols-12">
+        <div className="mb-10 grid gap-6 sm:mb-14 lg:grid-cols-12">
           <p data-reveal className="eyebrow text-gold-ink lg:col-span-3 lg:pt-4">
             How it works
           </p>
@@ -40,17 +40,21 @@ export default function Process() {
           {steps.map((s, i) => (
             <li
               key={s.title}
-              data-mobile-step
-              className="group bg-cream p-8 transition-all duration-500 hover:bg-forest [&.mobile-step-active]:bg-forest lg:p-10"
+              className="group flex gap-4 bg-cream p-6 transition-colors duration-500 hover:bg-forest sm:block sm:p-8 lg:p-10"
             >
-              <span aria-hidden="true" className="font-serif-display text-2xl text-gold-ink transition-colors group-hover:text-gold-light group-[.mobile-step-active]:text-gold-light">
+              <span
+                aria-hidden="true"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-forest font-serif-display text-lg text-cream transition-colors group-hover:text-gold-light sm:h-auto sm:w-auto sm:justify-start sm:rounded-none sm:bg-transparent sm:text-2xl sm:text-gold-ink"
+              >
                 0{i + 1}
               </span>
-              <h3 className="font-serif-display mt-5 text-2xl font-semibold leading-snug text-forest transition-colors duration-500 group-hover:text-cream group-[.mobile-step-active]:text-cream">
-                <span className="sr-only">Step {i + 1}: </span>
-                {s.title}
-              </h3>
-              <p className="mt-3 leading-relaxed text-charcoal/90 transition-colors duration-500 group-hover:text-cream/95 group-[.mobile-step-active]:text-cream/95">{s.desc}</p>
+              <div>
+                <h3 className="font-serif-display text-2xl font-semibold leading-snug text-forest transition-colors duration-500 group-hover:text-cream sm:mt-5">
+                  <span className="sr-only">Step {i + 1}: </span>
+                  {s.title}
+                </h3>
+                <p className="mt-2 leading-relaxed text-charcoal/90 transition-colors duration-500 group-hover:text-cream/95 sm:mt-3">{s.desc}</p>
+              </div>
             </li>
           ))}
         </ol>

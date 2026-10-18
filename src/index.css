@@ -170,20 +170,6 @@
     -webkit-text-size-adjust: 100%;
   }
 
-  html.lenis,
-  html.lenis body {
-    height: auto;
-  }
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-  .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-  .lenis.lenis-stopped {
-    overflow: hidden;
-  }
-
   body {
     @apply bg-cream text-charcoal;
     font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
@@ -191,21 +177,32 @@
     line-height: 1.65;
     overflow-x: clip;
     overflow-wrap: break-word; /* long emails/URLs wrap on small screens (WCAG 1.4.10) */
-    transition: background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s ease;
+    -webkit-tap-highlight-color: transparent; /* custom :active feedback is used instead */
   }
 
-  section,
-  footer,
-  header > div,
-  .card {
-    transition: background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+  /* Smooth colour change ONLY while the visitor switches theme (see useTheme.ts) - never on
+     page load or while scrolling, so it costs nothing the rest of the time. */
+  html.theme-switching body,
+  html.theme-switching section,
+  html.theme-switching footer,
+  html.theme-switching header > div,
+  html.theme-switching .card {
+    transition: background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, color 0.35s ease;
+  }
+
+  a,
+  button,
+  summary,
+  label,
+  select {
+    touch-action: manipulation; /* no double-tap-zoom delay on taps */
   }
 
   h1, h2, h3, h4 {
     text-wrap: balance;
   }
 
-  p, li, dd {
+  .prose-royal p {
     text-wrap: pretty;
   }
 
@@ -258,7 +255,32 @@
   }
   /* Fluid type that still grows with browser zoom (WCAG 1.4.4): rem + small vw component */
   .text-hero {
-    font-size: clamp(2.75rem, 1.6rem + 4.6vw, 6.25rem);
+    /* also capped by screen HEIGHT so the whole hero fits the first screen on short laptops/phones */
+    font-size: clamp(2.5rem, min(1.6rem + 4.6vw, 10.5svh), 6.25rem);
+  }
+  /* Hero must fit the first screen: padding clears the fixed header (top) and the phone call bar (bottom). */
+  .hero-pad {
+    padding-top: clamp(5.5rem, 14svh, 9rem);
+    padding-bottom: 5.25rem; /* phone call bar */
+  }
+  @media (min-width: 768px) {
+    .hero-pad { padding-bottom: clamp(2.5rem, 8svh, 5rem); }
+  }
+  /* Short screens: keep headline, buttons and call to action; drop supporting copy first. */
+  @media (max-height: 800px) {
+    html .hero-more { display: none; }
+  }
+  @media (max-height: 700px) {
+    html .hero-trust { display: none; }
+  }
+  @media (max-height: 680px) {
+    html .hero-lede { display: none; }
+    .hero-cta { margin-top: 1.25rem; }
+  }
+  @media (max-height: 480px) {
+    .hero-pad { padding-top: 4.75rem; padding-bottom: 1rem; }
+    html .hero-eyebrow-extra { display: none; }
+    .text-hero { font-size: 2.25rem; }
   }
   .text-h1 {
     font-size: clamp(2.5rem, 1.7rem + 3vw, 4.5rem);
@@ -274,11 +296,13 @@
   .btn {
     @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-semibold leading-tight transition-[transform,background-color,color,box-shadow,border-color] duration-300 active:scale-[0.97];
   }
-  .btn:hover {
-    transform: translateY(-2px);
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover {
+      transform: translateY(-2px);
+    }
   }
   .btn:active {
-    transform: translateY(0) scale(0.97);
+    transform: scale(0.97);
   }
   .btn-primary {
     @apply bg-forest text-cream hover:bg-forest-deep;
@@ -288,17 +312,17 @@
     @apply bg-cream text-forest hover:bg-white;
   }
   .btn-outline {
-    @apply border border-forest/30 bg-white/50 text-forest backdrop-blur-sm hover:border-forest hover:bg-forest/[0.06];
+    @apply border border-forest/30 bg-white/70 text-forest hover:border-forest hover:bg-forest/[0.06];
   }
   .btn-outline-light {
-    @apply border border-cream/50 bg-white/[0.06] text-cream backdrop-blur-sm hover:border-cream hover:bg-cream/15;
+    @apply border border-cream/50 bg-white/[0.08] text-cream hover:border-cream hover:bg-cream/15;
   }
   .btn-gold {
     @apply bg-gold-light text-forest-ink;
     box-shadow: 0 10px 26px -10px rgb(var(--gold-rgb) / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.45);
   }
   .btn-gold:hover {
-    filter: brightness(1.05);
+    background-color: rgb(var(--gold-light-rgb) / 0.88);
   }
 
   .card {
@@ -309,13 +333,6 @@
       0 20px 44px -26px rgb(var(--forest-ink-rgb) / 0.22),
       inset 0 1px 0 rgb(255 255 255 / 0.9);
   }
-  .card.mobile-card-active {
-    border-color: rgb(var(--gold-rgb) / 0.45);
-    box-shadow:
-      0 24px 48px -22px rgb(var(--forest-ink-rgb) / 0.32),
-      0 0 0 1px rgb(var(--gold-rgb) / 0.2);
-  }
-
   .link-arrow {
     @apply inline-flex items-center gap-1.5 font-semibold text-forest underline decoration-forest/30 underline-offset-4 transition-colors hover:decoration-forest;
   }
@@ -348,14 +365,41 @@ details.faq[open] .faq-icon {
   transform: rotate(45deg);
 }
 
-/* ---------- Reveal on scroll (progressive enhancement) ----------
-   Content is only hidden when JS is running AND the visitor has not asked
-   for reduced motion. index.html removes the "js" class if the app fails. */
+/* ---------- Reveal on scroll ----------
+   Pages are fully visible as prerendered HTML. Once the reveal script has run it adds
+   html.reveal-ready and marks everything already on screen; only content still below the fold
+   waits for its reveal. Opacity + transform only, so the GPU does the work. */
 @media (prefers-reduced-motion: no-preference) {
-  html.js:not(.motion-off) [data-reveal] {
-    opacity: 0;
-    transform: translateY(26px) scale(0.985);
+  html.reveal-ready:not(.motion-off) [data-reveal] {
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   }
+  html.reveal-ready:not(.motion-off) [data-reveal]:not(.is-revealed) {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  html.reveal-ready [data-reveal].no-anim {
+    transition: none;
+  }
+}
+/* Phones: shorter distance and duration so content keeps up with a fast thumb scroll */
+@media (prefers-reduced-motion: no-preference) and (max-width: 767px) {
+  html.reveal-ready:not(.motion-off) [data-reveal] {
+    transition-duration: 0.42s;
+  }
+  html.reveal-ready:not(.motion-off) [data-reveal]:not(.is-revealed) {
+    transform: translate3d(0, 12px, 0);
+  }
+}
+
+/* ---------- Skip rendering work for off-screen sections ----------
+   The browser lays out and paints each section only when it nears the screen, which makes long
+   pages much cheaper on phones. Content stays in the accessibility tree and find-in-page. */
+main > section:not(:first-child),
+main > div > section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
 }
 
 /* ---------- Mobile & ambient micro-animations ---------- */
@@ -368,17 +412,19 @@ details.faq[open] .faq-icon {
   70% { transform: scale(1.35); opacity: 0; }
   100% { transform: scale(1.35); opacity: 0; }
 }
-@media (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
   html:not(.motion-off) .animate-float-gentle {
     animation: float-gentle 5s ease-in-out infinite;
   }
+}
+@media (prefers-reduced-motion: no-preference) {
   html:not(.motion-off) .animate-pulse-ring::after {
     content: "";
     position: absolute;
     inset: -4px;
     border-radius: 9999px;
     border: 2px solid currentColor;
-    animation: pulse-ring 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    animation: pulse-ring 2.4s cubic-bezier(0.22, 1, 0.36, 1) 3; /* a few pulses, then rest */
     pointer-events: none;
   }
 }
@@ -444,12 +490,17 @@ body::-webkit-scrollbar-thumb {
 
 /* ---------- Hero entrance (CSS-only so prerendered HTML is never hidden) ---------- */
 @keyframes hero-in {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
   to { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
   html.js:not(.motion-off) .hero-in {
-    animation: hero-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 767px) {
+  html.js:not(.motion-off) .hero-in {
+    animation-duration: 0.6s;
   }
 }
 

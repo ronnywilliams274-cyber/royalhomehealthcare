@@ -39,15 +39,29 @@ export default function Nav() {
     setMobileOpen(false);
   }, [pathname]);
 
+  // Scroll state, read at most once per frame and only re-rendering when something changes.
   useEffect(() => {
     let lastY = window.scrollY;
-    const onScroll = () => {
+    let ticking = false;
+    const update = () => {
+      ticking = false;
       const y = window.scrollY;
-      setScrolled(y > 24);
-      setHidden(y > lastY && y > 160);
-      lastY = y;
+      const dy = y - lastY;
+      setScrolled((prev) => (prev === y > 24 ? prev : y > 24));
+      // Ignore tiny finger jitters; hide on a real scroll down, show again on scroll up.
+      if (Math.abs(dy) > 6) {
+        const hide = dy > 0 && y > 160;
+        setHidden((prev) => (prev === hide ? prev : hide));
+        lastY = y;
+      }
     };
-    onScroll();
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -83,16 +97,16 @@ export default function Nav() {
         onBlur={(e) => {
           if (!e.currentTarget.contains(e.relatedTarget as Node)) setFocusWithin(false);
         }}
-        className={`on-dark fixed inset-x-0 top-0 z-50 px-3 pt-3 transition-transform duration-500 ease-out sm:px-4 ${
+        className={`on-dark fixed inset-x-0 top-0 z-50 px-3 pt-3 transition-transform duration-300 ease-out will-change-transform sm:px-4 ${
           showHeader ? "translate-y-0" : "-translate-y-[130%]"
         }`}
         style={{ paddingTop: "max(0.75rem, env(safe-area-inset-top))" }}
       >
         <div
-          className={`relative mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-full border px-4 py-2.5 transition-[background-color,border-color,box-shadow] duration-500 sm:px-6 ${
+          className={`relative mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-full border px-4 py-2.5 transition-[background-color,box-shadow] duration-300 sm:px-6 ${
             scrolled || servicesOpen
-              ? "border-white/15 bg-forest-ink/90 shadow-[0_12px_40px_-16px_rgb(var(--forest-ink-rgb)/0.65)] backdrop-blur-xl"
-              : "border-white/15 bg-forest-ink/60 backdrop-blur-md"
+              ? "border-white/15 bg-forest-ink/[0.96] shadow-[0_12px_40px_-16px_rgb(var(--forest-ink-rgb)/0.65)]"
+              : "border-white/15 bg-forest-ink/70"
           }`}
         >
           <Link to="/" className="flex shrink-0 items-center gap-2.5 rounded-full py-1 pr-2 text-cream" aria-label={`${site.shortName} home`}>
@@ -124,7 +138,7 @@ export default function Nav() {
                   onBlur={(e) => {
                     if (!servicesWrap.current?.contains(e.relatedTarget as Node)) setServicesOpen(false);
                   }}
-                  className="absolute inset-x-0 top-[calc(100%+0.75rem)] rounded-3xl border border-white/10 bg-forest-ink/[0.97] p-8 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+                  className="absolute inset-x-0 top-[calc(100%+0.75rem)] rounded-3xl border border-white/10 bg-forest-ink p-8 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]"
                 >
                   <div className="grid grid-cols-3 gap-8">
                     {catOrder.map((cat) => (

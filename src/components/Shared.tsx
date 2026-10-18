@@ -148,37 +148,59 @@ export function SectionHeading({
 /* ------------------------------------------------------------------ */
 /* Service card - the whole card is one link with a clear name         */
 /* ------------------------------------------------------------------ */
-export function ServiceCard({ s, headingLevel = 3, compact = false }: { s: Service; headingLevel?: 2 | 3 | 4; compact?: boolean }) {
+export function ServiceCard({
+  s,
+  headingLevel = 3,
+  compact = false,
+  mobileCompact = false,
+}: {
+  s: Service;
+  headingLevel?: 2 | 3 | 4;
+  compact?: boolean;
+  /** On phones, show a slim one-line row (icon, name, arrow) instead of the full card. */
+  mobileCompact?: boolean;
+}) {
   const H = `h${headingLevel}` as "h2" | "h3" | "h4";
+  const row = mobileCompact;
   return (
     <article
-      data-mobile-card
-      className="card group relative flex h-full flex-col overflow-hidden p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_30px_60px_-28px_rgb(var(--forest-ink-rgb)/0.38)] active:scale-[0.985] focus-within:-translate-y-1 sm:p-7"
+      className={`card group relative flex h-full overflow-hidden transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_30px_60px_-28px_rgb(var(--forest-ink-rgb)/0.38)] active:scale-[0.985] active:border-gold/50 ${
+        row ? "flex-row items-center gap-4 p-4 sm:flex-col sm:items-stretch sm:gap-0 sm:p-7" : "flex-col p-6 sm:p-7"
+      }`}
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[radial-gradient(circle,rgb(var(--gold-rgb)/0.16)_0%,transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-[.mobile-card-active]:opacity-100"
+        className="pointer-events-none absolute -right-12 -top-12 hidden h-32 w-32 rounded-full bg-[radial-gradient(circle,rgb(var(--gold-rgb)/0.16)_0%,transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 sm:block"
       />
-      <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-forest/[0.08] text-forest ring-1 ring-forest/10 transition-all duration-300 group-hover:scale-105 group-hover:bg-forest group-hover:text-cream group-[.mobile-card-active]:bg-forest group-[.mobile-card-active]:text-cream">
+      <span
+        className={`flex shrink-0 items-center justify-center rounded-2xl bg-forest/[0.08] text-forest ring-1 ring-forest/10 transition-colors duration-300 group-hover:bg-forest group-hover:text-cream group-active:bg-forest group-active:text-cream ${
+          row ? "h-11 w-11 sm:mb-5 sm:h-12 sm:w-12" : "mb-5 h-12 w-12"
+        }`}
+      >
         <Icon name={s.icon} className="h-6 w-6" />
       </span>
-      <H className="font-serif-display text-[1.6rem] font-semibold leading-tight text-forest">
-        <Link
-          to={`/services/${s.slug}`}
-          className="after:absolute after:inset-0 after:rounded-2xl after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-[3px] focus-visible:after:outline-offset-[3px] focus-visible:after:outline-[var(--ring-color)]"
-        >
-          {s.title}
-        </Link>
-      </H>
-      {!compact && <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-moss">{s.summary}</p>}
-      <span aria-hidden="true" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest">
-        Learn more <Icon name="ArrowRight" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5 group-[.mobile-card-active]:translate-x-1" />
-      </span>
-      {s.byArrangement && (
-        <span className="mt-4 inline-flex w-fit rounded-full border border-forest/20 bg-linen/60 px-3 py-1 text-xs font-medium text-moss">
-          Coordinated by arrangement
+      <div className={row ? "min-w-0 flex-1 sm:flex sm:flex-1 sm:flex-col" : "flex flex-1 flex-col"}>
+        <H className={`font-serif-display font-semibold leading-tight text-forest ${row ? "text-[1.35rem] sm:text-[1.6rem]" : "text-[1.6rem]"}`}>
+          <Link
+            to={`/services/${s.slug}`}
+            className="after:absolute after:inset-0 after:rounded-2xl after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-[3px] focus-visible:after:outline-offset-[3px] focus-visible:after:outline-[var(--ring-color)]"
+          >
+            {s.title}
+          </Link>
+        </H>
+        {!compact && (
+          <p className={`mt-3 flex-1 text-[0.98rem] leading-relaxed text-moss ${row ? "hidden sm:block" : ""}`}>{s.summary}</p>
+        )}
+        <span aria-hidden="true" className={`mt-5 items-center gap-1.5 text-sm font-semibold text-forest ${row ? "hidden sm:inline-flex" : "inline-flex"}`}>
+          Learn more <Icon name="ArrowRight" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
         </span>
-      )}
+        {s.byArrangement && (
+          <span className={`mt-4 w-fit rounded-full border border-forest/20 bg-linen/60 px-3 py-1 text-xs font-medium text-moss ${row ? "hidden sm:inline-flex" : "inline-flex"}`}>
+            Coordinated by arrangement
+          </span>
+        )}
+      </div>
+      {row && <Icon name="ArrowRight" className="h-5 w-5 shrink-0 text-gold-ink transition-transform group-active:translate-x-1 sm:hidden" />}
     </article>
   );
 }

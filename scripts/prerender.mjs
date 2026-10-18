@@ -13,7 +13,7 @@
  */
 import { build } from "esbuild";
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -76,7 +76,19 @@ await build({
 });
 
 const mod = await import(pathToFileURL(serverEntry).href);
-const { render, allRoutes, notFoundRoute, site } = mod;
+const { render, allRoutes, notFoundRoute, site, imageVariants } = mod;
+
+// Warn when a photo was replaced but its optimized WebP copies were not (they would still show).
+for (const [jpg, v] of Object.entries(imageVariants)) {
+  const src = path.join(root, "public", jpg);
+  if (!existsSync(src)) continue;
+  const stale = v.webp.filter(([w]) => {
+    const f = path.join(root, "public", w);
+    return !existsSync(f) || statSync(f).mtimeMs + 60000 < statSync(src).mtimeMs;
+  });
+  if (stale.length)
+    console.warn(`prerender: ${jpg} is newer than (or missing) its WebP versions: ${stale.map(([w]) => w).join(", ")} - re-export them or remove them from imageVariants in src/config/media.ts.`);
+}
 
 const siteUrl = (process.env.SITE_URL || site.siteUrl || "").replace(/\/+$/, "");
 const template = await readFile(path.join(dist, "index.html"), "utf8");
@@ -97,6 +109,15 @@ function headTags(meta) {
   if (url) tags.push(`<meta property="og:url" content="${esc(url)}" />`);
   if (siteUrl) tags.push(`<meta property="og:image" content="${esc(siteUrl)}/media/hero-poster-desktop.jpg" />`);
   tags.push('<meta name="twitter:card" content="summary_large_image" />');
+  if (meta.path === "/") {
+    // Home page: start downloading the hero image (the largest thing on screen) right away.
+    for (const [key, media] of [["/media/hero-poster-mobile.jpg", "(max-width: 767px)"], ["/media/hero-poster-desktop.jpg", "(min-width: 768px)"]]) {
+      const v = imageVariants[key];
+      if (!v) continue;
+      const set = v.webp.map(([u, w]) => `${u} ${w}w`).join(", ");
+      tags.push(`<link rel="preload" as="image" type="image/webp" imagesrcset="${set}" imagesizes="100vw" media="${media}" fetchpriority="high" />`);
+    }
+  }
   return tags.join("\n    ");
 }
 
