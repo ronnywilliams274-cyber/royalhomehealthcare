@@ -36,20 +36,21 @@ export default function Process() {
           </div>
         </div>
 
-        <ol data-reveal className="grid gap-px overflow-hidden rounded-3xl bg-forest/10 sm:grid-cols-2 lg:grid-cols-4">
+        <ol data-reveal className="grid gap-px overflow-hidden rounded-3xl border border-forest/10 bg-forest/10 shadow-[0_24px_50px_-28px_rgb(var(--forest-ink-rgb)/0.2)] sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
             <li
               key={s.title}
-              className="group bg-cream p-8 transition-colors duration-500 hover:bg-forest lg:p-10"
+              data-mobile-step
+              className="group bg-cream p-8 transition-all duration-500 hover:bg-forest [&.mobile-step-active]:bg-forest lg:p-10"
             >
-              <span aria-hidden="true" className="font-serif-display text-2xl text-gold-ink transition-colors group-hover:text-gold-light">
+              <span aria-hidden="true" className="font-serif-display text-2xl text-gold-ink transition-colors group-hover:text-gold-light group-[.mobile-step-active]:text-gold-light">
                 0{i + 1}
               </span>
-              <h3 className="font-serif-display mt-5 text-2xl font-semibold leading-snug text-forest transition-colors duration-500 group-hover:text-cream">
+              <h3 className="font-serif-display mt-5 text-2xl font-semibold leading-snug text-forest transition-colors duration-500 group-hover:text-cream group-[.mobile-step-active]:text-cream">
                 <span className="sr-only">Step {i + 1}: </span>
                 {s.title}
               </h3>
-              <p className="mt-3 leading-relaxed text-charcoal/90 transition-colors duration-500 group-hover:text-cream/95">{s.desc}</p>
+              <p className="mt-3 leading-relaxed text-charcoal/90 transition-colors duration-500 group-hover:text-cream/95 group-[.mobile-step-active]:text-cream/95">{s.desc}</p>
             </li>
           ))}
         </ol>

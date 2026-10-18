@@ -7,8 +7,8 @@ import { Icon } from "@/components/Icon";
 export default function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="on-dark relative overflow-hidden bg-forest-ink text-cream">
-      <img src={media.cta} alt="" aria-hidden="true" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-20" onError={(e) => ((e.target as HTMLImageElement).style.display = "none")} />
-      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,26,7,0.9)_0%,rgba(18,38,12,0.95)_100%)]" />
+      <img src={media.cta} alt="" aria-hidden="true" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-30" onError={(e) => ((e.target as HTMLImageElement).style.display = "none")} />
+      <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgb(var(--forest-ink-rgb)/0.86)_0%,rgb(var(--forest-deep-rgb)/0.92)_100%)]" />
 
       <div className="container-royal section relative grid gap-16 lg:grid-cols-12">
         <div className="lg:col-span-5">

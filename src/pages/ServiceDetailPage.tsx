@@ -13,7 +13,7 @@ export default function ServiceDetailPage() {
   if (!s) return <NotFoundPage />;
 
   const related = s.related.map(serviceBySlug).filter((r): r is Service => Boolean(r));
-  const img = s.image ?? categoryImage[s.category];
+  const img = s.image ?? slugImage[s.slug] ?? categoryImage[s.category];
 
   return (
     <>
@@ -217,18 +217,85 @@ export default function ServiceDetailPage() {
   );
 }
 
+const slugImage: Record<string, { src: string; alt: string }> = {
+  "wound-care": {
+    src: media.specialtyNursing,
+    alt: "A registered nurse in blue scrubs preparing sterile wound care supplies at a table while speaking warmly with a smiling older woman at home.",
+  },
+  "iv-therapy": {
+    src: media.specialtyNursing,
+    alt: "A registered nurse preparing sterile clinical supplies in a bright, sunlit California living room beside a comfortable patient.",
+  },
+  "pleurx-drainage": {
+    src: media.specialtyNursing,
+    alt: "A registered nurse preparing a sterile drainage and dressing tray while reassuring a patient at home.",
+  },
+  "catheter-care": {
+    src: media.nurseVisit,
+    alt: "A registered nurse checking vital signs and reviewing care in a bright, comfortable California living room.",
+  },
+  "b12-injections": {
+    src: media.cardiacCare,
+    alt: "A registered nurse performing a clinical checkup and documenting care with a smiling older man at home.",
+  },
+  "diabetic-injections": {
+    src: media.cardiacCare,
+    alt: "A registered nurse reviewing health readings and care instructions with a smiling older man in his living room.",
+  },
+  "post-surgical-recovery": {
+    src: media.specialtyTherapy,
+    alt: "A licensed physical therapist guiding a smiling older adult walking with a walker down a sunlit home hallway.",
+  },
+  "stroke-recovery": {
+    src: media.specialtyTherapy,
+    alt: "A physical therapist supporting an older adult practicing balance and mobility in a bright California home.",
+  },
+  "diabetes-management": {
+    src: media.cardiacCare,
+    alt: "A registered nurse checking vital signs and reviewing a health log with an older gentleman at home.",
+  },
+  "cardiac-care": {
+    src: media.cardiacCare,
+    alt: "A registered nurse listening to a smiling older man's heart with a stethoscope in a sunlit living room.",
+  },
+  "fall-risk-mobility": {
+    src: media.specialtyTherapy,
+    alt: "A physical therapist walking alongside an older adult using a walker in a bright, obstacle-free home hallway.",
+  },
+  "physical-therapy": {
+    src: media.specialtyTherapy,
+    alt: "A physical therapist encouraging a smiling older adult during gait training at home.",
+  },
+  "occupational-therapy": {
+    src: media.specialtyTherapy,
+    alt: "A therapist helping an older adult practice safe daily mobility in their own home.",
+  },
+  "speech-therapy": {
+    src: media.connection,
+    alt: "A clinician sitting at a sunlit dining table talking through exercises with an older couple.",
+  },
+  "medical-social-services": {
+    src: media.connection,
+    alt: "A care professional sitting with an older couple at their dining table to review support resources and care planning.",
+  },
+  "medical-supplies": {
+    src: media.specialtyNursing,
+    alt: "A registered nurse organizing sterile medical supplies and dressings for a patient visit at home.",
+  },
+};
+
 const categoryImage: Record<Service["category"], { src: string; alt: string }> = {
   nursing: {
     src: media.nurseVisit,
-    alt: "A nurse in teal scrubs checks the blood pressure of a smiling older woman resting in a recliner at home.",
+    alt: "A registered nurse checking the blood pressure and pulse oximetry of a smiling older woman in a sunlit living room.",
   },
   programs: {
     src: media.connection,
-    alt: "A smiling older woman resting in a recliner looks up at a nurse who leans in to talk with her.",
+    alt: "A registered nurse reviewing discharge instructions and a medication organizer with an older couple at their dining table.",
   },
   core: {
     src: media.companionship,
-    alt: "A smiling caregiver leans toward a laughing older man as they hold hands in a sunlit living room.",
+    alt: "A smiling nurse and an older gentleman reviewing a care plan together on a comfortable sofa.",
   },
 };
 

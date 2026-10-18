@@ -11,43 +11,155 @@
    ========================================================================== */
 
 @layer base {
-  :root {
-    --forest: #1c3a13;
-    --forest-deep: #12260c;
-    --forest-ink: #0c1a07;
-    --cream: #f6f6f4;
-    --linen: #f5f2ed;
-    --sage: #d2d8d0;
-    --charcoal: #2a2a26;
-    --gold: #b9975b;
-    --gold-light: #d6b77c;
-    --gold-ink: #7d5f26;
+  :root,
+  [data-theme="sage"] {
+    /* Theme 1: Botanical Sage (Sunlit Ivory & Healing Emerald) */
+    --forest: #1b4d2e;
+    --forest-rgb: 27 77 46;
+    --forest-deep: #153f25;
+    --forest-deep-rgb: 21 63 37;
+    --forest-ink: #0f2e1b;
+    --forest-ink-rgb: 15 46 27;
 
-    /* focus ring colour; dark sections override it (see .on-dark) */
-    --ring-color: #1c3a13;
+    --cream: #f8faf7;
+    --cream-rgb: 248 250 247;
+    --linen: #eef4ec;
+    --linen-rgb: 238 244 236;
+    --sage: #d3e0d0;
+    --sage-rgb: 211 224 208;
+    --sage-deep: #a5baa0;
+    --sage-deep-rgb: 165 186 160;
+
+    --charcoal: #1e2b1f;
+    --charcoal-rgb: 30 43 31;
+    --moss: #3f5742;
+    --moss-rgb: 63 87 66;
+
+    --gold: #c29643;
+    --gold-rgb: 194 150 67;
+    --gold-light: #e8c476;
+    --gold-light-rgb: 232 196 118;
+    --gold-ink: #7d5b14;
+    --gold-ink-rgb: 125 91 20;
+
+    --ring-color: var(--forest);
     --header-h: 5.5rem;
 
-    /* shadcn/ui tokens (used by src/components/ui) */
-    --background: 60 9% 96%;
-    --foreground: 100 30% 8%;
+    /* shadcn/ui tokens */
+    --background: 100 20% 98%;
+    --foreground: 125 18% 14%;
     --card: 0 0% 100%;
-    --card-foreground: 100 30% 8%;
+    --card-foreground: 125 18% 14%;
     --popover: 0 0% 100%;
-    --popover-foreground: 100 30% 8%;
-    --primary: 102 52% 15%;
-    --primary-foreground: 60 9% 96%;
-    --secondary: 90 11% 83%;
-    --secondary-foreground: 102 52% 15%;
-    --muted: 90 11% 90%;
-    --muted-foreground: 90 6% 32%;
-    --accent: 90 11% 83%;
-    --accent-foreground: 102 52% 15%;
+    --popover-foreground: 125 18% 14%;
+    --primary: 143 48% 20%;
+    --primary-foreground: 100 20% 98%;
+    --secondary: 112 22% 85%;
+    --secondary-foreground: 143 48% 20%;
+    --muted: 105 25% 94%;
+    --muted-foreground: 128 16% 29%;
+    --accent: 112 22% 85%;
+    --accent-foreground: 143 48% 20%;
     --destructive: 0 72% 42%;
     --destructive-foreground: 0 0% 98%;
-    --border: 90 10% 82%;
-    --input: 90 10% 70%;
-    --ring: 102 52% 15%;
+    --border: 112 18% 84%;
+    --input: 112 16% 72%;
+    --ring: 143 48% 20%;
     --radius: 0.625rem;
+  }
+
+  [data-theme="coastal"] {
+    /* Theme 2: Coastal Care (Pacific Teal, Pearl Aqua & Sunlit Coral-Sand) */
+    --forest: #0d596b;
+    --forest-rgb: 13 89 107;
+    --forest-deep: #094857;
+    --forest-deep-rgb: 9 72 87;
+    --forest-ink: #063744;
+    --forest-ink-rgb: 6 55 68;
+
+    --cream: #f5fbfd;
+    --cream-rgb: 245 251 253;
+    --linen: #e7f4f8;
+    --linen-rgb: 231 244 248;
+    --sage: #c7e3eb;
+    --sage-rgb: 199 227 235;
+    --sage-deep: #94c2cf;
+    --sage-deep-rgb: 148 194 207;
+
+    --charcoal: #132a30;
+    --charcoal-rgb: 19 42 48;
+    --moss: #355963;
+    --moss-rgb: 53 89 99;
+
+    --gold: #d18741;
+    --gold-rgb: 209 135 65;
+    --gold-light: #f5be84;
+    --gold-light-rgb: 245 190 132;
+    --gold-ink: #8c5115;
+    --gold-ink-rgb: 140 81 21;
+
+    --ring-color: var(--forest);
+
+    --background: 195 67% 98%;
+    --foreground: 192 43% 13%;
+    --primary: 191 78% 24%;
+    --primary-foreground: 195 67% 98%;
+    --secondary: 193 45% 85%;
+    --secondary-foreground: 191 78% 24%;
+    --muted: 194 52% 94%;
+    --muted-foreground: 193 30% 30%;
+    --accent: 193 45% 85%;
+    --accent-foreground: 191 78% 24%;
+    --border: 193 35% 84%;
+    --input: 193 28% 72%;
+    --ring: 191 78% 24%;
+  }
+
+  [data-theme="azure"] {
+    /* Theme 3: Sanctuary Blue (Trusted Clinical Azure, Alabaster Sky & Honey Gold) */
+    --forest: #1b4b8a;
+    --forest-rgb: 27 75 138;
+    --forest-deep: #143c70;
+    --forest-deep-rgb: 20 60 112;
+    --forest-ink: #0e2d56;
+    --forest-ink-rgb: 14 45 86;
+
+    --cream: #f7faff;
+    --cream-rgb: 247 250 255;
+    --linen: #eaf1fb;
+    --linen-rgb: 234 241 251;
+    --sage: #ccddf5;
+    --sage-rgb: 204 221 245;
+    --sage-deep: #9cb8e0;
+    --sage-deep-rgb: 156 184 224;
+
+    --charcoal: #162338;
+    --charcoal-rgb: 22 35 56;
+    --moss: #3b5070;
+    --moss-rgb: 59 80 112;
+
+    --gold: #c99238;
+    --gold-rgb: 201 146 56;
+    --gold-light: #f0c475;
+    --gold-light-rgb: 240 196 117;
+    --gold-ink: #825610;
+    --gold-ink-rgb: 130 86 16;
+
+    --ring-color: var(--forest);
+
+    --background: 218 100% 98%;
+    --foreground: 217 44% 15%;
+    --primary: 214 67% 32%;
+    --primary-foreground: 218 100% 98%;
+    --secondary: 215 67% 88%;
+    --secondary-foreground: 214 67% 32%;
+    --muted: 215 68% 95%;
+    --muted-foreground: 216 31% 34%;
+    --accent: 215 67% 88%;
+    --accent-foreground: 214 67% 32%;
+    --border: 215 45% 85%;
+    --input: 215 35% 74%;
+    --ring: 214 67% 32%;
   }
 
   html {
@@ -79,6 +191,14 @@
     line-height: 1.65;
     overflow-x: clip;
     overflow-wrap: break-word; /* long emails/URLs wrap on small screens (WCAG 1.4.10) */
+    transition: background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s ease;
+  }
+
+  section,
+  footer,
+  header > div,
+  .card {
+    transition: background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, box-shadow 0.35s ease;
   }
 
   h1, h2, h3, h4 {
@@ -90,8 +210,8 @@
   }
 
   ::selection {
-    background: #1c3a13;
-    color: #f6f6f4;
+    background: var(--forest);
+    color: var(--cream);
   }
 
   /* Visible focus for keyboard users (WCAG 2.4.7) — never removed */
@@ -101,7 +221,7 @@
     border-radius: 6px;
   }
   .on-dark {
-    --ring-color: #d6b77c;
+    --ring-color: var(--gold-light);
   }
 
   /* Underline links inside running text so they don't rely on colour alone (WCAG 1.4.1) */
@@ -150,31 +270,50 @@
     font-size: clamp(1.5rem, 1.25rem + 0.8vw, 2rem);
   }
 
-  /* Buttons — min 48px tall, text never clipped when spacing is increased (WCAG 1.4.12) */
+  /* Buttons — min 48px tall, tactile spring feedback on mobile & desktop */
   .btn {
-    @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-semibold leading-tight transition-[transform,background-color,color,box-shadow] duration-300;
+    @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-semibold leading-tight transition-[transform,background-color,color,box-shadow,border-color] duration-300 active:scale-[0.97];
   }
   .btn:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+  }
+  .btn:active {
+    transform: translateY(0) scale(0.97);
   }
   .btn-primary {
-    @apply bg-forest text-cream shadow-[0_12px_30px_-14px_rgba(12,26,7,0.6)] hover:bg-forest-deep;
+    @apply bg-forest text-cream hover:bg-forest-deep;
+    box-shadow: 0 12px 30px -12px rgb(var(--forest-ink-rgb) / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.18);
   }
   .btn-light {
     @apply bg-cream text-forest hover:bg-white;
   }
   .btn-outline {
-    @apply border border-forest/30 text-forest hover:bg-forest/5;
+    @apply border border-forest/30 bg-white/50 text-forest backdrop-blur-sm hover:border-forest hover:bg-forest/[0.06];
   }
   .btn-outline-light {
-    @apply border border-cream/50 text-cream hover:bg-cream/10;
+    @apply border border-cream/50 bg-white/[0.06] text-cream backdrop-blur-sm hover:border-cream hover:bg-cream/15;
   }
   .btn-gold {
-    @apply bg-gold-light text-forest-ink hover:bg-[#e2c793];
+    @apply bg-gold-light text-forest-ink;
+    box-shadow: 0 10px 26px -10px rgb(var(--gold-rgb) / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.45);
+  }
+  .btn-gold:hover {
+    filter: brightness(1.05);
   }
 
   .card {
-    @apply rounded-2xl border border-forest/10 bg-white shadow-[0_1px_0_rgba(12,26,7,0.04),0_18px_40px_-28px_rgba(12,26,7,0.35)];
+    @apply rounded-2xl border border-forest/[0.11] bg-white;
+    background-image: linear-gradient(180deg, rgb(255 255 255 / 0.98) 0%, rgb(var(--cream-rgb) / 0.35) 100%);
+    box-shadow:
+      0 1px 2px rgb(var(--forest-ink-rgb) / 0.04),
+      0 20px 44px -26px rgb(var(--forest-ink-rgb) / 0.22),
+      inset 0 1px 0 rgb(255 255 255 / 0.9);
+  }
+  .card.mobile-card-active {
+    border-color: rgb(var(--gold-rgb) / 0.45);
+    box-shadow:
+      0 24px 48px -22px rgb(var(--forest-ink-rgb) / 0.32),
+      0 0 0 1px rgb(var(--gold-rgb) / 0.2);
   }
 
   .link-arrow {
@@ -186,7 +325,7 @@
 
   .skip-link {
     @apply fixed left-4 top-3 z-[100] -translate-y-[200%] rounded-lg bg-forest-ink px-5 py-3 font-semibold text-cream shadow-lg;
-    --ring-color: #d6b77c;
+    --ring-color: var(--gold-light);
   }
   .skip-link:focus {
     @apply translate-y-0;
@@ -215,7 +354,32 @@ details.faq[open] .faq-icon {
 @media (prefers-reduced-motion: no-preference) {
   html.js:not(.motion-off) [data-reveal] {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(26px) scale(0.985);
+  }
+}
+
+/* ---------- Mobile & ambient micro-animations ---------- */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.65; }
+  70% { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.motion-off) .animate-float-gentle {
+    animation: float-gentle 5s ease-in-out infinite;
+  }
+  html:not(.motion-off) .animate-pulse-ring::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    border: 2px solid currentColor;
+    animation: pulse-ring 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    pointer-events: none;
   }
 }
 
@@ -271,10 +435,10 @@ body::-webkit-scrollbar {
   width: 10px;
 }
 body::-webkit-scrollbar-track {
-  background: #f5f2ed;
+  background: var(--linen);
 }
 body::-webkit-scrollbar-thumb {
-  background: #aebba9;
+  background: var(--sage-deep);
   border-radius: 8px;
 }
 

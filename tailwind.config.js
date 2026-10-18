@@ -9,18 +9,24 @@ module.exports = {
         sans: ['"DM Sans"', "ui-sans-serif", "system-ui", "sans-serif"],
       },
       colors: {
-        /* Royal brand palette — every text pairing below is checked for WCAG 2.1 AA contrast.
-           See ADA-COMPLIANCE-REPORT.md for the full contrast table. */
-        forest: { DEFAULT: "#1c3a13", deep: "#12260c", ink: "#0c1a07" },
-        cream: "#f6f6f4",
-        linen: "#f5f2ed",
-        sage: { DEFAULT: "#d2d8d0", deep: "#aebba9" },
-        charcoal: "#2a2a26",
-        moss: "#4a5745", // secondary text on light backgrounds (6.9:1)
+        /* Royal multi-theme bright healthcare palette — dynamically driven by CSS custom properties */
+        forest: {
+          DEFAULT: "rgb(var(--forest-rgb) / <alpha-value>)",
+          deep: "rgb(var(--forest-deep-rgb) / <alpha-value>)",
+          ink: "rgb(var(--forest-ink-rgb) / <alpha-value>)",
+        },
+        cream: "rgb(var(--cream-rgb) / <alpha-value>)",
+        linen: "rgb(var(--linen-rgb) / <alpha-value>)",
+        sage: {
+          DEFAULT: "rgb(var(--sage-rgb) / <alpha-value>)",
+          deep: "rgb(var(--sage-deep-rgb) / <alpha-value>)",
+        },
+        charcoal: "rgb(var(--charcoal-rgb) / <alpha-value>)",
+        moss: "rgb(var(--moss-rgb) / <alpha-value>)",
         gold: {
-          DEFAULT: "#b9975b", // decorative only on light; text OK on dark green (5.8:1)
-          light: "#d6b77c", // text on dark backgrounds (8.3:1)
-          ink: "#7d5f26", // text on light backgrounds (5.3:1)
+          DEFAULT: "rgb(var(--gold-rgb) / <alpha-value>)",
+          light: "rgb(var(--gold-light-rgb) / <alpha-value>)",
+          ink: "rgb(var(--gold-ink-rgb) / <alpha-value>)",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

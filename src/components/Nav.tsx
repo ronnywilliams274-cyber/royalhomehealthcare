@@ -91,8 +91,8 @@ export default function Nav() {
         <div
           className={`relative mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-full border px-4 py-2.5 transition-[background-color,border-color,box-shadow] duration-500 sm:px-6 ${
             scrolled || servicesOpen
-              ? "border-white/15 bg-forest-ink/90 shadow-[0_12px_40px_-16px_rgba(12,26,7,0.65)] backdrop-blur-xl"
-              : "border-white/15 bg-forest-ink/55 backdrop-blur-md"
+              ? "border-white/15 bg-forest-ink/90 shadow-[0_12px_40px_-16px_rgb(var(--forest-ink-rgb)/0.65)] backdrop-blur-xl"
+              : "border-white/15 bg-forest-ink/60 backdrop-blur-md"
           }`}
         >
           <Link to="/" className="flex shrink-0 items-center gap-2.5 rounded-full py-1 pr-2 text-cream" aria-label={`${site.shortName} — home`}>

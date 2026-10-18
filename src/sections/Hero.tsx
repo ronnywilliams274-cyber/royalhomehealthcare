@@ -32,8 +32,8 @@ export default function Hero() {
     update();
     mq.addEventListener("change", update);
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    // Particles only on larger screens with data to spare
-    setCanvasOk(!mq.matches && !conn?.saveData);
+    // Enable gentle ambient particles on both mobile and desktop unless Data Saver is on
+    setCanvasOk(!conn?.saveData);
     setMounted(true);
     return () => mq.removeEventListener("change", update);
   }, []);
@@ -52,7 +52,7 @@ export default function Hero() {
     <section aria-labelledby="hero-title" className="on-dark relative flex min-h-[100svh] items-end overflow-hidden bg-forest-ink sm:items-center">
       {/* Background layers — decorative */}
       <div className="absolute inset-0" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_70%_10%,#1c3a13_0%,#12260c_55%,#0c1a07_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_70%_10%,rgb(var(--forest-rgb))_0%,rgb(var(--forest-deep-rgb))_55%,rgb(var(--forest-ink-rgb))_100%)]" />
         <picture>
           <source media="(max-width: 767px)" srcSet={media.heroMobile.poster} />
           <img src={media.heroDesktop.poster} alt="" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
@@ -87,8 +87,8 @@ export default function Hero() {
             <HeroCanvas className="absolute inset-0 h-full w-full opacity-80" paused={paused} />
           </Suspense>
         )}
-        {/* readability scrim — keeps text contrast above 4.5:1 over any frame */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,26,7,0.74)_0%,rgba(12,26,7,0.7)_40%,rgba(12,26,7,0.95)_100%)] sm:bg-[linear-gradient(90deg,rgba(12,26,7,0.9)_0%,rgba(12,26,7,0.72)_55%,rgba(12,26,7,0.4)_100%)]" />
+        {/* readability scrim — adapts to active theme color while keeping text contrast above 4.5:1 */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(var(--forest-ink-rgb)/0.68)_0%,rgb(var(--forest-ink-rgb)/0.62)_40%,rgb(var(--forest-ink-rgb)/0.92)_100%)] sm:bg-[linear-gradient(90deg,rgb(var(--forest-ink-rgb)/0.88)_0%,rgb(var(--forest-ink-rgb)/0.68)_55%,rgb(var(--forest-ink-rgb)/0.35)_100%)]" />
       </div>
 
       {/* Pause / play all background motion */}

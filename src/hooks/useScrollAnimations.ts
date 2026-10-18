@@ -19,26 +19,69 @@ export function useScrollAnimations<T extends HTMLElement>(key: string) {
 
     const ctx = gsap.context(() => {
       const els = gsap.utils.toArray<HTMLElement>("[data-reveal]");
+      const imgWraps = gsap.utils.toArray<HTMLElement>("[data-image-reveal]");
+
       if (motionOff) {
         gsap.set(els, { clearProps: "opacity,transform" });
         return;
       }
+
       els.forEach((el) => {
         const delay = parseFloat(el.dataset.revealDelay || "0");
         gsap.fromTo(
           el,
-          { opacity: 0, y: 24 },
+          { opacity: 0, y: 26, scale: 0.985 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.9,
+            scale: 1,
+            duration: 0.85,
             delay,
             ease: "power3.out",
             clearProps: "transform",
-            scrollTrigger: { trigger: el, start: "top 90%", once: true },
+            scrollTrigger: { trigger: el, start: "top 91%", once: true },
           }
         );
       });
+
+      // Editorial image zoom-out reveal on both mobile and desktop
+      imgWraps.forEach((wrap) => {
+        const img = wrap.querySelector("img");
+        if (!img) return;
+        gsap.fromTo(
+          img,
+          { scale: 1.08 },
+          {
+            scale: 1,
+            duration: 1.25,
+            ease: "power2.out",
+            clearProps: "transform",
+            scrollTrigger: { trigger: wrap, start: "top 88%", once: true },
+          }
+        );
+      });
+
+      // Mobile-specific scroll highlight for cards and process steps
+      const isMobileViewport = window.matchMedia("(max-width: 767px)").matches;
+      if (isMobileViewport) {
+        gsap.utils.toArray<HTMLElement>("[data-mobile-card]").forEach((card) => {
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top 68%",
+            end: "bottom 32%",
+            toggleClass: { targets: card, className: "mobile-card-active" },
+          });
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-mobile-step]").forEach((step) => {
+          ScrollTrigger.create({
+            trigger: step,
+            start: "top 65%",
+            end: "bottom 35%",
+            toggleClass: { targets: step, className: "mobile-step-active" },
+          });
+        });
+      }
     }, root);
 
     // A keyboard user tabbing into not-yet-revealed content sees it at once.

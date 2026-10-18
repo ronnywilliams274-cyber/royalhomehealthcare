@@ -127,8 +127,8 @@ export const services: Service[] = [
     ],
     related: ["diabetes-management", "post-surgical-recovery", "homebound-bedbound-care"],
     image: {
-      src: "/media/nurse-visit.jpg",
-      alt: "A nurse in teal scrubs checks the blood pressure of a smiling older woman resting in a recliner at home.",
+      src: "/media/specialty-nursing.jpg",
+      alt: "A registered nurse in blue scrubs preparing sterile wound care supplies at a table while speaking warmly with a smiling older woman at home.",
     },
   },
   {

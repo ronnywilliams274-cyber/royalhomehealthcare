@@ -14,7 +14,7 @@ export const medicareEligibility = [
 export default function MedicareBand() {
   return (
     <section aria-labelledby="medicare-title" className="on-dark relative overflow-hidden bg-forest-deep text-cream">
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(70%_80%_at_100%_100%,rgba(185,151,91,0.18),transparent_60%)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(70%_80%_at_100%_100%,rgb(var(--gold-rgb)/0.22),transparent_60%),radial-gradient(60%_70%_at_0%_0%,rgb(var(--forest-rgb)/0.5),transparent_60%)]" />
       <div className="container-royal section relative grid gap-14 lg:grid-cols-12 lg:items-center">
         <div className="lg:col-span-6">
           <div data-reveal>

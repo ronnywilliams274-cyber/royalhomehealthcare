@@ -59,7 +59,7 @@ export default function About() {
           <figure
             data-reveal
             data-reveal-delay="0.2"
-            className="on-dark absolute -bottom-10 -left-4 max-w-[17rem] rounded-2xl bg-forest p-6 text-cream shadow-[0_24px_60px_-24px_rgba(12,26,7,0.5)] sm:-left-12"
+            className="on-dark animate-float-gentle absolute -bottom-10 -left-4 max-w-[17rem] rounded-2xl border border-white/15 bg-forest p-6 text-cream shadow-[0_24px_60px_-20px_rgb(var(--forest-ink-rgb)/0.55)] sm:-left-12"
           >
             <blockquote className="font-serif-display text-2xl leading-snug">
               “{site.taglineAlt}.”

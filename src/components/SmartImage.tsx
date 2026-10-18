@@ -27,7 +27,8 @@ export default function SmartImage({
   const [failed, setFailed] = useState(false);
   return (
     <div
-      className={`relative overflow-hidden bg-[radial-gradient(110%_110%_at_30%_20%,#2c4d20_0%,#1c3a13_55%,#12260c_100%)] ${className}`}
+      data-image-reveal
+      className={`group/img relative overflow-hidden bg-[radial-gradient(110%_110%_at_30%_20%,rgb(var(--forest-rgb))_0%,rgb(var(--forest-deep-rgb))_55%,rgb(var(--forest-ink-rgb))_100%)] shadow-[0_24px_54px_-24px_rgb(var(--forest-ink-rgb)/0.38)] ring-1 ring-forest/15 ${className}`}
     >
       {!failed && (
         <img
@@ -38,9 +39,10 @@ export default function SmartImage({
           loading={eager ? "eager" : "lazy"}
           decoding="async"
           onError={() => setFailed(true)}
-          className={`h-full w-full object-cover ${imgClassName}`}
+          className={`h-full w-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-[1.03] ${imgClassName}`}
         />
       )}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ring-white/20" />
       {failed && (
         <div className="absolute inset-0 flex items-center justify-center" role={alt ? "img" : undefined} aria-label={alt || undefined} aria-hidden={alt ? undefined : true}>
           <svg viewBox="0 0 32 32" className="h-16 w-16 text-sage/40" fill="none" aria-hidden="true">

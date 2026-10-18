@@ -90,7 +90,7 @@ export function PageHero({
     <section className="on-dark relative overflow-hidden bg-forest-deep text-cream">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_80%_at_85%_0%,rgba(185,151,91,0.22)_0%,transparent_55%),radial-gradient(70%_70%_at_0%_100%,rgba(28,58,19,0.9)_0%,transparent_60%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(90%_80%_at_85%_0%,rgb(var(--gold-rgb)/0.24)_0%,transparent_55%),radial-gradient(70%_70%_at_0%_100%,rgb(var(--forest-rgb)/0.9)_0%,transparent_60%)]"
       />
       <div className="container-royal relative pb-16 pt-32 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-44">
         <Breadcrumbs />
@@ -151,8 +151,15 @@ export function SectionHeading({
 export function ServiceCard({ s, headingLevel = 3, compact = false }: { s: Service; headingLevel?: 2 | 3 | 4; compact?: boolean }) {
   const H = `h${headingLevel}` as "h2" | "h3" | "h4";
   return (
-    <article className="card group relative flex h-full flex-col p-6 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_30px_60px_-30px_rgba(12,26,7,0.45)] focus-within:-translate-y-1 sm:p-7">
-      <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-forest/[0.07] text-forest transition-colors duration-300 group-hover:bg-forest group-hover:text-cream">
+    <article
+      data-mobile-card
+      className="card group relative flex h-full flex-col overflow-hidden p-6 transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:border-gold/40 hover:shadow-[0_30px_60px_-28px_rgb(var(--forest-ink-rgb)/0.38)] active:scale-[0.985] focus-within:-translate-y-1 sm:p-7"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[radial-gradient(circle,rgb(var(--gold-rgb)/0.16)_0%,transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-[.mobile-card-active]:opacity-100"
+      />
+      <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-forest/[0.08] text-forest ring-1 ring-forest/10 transition-all duration-300 group-hover:scale-105 group-hover:bg-forest group-hover:text-cream group-[.mobile-card-active]:bg-forest group-[.mobile-card-active]:text-cream">
         <Icon name={s.icon} className="h-6 w-6" />
       </span>
       <H className="font-serif-display text-[1.6rem] font-semibold leading-tight text-forest">
@@ -165,10 +172,10 @@ export function ServiceCard({ s, headingLevel = 3, compact = false }: { s: Servi
       </H>
       {!compact && <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-moss">{s.summary}</p>}
       <span aria-hidden="true" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-forest">
-        Learn more <Icon name="ArrowRight" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        Learn more <Icon name="ArrowRight" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5 group-[.mobile-card-active]:translate-x-1" />
       </span>
       {s.byArrangement && (
-        <span className="mt-4 inline-flex w-fit rounded-full border border-forest/20 px-3 py-1 text-xs font-medium text-moss">
+        <span className="mt-4 inline-flex w-fit rounded-full border border-forest/20 bg-linen/60 px-3 py-1 text-xs font-medium text-moss">
           Coordinated by arrangement
         </span>
       )}
@@ -188,7 +195,7 @@ export function CtaBand({
 }) {
   return (
     <section aria-labelledby="cta-title" className="on-dark relative overflow-hidden bg-forest text-cream">
-      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(60%_120%_at_100%_0%,rgba(214,183,124,0.25),transparent_60%)]" />
+      <div aria-hidden="true" className="absolute inset-0 bg-[radial-gradient(60%_120%_at_100%_0%,rgb(var(--gold-light-rgb)/0.25),transparent_60%)]" />
       <div className="container-royal relative grid gap-10 py-20 lg:grid-cols-12 lg:items-center lg:py-24">
         <div className="lg:col-span-7">
           <h2 id="cta-title" data-reveal className="h-display text-h2">
