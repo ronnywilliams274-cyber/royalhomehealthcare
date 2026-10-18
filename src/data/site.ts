@@ -1,6 +1,6 @@
 /**
  * SINGLE SOURCE OF TRUTH for agency facts, contact details and compliance text.
- * Edit facts here only — every page reads from this file.
+ * Edit facts here only. Every page reads from this file.
  *
  * Fields set to `null` or "" are hidden on the site until you fill them in.
  * Never add staff names, statistics, awards or testimonials that are not real.
@@ -14,9 +14,8 @@ export const site = {
 
   /**
    * Your live domain, e.g. "https://www.yourdomain.com" (no trailing slash).
-   * Used for canonical URLs, social previews and sitemap.xml. Leave "" until known —
-   * the build skips those tags rather than pointing them at the wrong domain.
-   * You can also set it at build time:  SITE_URL=https://www.yourdomain.com npm run build
+   * Used for canonical URLs, social previews and sitemap.xml. Leave "" until known.
+   * You can also set it at build time: SITE_URL=https://www.yourdomain.com npm run build
    */
   siteUrl: "",
 
@@ -36,10 +35,10 @@ export const site = {
     "https://www.google.com/maps/search/?api=1&query=14328+Victory+Blvd+Suite+203+Van+Nuys+CA+91401",
 
   hours: {
-    label: "Monday – Friday, 9:00 AM – 5:30 PM",
-    short: "Mon–Fri 9:00–5:30",
+    label: "Monday to Friday, 9:00 AM to 5:30 PM",
+    short: "Mon to Fri, 9:00 AM to 5:30 PM",
     onCall:
-      "A registered nurse is on call by phone after office hours, on weekends and on holidays.",
+      "A registered nurse is always on call by phone after office hours, on weekends, and on holidays.",
   },
 
   /** Medicare certification. Add your CMS Certification Number (CCN) to display it. */
@@ -51,34 +50,34 @@ export const site = {
   licenseNumber: null as string | null,
 
   counties: [
-    { slug: "los-angeles", name: "Los Angeles County", note: "Including the San Fernando Valley, where our Van Nuys office is based." },
-    { slug: "ventura", name: "Ventura County", note: "Coordinated from our Van Nuys office." },
-    { slug: "san-bernardino", name: "San Bernardino County", note: "Coordinated from our Van Nuys office." },
-    { slug: "orange", name: "Orange County", note: "Coordinated from our Van Nuys office." },
+    { slug: "los-angeles", name: "Los Angeles County", note: "Including the San Fernando Valley, right where our Van Nuys office is based." },
+    { slug: "ventura", name: "Ventura County", note: "Coordinated directly from our Van Nuys office." },
+    { slug: "san-bernardino", name: "San Bernardino County", note: "Coordinated directly from our Van Nuys office." },
+    { slug: "orange", name: "Orange County", note: "Coordinated directly from our Van Nuys office." },
   ],
 
   coverage: [
-    { name: "Medicare", note: "Covered home health services at $0 to eligible patients" },
-    { name: "Medi-Cal", note: "For eligible members" },
-    { name: "Private insurance", note: "Some plans — we verify your benefits" },
+    { name: "Medicare", note: "Covered home health services at $0 out of pocket for eligible patients" },
+    { name: "Medi-Cal", note: "For eligible Medi-Cal members" },
+    { name: "Private insurance", note: "Accepted for select plans, and we verify your benefits for you" },
     { name: "Workers' compensation", note: "With an authorized claim" },
-    { name: "Regional centers", note: "For eligible clients" },
-    { name: "Private pay", note: "Ask us about options" },
+    { name: "Regional centers", note: "For eligible regional center clients" },
+    { name: "Private pay", note: "Talk with us about private pay options" },
   ],
-  coverageNote: "Coverage depends on eligibility and your plan. Call us and we'll verify your benefits before care begins.",
+  coverageNote: "Coverage depends on your plan and eligibility. Give us a call and we will gladly check your benefits before care begins.",
 
   whoCanRefer: [
     "You or a family member",
     "A friend or neighbor",
-    "Your physician or nurse practitioner",
-    "A hospital, skilled nursing facility, clinic or social service agency",
+    "Your doctor or nurse practitioner",
+    "A hospital, skilled nursing facility, clinic, or social service agency",
   ],
 
   whyHome: [
-    { title: "Familiar surroundings", body: "Care happens among family and the things you love — and your family can take part." },
-    { title: "Physician-directed", body: "Every service follows a plan of care developed with, and signed by, your physician." },
-    { title: "A safer transition", body: "Home health is a bridge between the hospital and independent living." },
-    { title: "Lower costs", body: "Care at home can support earlier hospital discharges and lower overall health care costs." },
+    { title: "Familiar surroundings", body: "You get to heal in your own bed and living room, surrounded by the people and daily routines you love." },
+    { title: "Guided by your doctor", body: "Your own physician stays in charge. Every visit follows a care plan built with and signed by your doctor." },
+    { title: "A smoother transition home", body: "Coming home from the hospital feels much less stressful when a nurse is right there to review your medications and answer questions." },
+    { title: "Fewer trips back to the hospital", body: "Steady check-ins at home help catch small changes early and keep overall healthcare costs down." },
   ],
 
   compliance: {
@@ -112,9 +111,9 @@ export const site = {
   },
 
   formNotice:
-    "Please don't include detailed medical information in this form. For referrals and medical records, call or fax us.",
+    "For your privacy, please leave out detailed medical history in this form. For referrals and medical records, give us a call or send a fax.",
 
-  /** Optional: an HTTPS endpoint (Formspree, Basin, your CRM…) that accepts form POSTs.
+  /** Optional: an HTTPS endpoint (Formspree, Basin, your CRM) that accepts form POSTs.
    *  Set VITE_FORM_ENDPOINT in a .env file. Without it, the form opens the visitor's email app. */
   formEndpointEnvVar: "VITE_FORM_ENDPOINT",
 

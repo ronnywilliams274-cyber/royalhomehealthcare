@@ -10,8 +10,7 @@ export default function ServiceAreasPage() {
         title="Home health care across four Southern California counties."
         intro={
           <p>
-            All care is coordinated from our office in Van Nuys. Coverage for your exact address depends on your plan and
-            staffing for the services you need — call us and we'll confirm.
+            All of our care is coordinated from our Van Nuys office in the San Fernando Valley. Because coverage for a specific street address depends on your health plan and clinician availability, give us a quick call and we will confirm right away.
           </p>
         }
       >
@@ -36,10 +35,10 @@ export default function ServiceAreasPage() {
                 <div className="mt-6 border-t border-forest/10 pt-6">
                   <CheckList
                     items={[
-                      "Skilled nursing, wound care, IV therapy and injections",
-                      "Recovery programs after hospital stays and surgery",
-                      "Home health aides; therapy coordinated by arrangement",
-                      "Medicare, Medi-Cal and other coverage — call to verify",
+                      "Skilled nursing, wound care, IV therapy, and injections",
+                      "Personalized recovery programs after hospital stays and surgery",
+                      "Certified home health aides, plus therapy coordinated by arrangement",
+                      "Medicare, Medi-Cal, and select insurance plans (call us to verify)",
                     ]}
                   />
                 </div>
@@ -73,10 +72,9 @@ export default function ServiceAreasPage() {
           </div>
           <div className="lg:col-span-5 lg:col-start-8">
             <div className="card p-8">
-              <h3 className="font-serif-display text-2xl font-semibold text-forest">Not sure if we cover your area?</h3>
+              <h3 className="font-serif-display text-2xl font-semibold text-forest">Not sure if we cover your neighborhood?</h3>
               <p className="mt-3 leading-relaxed text-moss">
-                Call with your ZIP code and the services you need. We'll tell you right away whether we can help — and if we
-                can't, we'll try to point you in the right direction.
+                Give us a call with your ZIP code and the care you are looking for. We will let you know right away if our nurses serve your neighborhood, and if you are outside our range, we will gladly help point you in the right direction.
               </p>
               <a href={site.phoneHref} className="btn btn-primary mt-6">
                 <Icon name="Phone" className="h-4 w-4" /> {site.phone}

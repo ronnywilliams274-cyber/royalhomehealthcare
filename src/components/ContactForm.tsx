@@ -76,7 +76,7 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
         setStatus({ kind: "sent", text: `Thank you, ${f.name.split(" ")[0]}. We received your message and will call you back, usually the same business day.` });
         setF({ name: "", phone: "", email: "", role: "", service: "", zip: "", message: "" });
       } catch {
-        setStatus({ kind: "error", text: `Sorry — your message didn't go through. Please call us at ${site.phone}.` });
+        setStatus({ kind: "error", text: `Sorry, your message did not go through. Please give us a call at ${site.phone}.` });
       }
       return;
     }

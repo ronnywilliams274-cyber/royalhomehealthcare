@@ -1,5 +1,5 @@
 /**
- * Page registry — titles, descriptions and URLs for every page.
+ * Page registry - titles, descriptions and URLs for every page.
  * Used by the app (document titles), the prerender script (static HTML <head>)
  * and sitemap.xml generation.
  */

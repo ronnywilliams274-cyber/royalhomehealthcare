@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 /**
- * Image with a graceful fallback — if the file is missing from public/media/,
+ * Image with a graceful fallback - if the file is missing from public/media/,
  * a designed gradient panel is shown instead of a broken image.
  *
  * ACCESSIBILITY: `alt` must describe what the photo actually shows (WCAG 1.1.1).

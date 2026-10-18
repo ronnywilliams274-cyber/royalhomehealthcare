@@ -27,7 +27,7 @@ export default function Footer() {
       <div className="container-royal border-t border-white/10 pt-16">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Link to="/" className="inline-flex items-center gap-3" aria-label={`${site.shortName} — home`}>
+            <Link to="/" className="inline-flex items-center gap-3" aria-label={`${site.shortName} home`}>
               <Crest className="h-10 w-10 text-gold-light" />
               <span aria-hidden="true" className="font-serif-display text-2xl font-medium">
                 {site.name}

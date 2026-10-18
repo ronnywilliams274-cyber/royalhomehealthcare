@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 let lenisInstance: Lenis | null = null;
 
-/** Smooth scrolling — only when the visitor hasn't asked for reduced motion. */
+/** Smooth scrolling - only when the visitor hasn't asked for reduced motion. */
 export function useLenis() {
   const motionOff = useMotionOff();
 

@@ -146,7 +146,7 @@ export function SectionHeading({
 }
 
 /* ------------------------------------------------------------------ */
-/* Service card — the whole card is one link with a clear name         */
+/* Service card - the whole card is one link with a clear name         */
 /* ------------------------------------------------------------------ */
 export function ServiceCard({ s, headingLevel = 3, compact = false }: { s: Service; headingLevel?: 2 | 3 | 4; compact?: boolean }) {
   const H = `h${headingLevel}` as "h2" | "h3" | "h4";
@@ -219,7 +219,7 @@ export function CtaBand({
 }
 
 /* ------------------------------------------------------------------ */
-/* FAQ list — native <details>, keyboard and screen-reader friendly    */
+/* FAQ list - native <details>, keyboard and screen-reader friendly    */
 /* ------------------------------------------------------------------ */
 export function FaqList({ items }: { items: readonly { q: string; a: string; link?: { href: string; label: string } }[] }) {
   return (

@@ -23,7 +23,7 @@ const outDir = path.join(root, "node_modules", ".cache", "rhhc-prerender");
 const serverEntry = path.join(outDir, "entry-server.mjs");
 
 if (!existsSync(path.join(dist, "index.html"))) {
-  console.error("prerender: dist/index.html not found — run `vite build` first.");
+  console.error("prerender: dist/index.html not found - run `vite build` first.");
   process.exit(1);
 }
 
@@ -142,7 +142,7 @@ if (siteUrl) {
   await write(path.join(dist, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`);
 } else {
   await write(path.join(dist, "robots.txt"), "User-agent: *\nAllow: /\n");
-  console.warn("prerender: no SITE_URL set — skipped canonical URLs and sitemap.xml (set site.siteUrl in src/data/site.ts).");
+  console.warn("prerender: no SITE_URL set - skipped canonical URLs and sitemap.xml (set site.siteUrl in src/data/site.ts).");
 }
 
 await rm(outDir, { recursive: true, force: true });

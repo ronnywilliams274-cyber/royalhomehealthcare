@@ -13,8 +13,7 @@ export default function ServicesPage() {
         title="Skilled care at home, coordinated around you."
         intro={
           <p>
-            Every service below is provided under a plan of care from your physician. Not sure what you need? Call us — a
-            registered nurse can help you sort it out.
+            Every service below is provided under a personalized care plan signed by your doctor. Not sure where to start? Give us a call and one of our registered nurses will help you sort everything out.
           </p>
         }
         aside={

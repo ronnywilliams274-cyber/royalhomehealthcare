@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   Royal Home Health Care — design system
+   Royal Home Health Care - design system
    Palette, type and interaction rules are tuned for WCAG 2.1 AA:
    - every text colour pairing meets 4.5:1 (normal) or 3:1 (large text)
    - focus is always visible on both light and dark sections
@@ -187,7 +187,7 @@
   body {
     @apply bg-cream text-charcoal;
     font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-    font-size: 1.0625rem; /* 17px — comfortable for older readers, scales with zoom */
+    font-size: 1.0625rem; /* 17px - comfortable for older readers, scales with zoom */
     line-height: 1.65;
     overflow-x: clip;
     overflow-wrap: break-word; /* long emails/URLs wrap on small screens (WCAG 1.4.10) */
@@ -214,7 +214,7 @@
     color: var(--cream);
   }
 
-  /* Visible focus for keyboard users (WCAG 2.4.7) — never removed */
+  /* Visible focus for keyboard users (WCAG 2.4.7) - never removed */
   :focus-visible {
     outline: 3px solid var(--ring-color);
     outline-offset: 3px;
@@ -270,7 +270,7 @@
     font-size: clamp(1.5rem, 1.25rem + 0.8vw, 2rem);
   }
 
-  /* Buttons — min 48px tall, tactile spring feedback on mobile & desktop */
+  /* Buttons - min 48px tall, tactile spring feedback on mobile & desktop */
   .btn {
     @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-semibold leading-tight transition-[transform,background-color,color,box-shadow,border-color] duration-300 active:scale-[0.97];
   }

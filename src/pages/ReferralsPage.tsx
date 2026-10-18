@@ -86,7 +86,7 @@ export default function ReferralsPage() {
               </div>
               <p className="mt-6 flex gap-3 rounded-xl bg-linen p-4 text-[0.95rem] text-moss">
                 <Icon name="Info" className="mt-0.5 h-5 w-5 shrink-0 text-forest" />
-                Please send protected health information by fax or phone — not through the website contact form.
+                Please send patient medical records by fax or phone rather than through our website contact form.
               </p>
             </div>
           </div>

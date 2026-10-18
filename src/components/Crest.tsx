@@ -1,4 +1,4 @@
-/** Placeholder brand mark (crown over a house). Decorative — the adjacent text carries the name.
+/** Placeholder brand mark (crown over a house). Decorative - the adjacent text carries the name.
  *  Replace the paths with the agency's vector logo when available. */
 export function Crest({ className = "" }: { className?: string }) {
   return (

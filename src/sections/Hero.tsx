@@ -50,7 +50,7 @@ export default function Hero() {
 
   return (
     <section aria-labelledby="hero-title" className="on-dark relative flex min-h-[100svh] items-end overflow-hidden bg-forest-ink sm:items-center">
-      {/* Background layers — decorative */}
+      {/* Background layers - decorative */}
       <div className="absolute inset-0" aria-hidden="true">
         <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_70%_10%,rgb(var(--forest-rgb))_0%,rgb(var(--forest-deep-rgb))_55%,rgb(var(--forest-ink-rgb))_100%)]" />
         <picture>
@@ -87,7 +87,7 @@ export default function Hero() {
             <HeroCanvas className="absolute inset-0 h-full w-full opacity-80" paused={paused} />
           </Suspense>
         )}
-        {/* readability scrim — adapts to active theme color while keeping text contrast above 4.5:1 */}
+        {/* readability scrim - adapts to active theme color while keeping text contrast above 4.5:1 */}
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(var(--forest-ink-rgb)/0.68)_0%,rgb(var(--forest-ink-rgb)/0.62)_40%,rgb(var(--forest-ink-rgb)/0.92)_100%)] sm:bg-[linear-gradient(90deg,rgb(var(--forest-ink-rgb)/0.88)_0%,rgb(var(--forest-ink-rgb)/0.68)_55%,rgb(var(--forest-ink-rgb)/0.35)_100%)]" />
       </div>
 
@@ -107,16 +107,15 @@ export default function Hero() {
           <span className="inline-flex items-center gap-2 rounded-full border border-gold-light/40 bg-forest-ink/40 px-3 py-1.5 text-gold-light">
             <Icon name="BadgeCheck" className="h-4 w-4" /> Medicare-certified
           </span>
-          <span>Licensed home health agency · Van Nuys, California</span>
+          <span>Licensed home health agency in Van Nuys, California</span>
         </p>
 
         <h1 id="hero-title" {...anim(120)} className="hero-in h-display text-hero max-w-5xl text-cream">
-          Healing happens best <em className="font-medium italic text-gold-light">at home.</em>
+          Healing feels best <em className="font-medium italic text-gold-light">in your own home.</em>
         </h1>
 
         <p {...anim(260)} className="hero-in mt-7 max-w-xl text-lg leading-relaxed text-cream/95 sm:text-xl">
-          Skilled nurses, therapists and caring aides — at your door, under your physician's plan. Wound care, IV therapy,
-          injections and recovery programs across Los Angeles, Ventura, San&nbsp;Bernardino and Orange Counties.
+          Experienced nurses, physical therapists, and caring aides right at your front door, working closely with your doctor. We bring wound care, IV therapy, injections, and recovery support to families across Los Angeles, Ventura, San&nbsp;Bernardino, and Orange Counties.
         </p>
 
         <div {...anim(380)} className="hero-in mt-9 flex flex-wrap items-center gap-3">
@@ -130,9 +129,9 @@ export default function Hero() {
 
         <ul {...anim(500)} className="hero-in mt-12 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-4 border-t border-white/15 pt-7 text-sm text-cream/90 sm:grid-cols-4">
           {[
-            ["ShieldPlus", "Physician-directed care"],
-            ["Stethoscope", "Registered nurses"],
-            ["Clock", "On-call nurse after hours"],
+            ["ShieldPlus", "Guided by your doctor"],
+            ["Stethoscope", "Licensed RNs & LVNs"],
+            ["Clock", "Nurse on call after hours"],
             ["MapPin", "4 Southern California counties"],
           ].map(([icon, text]) => (
             <li key={text} className="flex items-center gap-2.5">

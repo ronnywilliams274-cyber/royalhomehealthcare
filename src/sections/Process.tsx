@@ -4,20 +4,20 @@ import { Icon } from "@/components/Icon";
 
 export const steps = [
   {
-    title: "Referral",
-    desc: "Your physician, hospital or clinic sends a referral — or you or a family member call us and we coordinate with your doctor's office.",
+    title: "Quick referral",
+    desc: "Your doctor, hospital, or clinic sends a referral over, or you call us directly and we reach out to your doctor's office for you.",
   },
   {
-    title: "Nurse visit & assessment",
-    desc: "A registered nurse visits your home, gets to know your needs, and confirms that home health care is the right fit.",
+    title: "Home nurse visit",
+    desc: "One of our registered nurses comes to your home, listens to how you are feeling, and goes over your medications and care needs.",
   },
   {
-    title: "Your personal plan of care",
-    desc: "Together with your physician we design your plan: the right services, the right schedule and clear goals for your recovery.",
+    title: "Your personal care plan",
+    desc: "Together with your physician, we set up a plan that fits your life, including the right services, visit schedule, and recovery goals.",
   },
   {
-    title: "Care that grows with you",
-    desc: "Your team visits regularly, teaches you and your family, keeps your doctor informed and adjusts the plan as you improve.",
+    title: "Care that adjusts with you",
+    desc: "Your team visits on schedule, shows your family how to help, keeps your doctor updated, and adjusts your visits as you get stronger.",
   },
 ];
 

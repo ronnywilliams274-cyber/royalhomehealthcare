@@ -13,7 +13,7 @@ function useOfficeStatus() {
     const day = now.getDay();
     const mins = now.getHours() * 60 + now.getMinutes();
     const open = day >= 1 && day <= 5 && mins >= 9 * 60 && mins < 17 * 60 + 30;
-    setStatus(open ? "Our office is open now." : "Our office is closed now — the on-call nurse is available by phone.");
+    setStatus(open ? "Our office is open right now." : "Our office is closed for the day, and our on-call nurse is available by phone.");
   }, []);
   return status;
 }

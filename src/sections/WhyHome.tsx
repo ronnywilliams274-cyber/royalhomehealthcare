@@ -10,7 +10,7 @@ export default function WhyHome() {
           <div data-reveal>
             <SmartImage
               src={media.hands}
-              alt="Close-up of a caregiver gently holding the hands of an older person wrapped in a soft blanket."
+              alt="Close-up of a clinician gently holding the hands of an older patient resting under a soft cream knit blanket."
               width={720}
               height={900}
               className="aspect-[4/5] rounded-[1.75rem]"
@@ -25,8 +25,7 @@ export default function WhyHome() {
             Recovery feels different in your own living room.
           </h2>
           <p data-reveal data-reveal-delay="0.1" className="mt-6 text-lg leading-relaxed text-moss">
-            Many patients find recovery feels easier at home — surrounded by family, on their own schedule, with care that
-            fits their real life.
+            Most people heal better when they can sleep in their own bed, eat their own food, and recover surrounded by family on a schedule that fits real life.
           </p>
           <ul className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
             {site.whyHome.map((w, i) => (

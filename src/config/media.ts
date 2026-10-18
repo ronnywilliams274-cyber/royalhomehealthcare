@@ -1,5 +1,5 @@
 /**
- * MEDIA FILES — drop your own assets into `public/media/` using EXACTLY
+ * MEDIA FILES - drop your own assets into `public/media/` using EXACTLY
  * these names and the site picks them up automatically. Every slot has a
  * graceful fallback: video → poster image → designed gradient.
  *
@@ -32,6 +32,6 @@ export const media = {
   specialtyTherapy: `${base}/specialty-therapy.jpg`,
   /** Registered nurse listening to an older man's heart with a stethoscope at home (landscape 3:2) */
   cardiacCare: `${base}/about-care.jpg`,
-  /** Contact band background — sunlit Southern California living room */
+  /** Contact band background - sunlit Southern California living room */
   cta: `${base}/cta-home.jpg`,
 };

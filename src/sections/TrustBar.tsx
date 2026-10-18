@@ -1,7 +1,7 @@
 import { site } from "@/data/site";
 import { Icon } from "@/components/Icon";
 
-/** Static payer strip (replaces the old auto-scrolling marquee, which could not be paused — WCAG 2.2.2). */
+/** Static payer strip (replaces the old auto-scrolling marquee, which could not be paused - WCAG 2.2.2). */
 export default function TrustBar() {
   return (
     <section aria-labelledby="payers-title" className="border-y border-forest/10 bg-linen">

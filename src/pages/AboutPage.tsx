@@ -7,19 +7,19 @@ import { Icon, type IconName } from "@/components/Icon";
 import { steps } from "@/sections/Process";
 
 const values: { icon: IconName; title: string; body: string }[] = [
-  { icon: "HandHeart", title: "Compassion", body: "We treat every patient the way we'd want our own parents treated — with patience, dignity and kindness." },
-  { icon: "Stethoscope", title: "Clinical excellence", body: "Skilled, licensed clinicians who follow your physician's orders and current standards of care." },
-  { icon: "Users", title: "Family partnership", body: "Families are part of the team. We teach, listen and keep you informed at every step." },
-  { icon: "ClipboardCheck", title: "Coordination", body: "One plan, one team — nursing, therapy, aides and supplies working together with your doctor." },
-  { icon: "ShieldPlus", title: "Safety", body: "Medication checks, fall prevention, infection control and clear guidance on when to call." },
-  { icon: "Accessibility", title: "Respect for every person", body: "We serve people of every background and ability, and we adapt how we communicate to meet your needs." },
+  { icon: "HandHeart", title: "Genuine compassion", body: "We care for every patient the way we would want our own parents and grandparents cared for, with patience, dignity, and kindness." },
+  { icon: "Stethoscope", title: "Clinical excellence", body: "Experienced, licensed nurses and therapists who follow your doctor's orders and take pride in getting the details right." },
+  { icon: "Users", title: "Family partnership", body: "Families are part of the care team. We take the time to teach, listen, and keep you in the loop at every visit." },
+  { icon: "ClipboardCheck", title: "Seamless coordination", body: "One shared plan and one connected team, with nursing, therapy, aides, and medical supplies working alongside your doctor." },
+  { icon: "ShieldPlus", title: "Everyday safety", body: "Careful medication reviews, fall prevention, sterile technique, and clear guidance on when to call us." },
+  { icon: "Accessibility", title: "Respect for every person", body: "We proudly care for families of every background across Southern California and adapt how we communicate to fit your needs." },
 ];
 
 const team = [
-  { title: "Registered nurses", body: "Assess, treat, teach and coordinate your care under your physician's orders." },
-  { title: "Certified home health aides", body: "Help with bathing, grooming and personal care, supervised by a registered nurse." },
-  { title: "Physical, occupational & speech therapists", body: "Licensed therapy partners coordinated by Royal as part of your plan." },
-  { title: "Medical social workers", body: "Connect families with resources, counseling and long-term planning." },
+  { title: "Registered nurses", body: "Evaluate your health, provide hands-on clinical care, teach your family, and coordinate directly with your physician." },
+  { title: "Certified home health aides", body: "Assist with warm showers, grooming, dressing, and safe mobility under the supervision of a registered nurse." },
+  { title: "Physical, occupational & speech therapists", body: "Licensed local therapy partners coordinated by Royal as part of your care plan." },
+  { title: "Medical social workers", body: "Help families navigate community programs, counseling, and long-term care planning." },
 ];
 
 export default function AboutPage() {
@@ -30,8 +30,7 @@ export default function AboutPage() {
         title={site.tagline + "."}
         intro={
           <p>
-            We're a licensed, Medicare-certified home health agency based in Van Nuys, California, bringing skilled care to
-            families across Los Angeles, Ventura, San Bernardino and Orange Counties.
+            We are a licensed, Medicare-certified home health agency based in Van Nuys, California, bringing attentive clinical care to families across Los Angeles, Ventura, San Bernardino, and Orange Counties.
           </p>
         }
         aside={<MedicareBadge dark />}
@@ -48,17 +47,13 @@ export default function AboutPage() {
             </h2>
             <div data-reveal className="mt-6 space-y-5 text-lg leading-relaxed text-charcoal/90">
               <p>
-                Our mission is simple: to help people recover, stay safe and live well in the place they feel most at home.
-                We do that with skilled clinical care, clear communication and genuine respect for every patient and family.
+                Our goal is straightforward: to help you or your loved one recover, stay safe, and feel comfortable in the place you know best. We do that through unhurried clinical visits, honest communication, and genuine respect for every family we meet.
               </p>
               <p>
-                Home health care is an ideal bridge between the hospital and independent living. It can support earlier
-                discharges, help avoid return trips to the hospital, and lower the overall cost of care — while letting
-                patients heal surrounded by the people and things they love.
+                Coming home from a hospital or rehab stay is a big moment, and having the right support in those first few weeks makes all the difference. Steady care at home helps prevent avoidable trips back to the emergency room and lets you heal in your own bed, surrounded by family.
               </p>
               <p>
-                Everything we do is coordinated with your physician. Your doctor leads; we bring the plan to life in your
-                home and keep everyone informed.
+                Everything we do starts with your own doctor. Your physician directs your medical plan, and our team brings that plan to life in your living room while keeping your doctor updated along the way.
               </p>
             </div>
           </div>
@@ -66,7 +61,7 @@ export default function AboutPage() {
             <div data-reveal>
               <SmartImage
                 src={media.companionship}
-                alt="A smiling caregiver leans toward a laughing older man as they hold hands in a sunlit living room."
+                alt="A compassionate female nurse in navy scrubs sitting beside a smiling older gentleman on a sofa reviewing a care plan folder."
                 width={720}
                 height={900}
                 className="aspect-[4/5] rounded-[1.75rem]"

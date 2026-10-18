@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 /**
- * Gentle three.js particle field — soft drifting motes in cream/gold tones,
+ * Gentle three.js particle field - soft drifting motes in cream/gold tones,
  * rendered additively over the hero. Reacts subtly to pointer movement and
  * slows to a near-still drift on touch devices. Pauses when offscreen.
  */

@@ -89,7 +89,7 @@ const icons = {
 
 export type IconName = keyof typeof icons;
 
-/** Decorative icon. Always hidden from assistive technology — pair it with visible text. */
+/** Decorative icon. Always hidden from assistive technology - pair it with visible text. */
 export function Icon({ name, ...props }: { name: IconName } & LucideProps) {
   const Cmp = icons[name];
   return <Cmp aria-hidden="true" focusable="false" strokeWidth={1.6} {...props} />;

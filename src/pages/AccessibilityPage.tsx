@@ -100,7 +100,7 @@ export default function AccessibilityPage() {
               <li>California Relay Service: dial 711</li>
             </ul>
             <p className="mt-5 text-charcoal/90">
-              You may also file a civil rights complaint — see our <Link to="/nondiscrimination">nondiscrimination notice</Link>.
+              You can also file a civil rights complaint at any time. See our <Link to="/nondiscrimination">nondiscrimination notice</Link> for contact details.
             </p>
           </section>
           </div>

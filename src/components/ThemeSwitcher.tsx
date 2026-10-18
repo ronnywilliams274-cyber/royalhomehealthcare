@@ -165,7 +165,7 @@ export default function ThemeSwitcher() {
               onClick={() => applyTheme(t.id)}
               aria-label={`Switch to ${t.name} theme`}
               aria-pressed={active}
-              title={`${t.name} — ${t.desc}`}
+              title={`${t.name}: ${t.desc}`}
               className={`relative flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-200 active:scale-90 ${
                 active ? "scale-105 ring-2 ring-forest ring-offset-1 ring-offset-white/80" : "opacity-80 hover:scale-105 hover:opacity-100"
               }`}

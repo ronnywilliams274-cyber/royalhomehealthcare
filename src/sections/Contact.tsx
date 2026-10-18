@@ -19,8 +19,7 @@ export default function Contact() {
             We're here whenever you're ready.
           </h2>
           <p data-reveal data-reveal-delay="0.12" className="mt-6 max-w-md text-lg leading-relaxed text-cream/90">
-            Questions, a referral, or just talking through your options — give us a call. We're a real team, and we usually
-            get back to you the same business day.
+            Whether you have a quick question about Medicare, want to send a referral, or just need to talk through what is going on with a loved one, give us a call. A real person answers our phone, and we usually get back to messages the same business day.
           </p>
           <ContactDetails />
         </div>

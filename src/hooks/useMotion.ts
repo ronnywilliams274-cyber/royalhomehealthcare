@@ -35,7 +35,7 @@ export function setUserMotionOff(off: boolean) {
     if (off) window.localStorage.setItem(KEY, "1");
     else window.localStorage.removeItem(KEY);
   } catch {
-    /* storage unavailable — preference lasts for this page view only */
+    /* storage unavailable - preference lasts for this page view only */
     document.documentElement.classList.toggle("motion-off", off);
   }
   apply();

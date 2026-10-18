@@ -95,7 +95,7 @@ export default function Nav() {
               : "border-white/15 bg-forest-ink/60 backdrop-blur-md"
           }`}
         >
-          <Link to="/" className="flex shrink-0 items-center gap-2.5 rounded-full py-1 pr-2 text-cream" aria-label={`${site.shortName} — home`}>
+          <Link to="/" className="flex shrink-0 items-center gap-2.5 rounded-full py-1 pr-2 text-cream" aria-label={`${site.shortName} home`}>
             <Crest className="h-9 w-9 text-gold-light" />
             <span className="font-serif-display text-xl font-medium leading-none sm:text-[1.4rem]" aria-hidden="true">
               Royal <span className="hidden sm:inline">Home Health Care</span>

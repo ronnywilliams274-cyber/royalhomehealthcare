@@ -7,27 +7,27 @@ import { medicareEligibility } from "@/sections/MedicareBand";
 import { Icon } from "@/components/Icon";
 
 const covered = [
-  "Part-time or intermittent skilled nursing — wound care, IV or nutrition therapy, injections, teaching and monitoring",
-  "Physical, occupational and speech-language therapy",
-  "Medical social services",
-  "Part-time home health aide care, when you're also getting skilled nursing or therapy",
-  "Medical supplies for use at home",
-  "Durable medical equipment, such as walkers and hospital beds (20% coinsurance applies)",
+  "Part-time or intermittent skilled nursing, including wound care, IV or nutrition therapy, injections, family teaching, and health monitoring",
+  "Physical, occupational, and speech-language therapy",
+  "Medical social services to support you and your family",
+  "Part-time home health aide visits when you are also receiving skilled nursing or therapy",
+  "Routine medical supplies needed for your care at home",
+  "Durable medical equipment such as walkers and hospital beds (20% coinsurance applies after the Part B deductible)",
 ];
 
 const notCovered = [
-  "24-hour care at home",
+  "Round-the-clock 24-hour care at home",
   "Meals delivered to your home",
-  "Homemaker services, such as shopping and cleaning, that aren't related to your care plan",
-  "Personal care, such as bathing and dressing, when it's the only care you need",
+  "General housekeeping like shopping and cleaning when unrelated to your medical care plan",
+  "Personal care like bathing and dressing when that is the only care you need",
 ];
 
 const rights = [
-  "Choose your home health agency — Medicare lets you pick any certified agency that serves your area",
-  "Take part in planning your care and receive information about your plan of care",
-  "Be told in advance about the care you'll receive and any costs you may owe",
-  "Have your property and person treated with respect, and your health information kept private",
-  "Voice complaints about your care without fear of retaliation, and be told how to reach the state home health hotline",
+  "Choose your own home health agency. Medicare gives you the freedom to pick any certified agency that serves your neighborhood",
+  "Take an active part in planning your care and receive a clear copy of your care plan",
+  "Be told in advance about the services you will receive and any costs that might not be covered",
+  "Have your home, your family, and your privacy treated with respect at every visit",
+  "Speak up or share a concern about your care without ever worrying about retaliation, and know how to reach the state home health hotline",
 ];
 
 export default function MedicarePage() {
@@ -35,18 +35,17 @@ export default function MedicarePage() {
     <>
       <PageHero
         eyebrow="Medicare-certified home health agency"
-        title="Medicare-certified care, with nothing to pay for covered services."
+        title="Medicare-certified care, with $0 out of pocket for covered visits."
         intro={
           <p>
-            Royal Home Health Care, Inc. is certified by Medicare. If you qualify, Medicare pays the full cost of covered home
-            health services — and we handle the paperwork with your physician.
+            Royal Home Health Care, Inc. is certified by Medicare. When you qualify under Original Medicare, your covered home health visits are paid in full, and our office coordinates all the paperwork directly with your doctor.
           </p>
         }
         aside={
           <div className="rounded-3xl border border-white/10 bg-white/[0.05] p-7">
             <MedicareBadge dark />
             <p className="mt-5 font-serif-display text-6xl font-medium text-gold-light">$0</p>
-            <p className="mt-2 text-cream/90">What eligible patients pay for covered home health services.</p>
+            <p className="mt-2 text-cream/90">What eligible patients pay for covered home health visits.</p>
             {site.medicare.ccn && <p className="mt-4 text-sm text-cream/80">CMS Certification Number: {site.medicare.ccn}</p>}
           </div>
         }
@@ -63,18 +62,14 @@ export default function MedicarePage() {
               What it means
             </p>
             <h2 id="meaning-title" data-reveal className="h-display text-h2 text-forest">
-              What “Medicare-certified” means for you.
+              What “Medicare-certified” means for your family.
             </h2>
             <div data-reveal className="mt-6 space-y-5 text-lg leading-relaxed text-charcoal/90">
               <p>
-                Medicare only pays for home health care provided by agencies it has certified. To be certified, an agency must
-                meet federal health and safety standards — called Conditions of Participation — set by the Centers for Medicare
-                &amp; Medicaid Services (CMS), and it is surveyed to confirm it follows them.
+                Medicare only pays for home health care when it comes from an agency that has earned federal Medicare certification. To earn and keep that certification, an agency has to meet strict federal health and safety standards set by the Centers for Medicare &amp; Medicaid Services (CMS) and pass regular independent surveys.
               </p>
               <p>
-                Those standards cover patient rights, care planning with your physician, qualified clinical staff, infection
-                control, emergency preparedness and quality monitoring. In short: certification is an independent check that
-                your care meets a national standard.
+                Those standards cover everything from how we coordinate with your doctor and verify nursing credentials to infection control, emergency readiness, and patient rights. Simply put, certification gives your family peace of mind that our clinical care meets a trusted national standard.
               </p>
             </div>
           </div>
@@ -82,7 +77,7 @@ export default function MedicarePage() {
             <div data-reveal>
               <SmartImage
                 src={media.connection}
-                alt="A smiling older woman resting in a recliner looks up at a nurse who leans in to talk with her."
+                alt="A registered nurse at a sunlit dining table reviewing hospital discharge instructions and a pill organizer with an older couple."
                 width={1080}
                 height={720}
                 className="aspect-[4/3] rounded-[1.75rem]"
@@ -100,8 +95,7 @@ export default function MedicarePage() {
               You may qualify for Medicare home health if:
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-moss">
-              All four must be true. Not sure? Call us — a registered nurse will help determine eligibility and work with your
-              doctor's office.
+              All four of these need to apply. If you are not sure whether you or your loved one qualifies, give us a call. One of our registered nurses will talk it through with you and check with your doctor's office.
             </p>
           </div>
           <div className="card p-7 sm:p-10 lg:col-span-6 lg:col-start-7">
@@ -109,9 +103,7 @@ export default function MedicarePage() {
             <div className="mt-8 border-t border-forest/10 pt-6">
               <h3 className="font-semibold text-forest">What does “homebound” mean?</h3>
               <p className="mt-2 leading-relaxed text-charcoal/90">
-                Leaving home isn't recommended because of your condition, or you need help — a cane, walker, wheelchair, special
-                transportation or another person — to leave; and leaving home takes a considerable and taxing effort. You can
-                still go to medical appointments, religious services, adult day care and occasional short outings.
+                Being homebound does not mean you are confined to bed. It means leaving home is not recommended because of your medical condition, or you need support such as a cane, walker, wheelchair, special transportation, or another person's help to go out, and leaving takes a real physical effort. You can still leave home for doctor visits, religious services, adult day care, and occasional short family outings.
               </p>
             </div>
           </div>
@@ -122,7 +114,7 @@ export default function MedicarePage() {
         <div className="container-royal py-20 lg:py-24">
           <p className="eyebrow mb-5 text-gold-ink">What's covered</p>
           <h2 id="covered-title" className="h-display text-h2 max-w-3xl text-forest">
-            What Medicare home health covers — and what it doesn't.
+            What Medicare home health covers, and what it does not.
           </h2>
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             <div className="card p-7 sm:p-9">
@@ -148,9 +140,9 @@ export default function MedicarePage() {
 
           <div className="mt-6 grid gap-6 md:grid-cols-3">
             {[
-              ["Home health services", "$0", "for covered services when you're eligible"],
-              ["Medical equipment (DME)", "20%", "of the Medicare-approved amount, after the Part B deductible"],
-              ["Before care begins", "Notice", "We tell you in writing if any service won't be covered and what it would cost"],
+              ["Home health services", "$0", "for covered home health visits when you qualify"],
+              ["Medical equipment (DME)", "20%", "of the Medicare-approved amount, after your Part B deductible"],
+              ["Before care begins", "Written notice", "We let you know in writing ahead of time if any requested item is not covered by Medicare"],
             ].map(([t, v, d]) => (
               <div key={t} className="rounded-2xl bg-forest p-7 text-cream on-dark">
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cream/85">{t}</p>
@@ -160,9 +152,7 @@ export default function MedicarePage() {
             ))}
           </div>
           <p className="mt-6 text-sm text-moss">
-            Source: Medicare.gov, “Home health services.” If you have a Medicare Advantage plan, coverage rules and networks vary —
-            call us and we'll check your plan. We also work with Medi-Cal, some private insurance, workers' compensation, regional
-            centers and private pay.
+            Source: Medicare.gov, “Home health services.” If you have a Medicare Advantage plan, network rules and prior authorizations vary by plan. Give us a call and we will check your specific benefits. We also work with Medi-Cal, select private insurance plans, workers' compensation, regional centers, and private pay.
           </p>
         </div>
       </section>
@@ -175,7 +165,7 @@ export default function MedicarePage() {
               As a Medicare patient, you have the right to:
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-cream/90">
-              We give every patient a written copy of their rights at the start of care and review it with you.
+              We provide every patient and family with a written copy of their rights at our very first visit and walk through it together.
             </p>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
@@ -210,19 +200,19 @@ export default function MedicarePage() {
               items={[
                 {
                   q: "Do I need a referral from my doctor?",
-                  a: "You need orders from your physician or another allowed practitioner, and that provider must have seen you in a face-to-face visit related to the main reason you need home health care. If you don't have orders yet, call us and we'll contact your doctor's office.",
+                  a: "Yes. You need orders from your physician or another licensed practitioner, and that provider must have seen you in a face-to-face visit related to the reason you need home health care. If you do not have orders yet, just call us and we will reach out to your doctor's office.",
                 },
                 {
                   q: "How long can I receive Medicare home health care?",
-                  a: "There's no fixed lifetime limit. Your physician certifies your plan of care for up to 60 days at a time, and it can be recertified as long as you continue to qualify.",
+                  a: "There is no fixed lifetime cap. Your doctor certifies your plan of care for up to 60 days at a time, and your plan can be renewed for additional 60-day periods as long as you continue to need skilled care and meet Medicare requirements.",
                 },
                 {
                   q: "Can I choose Royal if the hospital suggests another agency?",
-                  a: "Yes. With Medicare you have the right to choose any Medicare-certified home health agency that serves your area. Tell your discharge planner or physician you'd like Royal Home Health Care.",
+                  a: "Yes. Under federal Medicare law, you have the right to choose any Medicare-certified home health agency that serves your area. Just let your hospital discharge planner or doctor know you want Royal Home Health Care.",
                 },
                 {
                   q: "What if Medicare won't pay for a service?",
-                  a: "Before you receive a service Medicare may not cover, we'll give you written notice explaining why and what it would cost, so you can decide what to do.",
+                  a: "Before providing any item or service that Medicare might not cover, we give you a clear written notice explaining why and what it would cost, so you are never surprised by a bill.",
                 },
               ]}
             />
@@ -230,7 +220,7 @@ export default function MedicarePage() {
         </div>
       </section>
 
-      <CtaBand title="Find out if you qualify — it takes one call." />
+      <CtaBand title="Find out if you qualify with one quick phone call." />
     </>
   );
 }

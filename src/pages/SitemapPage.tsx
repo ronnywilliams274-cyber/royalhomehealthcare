@@ -3,7 +3,7 @@ import { staticRoutes } from "@/routes";
 import { categories, servicesIn, type ServiceCategory } from "@/data/services";
 import { PageHero } from "@/components/Shared";
 
-/** HTML site map — a second way to find every page (WCAG 2.4.5 Multiple Ways). */
+/** HTML site map - a second way to find every page (WCAG 2.4.5 Multiple Ways). */
 export default function SitemapPage() {
   const cats: ServiceCategory[] = ["nursing", "programs", "core"];
   return (

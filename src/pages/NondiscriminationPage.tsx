@@ -8,7 +8,7 @@ export default function NondiscriminationPage() {
       <PageHero
         eyebrow="Patient rights"
         title="Nondiscrimination notice & how to file a complaint."
-        intro={<p>Everyone deserves equal access to care. Here's our commitment and who to contact if you have a concern.</p>}
+        intro={<p>Everyone deserves equal, respectful access to care. Below is our commitment to your rights and who to reach out to if you ever have a concern.</p>}
       />
 
       <div className="bg-cream">
@@ -27,10 +27,8 @@ export default function NondiscriminationPage() {
               Free communication help
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-charcoal/90">
-              If you have a disability or speak a language other than English, tell us how we can communicate with you best — for
-              example large print, help completing forms, or language assistance. Call{" "}
-              <a href={site.phoneHref}>{site.phone}</a>. If you are deaf, hard of hearing or have a speech disability, you can reach
-              us through the California Relay Service by dialing 711.
+              If you have a disability or prefer speaking a language other than English, please let us know how we can communicate with you best, such as large-print materials, help filling out forms, or language assistance. Call{" "}
+              <a href={site.phoneHref}>{site.phone}</a>. If you are deaf, hard of hearing, or have a speech disability, you can reach us through the California Relay Service by dialing 711.
             </p>
           </section>
 
