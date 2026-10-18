@@ -44,6 +44,23 @@ await build({
   logLevel: "warning",
   plugins: [
     {
+      // Force packages that ship both CJS (main) and ESM (module) to resolve to ESM.
+      // esbuild on platform:node picks `main` (CJS) by default; those CJS files
+      // do `require("react")` at runtime which throws in an ESM Node context.
+      name: "prefer-esm",
+      setup(b) {
+        const esmPackages = ["lucide-react"];
+        b.onResolve({ filter: /.*/ }, async (args) => {
+          if (!esmPackages.includes(args.path)) return undefined;
+          const pkgDir = path.join(root, "node_modules", args.path);
+          const pkg = JSON.parse(await readFile(path.join(pkgDir, "package.json"), "utf8"));
+          const esm = pkg.module || pkg["jsnext:main"];
+          if (!esm) return undefined;
+          return { path: path.join(pkgDir, esm) };
+        });
+      },
+    },
+    {
       name: "alias-at",
       setup(b) {
         b.onResolve({ filter: /^@\// }, async (args) => {
