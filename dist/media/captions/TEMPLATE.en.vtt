@@ -1,0 +1,20 @@
+WEBVTT
+
+NOTE
+  Caption template for Royal Home Health Care videos (WCAG 2.1 SC 1.2.2).
+  1. Copy this file and rename it to match your video, e.g. welcome.en.vtt
+  2. One cue per line of speech: start --> end, then the words spoken.
+  3. Identify speakers when it isn't obvious, and describe meaningful sounds in [brackets].
+  4. Keep cues to 1–2 lines of about 32 characters, on screen for at least 1.5 seconds.
+  5. Use it with the CaptionedVideo component (src/components/CaptionedVideo.tsx).
+
+00:00:00.000 --> 00:00:03.500
+[Soft piano music]
+
+00:00:03.500 --> 00:00:07.000
+NURSE: Hi, I'm Maria, a registered nurse
+with Royal Home Health Care.
+
+00:00:07.000 --> 00:00:11.000
+Today I'll show you how we prepare
+for your first home visit.

@@ -1,0 +1,302 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Royal Home Health Care — design system
+   Palette, type and interaction rules are tuned for WCAG 2.1 AA:
+   - every text colour pairing meets 4.5:1 (normal) or 3:1 (large text)
+   - focus is always visible on both light and dark sections
+   - nothing moves for people who ask their device to reduce motion
+   ========================================================================== */
+
+@layer base {
+  :root {
+    --forest: #1c3a13;
+    --forest-deep: #12260c;
+    --forest-ink: #0c1a07;
+    --cream: #f6f6f4;
+    --linen: #f5f2ed;
+    --sage: #d2d8d0;
+    --charcoal: #2a2a26;
+    --gold: #b9975b;
+    --gold-light: #d6b77c;
+    --gold-ink: #7d5f26;
+
+    /* focus ring colour; dark sections override it (see .on-dark) */
+    --ring-color: #1c3a13;
+    --header-h: 5.5rem;
+
+    /* shadcn/ui tokens (used by src/components/ui) */
+    --background: 60 9% 96%;
+    --foreground: 100 30% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 100 30% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 100 30% 8%;
+    --primary: 102 52% 15%;
+    --primary-foreground: 60 9% 96%;
+    --secondary: 90 11% 83%;
+    --secondary-foreground: 102 52% 15%;
+    --muted: 90 11% 90%;
+    --muted-foreground: 90 6% 32%;
+    --accent: 90 11% 83%;
+    --accent-foreground: 102 52% 15%;
+    --destructive: 0 72% 42%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 90 10% 82%;
+    --input: 90 10% 70%;
+    --ring: 102 52% 15%;
+    --radius: 0.625rem;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-cream text-charcoal;
+    font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 1.0625rem; /* 17px — comfortable for older readers, scales with zoom */
+    line-height: 1.65;
+    overflow-x: clip;
+    overflow-wrap: break-word; /* long emails/URLs wrap on small screens (WCAG 1.4.10) */
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  p, li, dd {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: #1c3a13;
+    color: #f6f6f4;
+  }
+
+  /* Visible focus for keyboard users (WCAG 2.4.7) — never removed */
+  :focus-visible {
+    outline: 3px solid var(--ring-color);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .on-dark {
+    --ring-color: #d6b77c;
+  }
+
+  /* Underline links inside running text so they don't rely on colour alone (WCAG 1.4.1) */
+  .prose-royal a:not(.btn) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  .prose-royal a:not(.btn):hover {
+    text-decoration-thickness: 2px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  .font-serif-display {
+    font-family: "Cormorant Garamond", "Times New Roman", serif;
+    font-feature-settings: "liga" 1, "onum" 1;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.22em];
+  }
+  .container-royal {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+  .section {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+  .h-display {
+    @apply font-serif-display font-medium leading-[1.05] tracking-[-0.01em];
+  }
+  /* Fluid type that still grows with browser zoom (WCAG 1.4.4): rem + small vw component */
+  .text-hero {
+    font-size: clamp(2.75rem, 1.6rem + 4.6vw, 6.25rem);
+  }
+  .text-h1 {
+    font-size: clamp(2.5rem, 1.7rem + 3vw, 4.5rem);
+  }
+  .text-h2 {
+    font-size: clamp(2.125rem, 1.5rem + 2.2vw, 3.75rem);
+  }
+  .text-h3 {
+    font-size: clamp(1.5rem, 1.25rem + 0.8vw, 2rem);
+  }
+
+  /* Buttons — min 48px tall, text never clipped when spacing is increased (WCAG 1.4.12) */
+  .btn {
+    @apply inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-full px-6 py-3 text-[0.95rem] font-semibold leading-tight transition-[transform,background-color,color,box-shadow] duration-300;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn-primary {
+    @apply bg-forest text-cream shadow-[0_12px_30px_-14px_rgba(12,26,7,0.6)] hover:bg-forest-deep;
+  }
+  .btn-light {
+    @apply bg-cream text-forest hover:bg-white;
+  }
+  .btn-outline {
+    @apply border border-forest/30 text-forest hover:bg-forest/5;
+  }
+  .btn-outline-light {
+    @apply border border-cream/50 text-cream hover:bg-cream/10;
+  }
+  .btn-gold {
+    @apply bg-gold-light text-forest-ink hover:bg-[#e2c793];
+  }
+
+  .card {
+    @apply rounded-2xl border border-forest/10 bg-white shadow-[0_1px_0_rgba(12,26,7,0.04),0_18px_40px_-28px_rgba(12,26,7,0.35)];
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 font-semibold text-forest underline decoration-forest/30 underline-offset-4 transition-colors hover:decoration-forest;
+  }
+  .on-dark .link-arrow {
+    @apply text-cream decoration-cream/40 hover:decoration-cream;
+  }
+
+  .skip-link {
+    @apply fixed left-4 top-3 z-[100] -translate-y-[200%] rounded-lg bg-forest-ink px-5 py-3 font-semibold text-cream shadow-lg;
+    --ring-color: #d6b77c;
+  }
+  .skip-link:focus {
+    @apply translate-y-0;
+  }
+
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    @apply sr-only;
+  }
+}
+
+/* ---------- Native <details> accordion (FAQ) ---------- */
+details.faq > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details.faq > summary::-webkit-details-marker {
+  display: none;
+}
+details.faq[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+/* ---------- Reveal on scroll (progressive enhancement) ----------
+   Content is only hidden when JS is running AND the visitor has not asked
+   for reduced motion. index.html removes the "js" class if the app fails. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.motion-off) [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* ---------- Reduced motion: OS setting or the on-site "pause animations" control ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+html.motion-off *,
+html.motion-off *::before,
+html.motion-off *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ---------- Windows High Contrast / forced colours ---------- */
+@media (forced-colors: active) {
+  .btn,
+  .card {
+    border: 1px solid CanvasText;
+  }
+  :focus-visible {
+    outline-color: Highlight;
+  }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  header[data-site-header],
+  .no-print,
+  video,
+  canvas {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .on-dark {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+body::-webkit-scrollbar-track {
+  background: #f5f2ed;
+}
+body::-webkit-scrollbar-thumb {
+  background: #aebba9;
+  border-radius: 8px;
+}
+
+/* ---------- Hero entrance (CSS-only so prerendered HTML is never hidden) ---------- */
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.motion-off) .hero-in {
+    animation: hero-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+/* Programmatically focused headings (after navigation) don't need a ring */
+main h1[tabindex="-1"]:focus,
+main#main:focus {
+  outline: none;
+}
+
+/* Native dropdown options must stay readable on dark forms */
+.on-dark select option {
+  color: #2a2a26;
+  background: #ffffff;
+}

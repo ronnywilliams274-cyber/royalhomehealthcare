@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-300: #f0ce8a;
+  --color-gold-500: #d9a441;
+  --color-gold-700: #9a6b12;
+  --color-ink: #1e1b16;
+  --color-ivory: #fbf7ef;
+  --color-dusk: #171410;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ivory text-ink font-sans antialiased;
+  font-size: 18px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-gold-300);
+  color: var(--color-ink);
+}
+
+/* Visible focus rings — WCAG 2.2 AA */
+:focus-visible {
+  outline: 3px solid var(--color-gold-700);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  background: var(--color-ink);
+  color: var(--color-ivory);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  transition: top 0.2s var(--ease-silk);
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ---------- Reveal-on-scroll (IntersectionObserver adds .is-visible) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s var(--ease-silk),
+    transform 0.9s var(--ease-silk);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* SVG draw-on animation for the care-journey path (triggers with .is-visible) */
+.draw-path path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 2.4s var(--ease-silk) 0.2s;
+}
+.draw-path.is-visible path {
+  stroke-dashoffset: 0;
+}
+
+/* Soft pulsing node (service-area constellation, status dot) */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.35); }
+}
+.pulse-glow {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: pulse-glow 3.2s ease-in-out infinite;
+}
+
+/* Dusk → dawn gradient used behind dark sections and the hero */
+.dusk-dawn {
+  background:
+    radial-gradient(120% 90% at 50% 115%, rgba(217, 164, 65, 0.35), transparent 55%),
+    linear-gradient(180deg, #171410 0%, #241c11 55%, #171410 100%);
+}
+
+/* ---------- Reduced motion: media query AND manual toggle ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .draw-path path { stroke-dashoffset: 0; transition: none; }
+  .pulse-glow { animation: none; }
+}
+
+html[data-reduced-motion="true"] {
+  scroll-behavior: auto;
+}
+html[data-reduced-motion="true"] .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+html[data-reduced-motion="true"] .draw-path path {
+  stroke-dashoffset: 0;
+  transition: none;
+}
+html[data-reduced-motion="true"] .pulse-glow {
+  animation: none;
+}
