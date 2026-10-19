@@ -137,21 +137,21 @@ export default function Hero() {
           type="button"
           onClick={() => setUserPaused((p) => !p)}
           aria-label={userPaused ? "Play background video" : "Pause background video"}
-          className="absolute right-4 top-[5.5rem] z-20 flex h-11 items-center gap-1.5 rounded-full border border-white/30 bg-forest-ink/80 px-3.5 text-sm sm:gap-2 sm:px-4 font-medium text-cream transition-colors hover:bg-forest-ink sm:bottom-8 sm:right-8 sm:top-auto"
+          className="hero-pause absolute right-4 top-[5.5rem] z-20 flex h-11 items-center gap-1.5 rounded-full border border-white/30 bg-forest-ink/80 px-3.5 text-sm sm:gap-2 sm:px-4 font-medium text-cream transition-colors hover:bg-forest-ink sm:bottom-8 sm:right-8 sm:top-auto"
         >
           <Icon name={userPaused ? "Play" : "Pause"} className="h-4 w-4" />
-          <span>
+          <span className="hero-pause-label">
             {userPaused ? "Play" : "Pause"}
             <span className="hidden sm:inline"> background video</span>
           </span>
         </button>
       )}
       <div className="container-royal hero-pad relative z-10">
-        <p {...anim(0)} className="hero-in eyebrow mb-3 flex sm:mb-5 flex-wrap items-center gap-x-3 gap-y-2 text-cream">
+        <p {...anim(0)} className="hero-in hero-eyebrow eyebrow mb-3 flex sm:mb-5 flex-wrap items-center gap-x-3 gap-y-2 text-cream">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold-light/40 bg-forest-ink/40 px-3 py-1.5 text-gold-light">
             <Icon name="BadgeCheck" className="h-4 w-4" /> Medicare-certified
           </span>
-          <span className="hero-eyebrow-extra">Licensed home health agency in Van Nuys, California</span>
+          <span>Licensed home health agency in Van Nuys, California</span>
         </p>
 
         <h1 id="hero-title" {...anim(120)} className="hero-in h-display text-hero max-w-5xl text-cream">
@@ -159,7 +159,7 @@ export default function Hero() {
         </h1>
 
         <p {...anim(260)} className="hero-in hero-lede mt-3 max-w-xl text-base leading-relaxed text-cream/95 sm:mt-6 sm:text-xl">
-          Experienced nurses, physical therapists, and caring aides right at your front door, working closely with your doctor.<span className="hero-more"> We bring wound care, IV therapy, injections, and recovery support to families across Los Angeles, Ventura, San&nbsp;Bernardino, and Orange Counties.</span>
+          Experienced nurses, physical therapists, and caring aides right at your front door, working closely with your doctor. We bring wound care, IV therapy, injections, and recovery support to families across Los Angeles, Ventura, San&nbsp;Bernardino, and Orange Counties.
         </p>
 
         <div {...anim(380)} className="hero-in hero-cta mt-5 flex flex-wrap items-center gap-3 sm:mt-8">

@@ -266,21 +266,41 @@
   @media (min-width: 768px) {
     .hero-pad { padding-bottom: clamp(2.5rem, 8svh, 5rem); }
   }
-  /* Short screens: keep headline, buttons and call to action; drop supporting copy first. */
-  @media (max-height: 800px) {
-    html .hero-more { display: none; }
+  /* Short screens: the SAME content, scaled down in steps so the whole hero fits the first screen. */
+  @media (max-height: 820px) {
+    html .hero-lede { font-size: 0.9375rem; line-height: 1.5; margin-top: 0.75rem; }
+    html .hero-cta { margin-top: 1rem; }
+    html .hero-trust { margin-top: 1rem; padding-top: 0.875rem; gap: 0.5rem 1rem; }
   }
-  @media (max-height: 700px) {
-    html .hero-trust { display: none; }
+  @media (max-height: 720px) {
+    html .hero-lede { font-size: 0.875rem; line-height: 1.45; }
+    html .hero-cta .btn { min-height: 2.75rem; padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    html .hero-trust { font-size: 0.75rem; gap: 0.375rem 0.75rem; margin-top: 0.75rem; padding-top: 0.625rem; }
+    html .hero-trust svg { width: 1rem; height: 1rem; }
   }
-  @media (max-height: 680px) {
-    html .hero-lede { display: none; }
-    .hero-cta { margin-top: 1.25rem; }
+  /* Short phones: Pause becomes an icon-only button (still labelled for screen readers) and the badge row leaves room for it. */
+  @media (max-height: 780px) and (max-width: 767px) {
+    html .hero-pause { width: 2.75rem; padding: 0; justify-content: center; top: 4.9rem; }
+    html .hero-pause-label { display: none; }
+    html .hero-eyebrow { padding-right: 3.25rem; }
+    html .text-hero { font-size: 2.25rem; }
+    html .hero-pad { padding-top: 5.25rem; padding-bottom: 4.75rem; }
+  }
+  @media (max-height: 700px) and (max-width: 767px) {
+    html .text-hero { font-size: 2rem; }
+    html .hero-pad { padding-top: 4.75rem; }
+    html .hero-cta { margin-top: 0.75rem; gap: 0.5rem; }
+    html .hero-cta .btn { min-height: 2.5rem; }
+    html .hero-trust { margin-top: 0.625rem; }
+  }
+  @media (max-height: 620px) {
+    html .hero-lede { font-size: 0.8125rem; line-height: 1.4; margin-top: 0.5rem; }
+    html .hero-eyebrow { margin-bottom: 0.5rem; }
+    html .hero-cta { margin-top: 0.75rem; }
   }
   @media (max-height: 480px) {
-    .hero-pad { padding-top: 4.75rem; padding-bottom: 1rem; }
-    html .hero-eyebrow-extra { display: none; }
-    .text-hero { font-size: 2.25rem; }
+    html .hero-pad { padding-top: 4.5rem; padding-bottom: 0.75rem; }
+    html .text-hero { font-size: 2rem; }
   }
   .text-h1 {
     font-size: clamp(2.5rem, 1.7rem + 3vw, 4.5rem);
