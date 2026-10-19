@@ -27,7 +27,7 @@ export default function MobileCallBar() {
     };
   }, []);
 
-  const onContact = pathname === "/contact";
+  const onContact = pathname.replace(/\/+$/, "") === "/contact";
 
   return (
     <div

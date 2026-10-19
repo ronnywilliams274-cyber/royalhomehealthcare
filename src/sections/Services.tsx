@@ -56,7 +56,7 @@ export default function Services() {
                 <ServiceCard s={s} headingLevel={4} mobileCompact />
               </li>
             ))}
-            <li data-reveal data-reveal-delay="0.18">
+            <li data-reveal data-reveal-delay="0.18" className="lg:col-span-2 xl:col-span-1">
               <div className="on-dark flex h-full flex-col justify-between rounded-2xl bg-forest p-6 text-cream sm:p-7">
                 <div>
                   <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-gold-light">
@@ -77,11 +77,11 @@ export default function Services() {
 
         <div data-reveal className="mt-14 rounded-3xl sm:mt-20 border border-forest/10 bg-white p-7 sm:p-10">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-12">
               <h3 className="font-serif-display text-3xl font-semibold text-forest">{categories.core.label}</h3>
               <p className="mt-2 text-moss">{categories.core.blurb}</p>
             </div>
-            <ul className="grid gap-x-6 gap-y-1 sm:grid-cols-2 lg:col-span-8 lg:grid-cols-3">
+            <ul className="grid gap-x-6 gap-y-1 sm:grid-cols-2 lg:col-span-12 lg:grid-cols-3 xl:grid-cols-4">
               {core.map((s) => (
                 <li key={s.slug}>
                   <Link

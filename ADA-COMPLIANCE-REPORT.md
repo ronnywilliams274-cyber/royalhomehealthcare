@@ -18,7 +18,7 @@ the upgraded site.
 | Automated WCAG 2.1 A/AA checks | 40+ issues on the home page alone | **0 issues** on all 32 pages |
 | Text colour contrast | 35+ text elements below 4.5:1 | **3,694 text elements measured — all pass** |
 | Keyboard-only use | No skip link; 6 invisible tab stops; focus ring invisible on dark sections | Skip link; 84 tab stops on home, every one visible with a ring |
-| Moving content | Video + scrolling marquee with no way to stop them | Pause button; marquee removed; respects "reduce motion" |
+| Moving content | Video + scrolling marquee with no way to stop them | Pause buttons on both; marquee also pauses on hover/keyboard focus; both stop for "reduce motion" |
 | Image descriptions | 3 photos described scenes they didn't show | Accurate descriptions; decorative images hidden |
 | Form | Placeholder-only fields, no error messages | Visible labels, error summary, inline errors |
 
@@ -67,7 +67,7 @@ and [Pivotal Accessibility](https://www.pivotalaccessibility.com/2026/06/hhs-sec
 | 3 | Focus outline was dark green on dark-green sections — **invisible** | 2.4.7, 1.4.11 | Two-tone focus system: forest ring on light sections, gold ring on dark (8.3:1) |
 | 4 | Menu links scrolled the page but left keyboard focus at the top | 2.4.3 | Real pages; on navigation, focus moves to the new page's heading and the change is announced |
 | 5 | Background video autoplayed with **no way to pause**, even with "reduce motion" on | 2.2.2 | Pause/Play button; no autoplay when reduced motion is requested; site-wide "Reduce motion" switch in footer |
-| 6 | Auto-scrolling marquee with no pause control | 2.2.2 | Replaced with a static "We work with" strip |
+| 6 | Auto-scrolling marquee with no pause control | 2.2.2 | "We work with" strip now has a visible Pause button, pauses on hover and keyboard focus, is read once by screen readers, and is a static list when motion is reduced or JavaScript is off |
 | 7 | 35+ text elements failed contrast (gold labels 2.5:1, "by arrangement" tags 3.6:1, contact labels 4.2:1, footer 3.6:1, step numbers 2.5:1) | 1.4.3 | New accessible palette: gold-ink `#7d5f26` on light (5.3:1), gold-light `#d6b77c` on dark (8.3:1), moss `#4a5745` secondary text (6.9:1). Every pairing measured. |
 | 8 | Three photos had alt text describing things not in the photo | 1.1.1 | Accurate alt text; mismatched stock photos retired |
 | 9 | Contact form used placeholders instead of labels; no error messages; required fields not indicated; no autocomplete | 1.3.1, 1.3.5, 3.3.1, 3.3.2, 3.3.3 | Visible labels with "(required)"/"(optional)", autocomplete tokens, error summary that receives focus with links to each field, inline errors, polite status messages |
@@ -186,7 +186,7 @@ These can't be completed in code:
 | 2.1.2 No Keyboard Trap | A | ✅ | Only the open mobile dialog contains focus, and Escape exits |
 | 2.1.4 Character Key Shortcuts | A | ➖ | None |
 | 2.2.1 Timing Adjustable | A | ✅ | No time limits; intro screen removed |
-| 2.2.2 Pause, Stop, Hide | A | ✅ | Pause button; reduced-motion; marquee removed |
+| 2.2.2 Pause, Stop, Hide | A | ✅ | Pause buttons (hero video and payer strip); reduced-motion respected |
 | 2.3.1 Three Flashes | A | ✅ | No flashing |
 | 2.4.1 Bypass Blocks | A | ✅ | Skip link + landmarks |
 | 2.4.2 Page Titled | A | ✅ | Unique titles |

@@ -56,8 +56,9 @@ export function ContactDetails({ dark = true }: { dark?: boolean }) {
       <div className={row}>
         <dt className={dt}>Email</dt>
         <dd>
-          <a href={site.emailHref} className={`break-all text-lg underline underline-offset-4 ${val}`}>
-            {site.email}
+          <a href={site.emailHref} className={`text-lg underline underline-offset-4 [overflow-wrap:anywhere] ${val}`}>
+            {site.email.split("@")[0]}
+            <wbr />@{site.email.split("@")[1]}
           </a>
         </dd>
       </div>

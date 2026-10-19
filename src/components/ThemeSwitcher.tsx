@@ -94,7 +94,7 @@ export default function ThemeSwitcher() {
   return (
     <div
       ref={wrapRef}
-      className="no-print fixed bottom-6 right-6 z-50 hidden sm:block"
+      className="no-print fixed bottom-6 right-6 z-50 hidden flex-col items-end sm:flex"
     >
       {open && (
         <div
@@ -157,41 +157,20 @@ export default function ThemeSwitcher() {
         </div>
       )}
 
-      {/* Floating transparent pill button with direct swatch dots + menu toggle */}
-      <div className="flex items-center gap-1.5 rounded-full border border-forest/20 bg-white/95 p-1.5 shadow-[0_12px_34px_-8px_rgb(var(--forest-ink-rgb)/0.32)] transition-colors duration-300 hover:bg-white">
-        {THEMES.map((t) => {
-          const active = t.id === theme;
-          return (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => applyTheme(t.id)}
-              aria-label={`Switch to ${t.name} theme`}
-              aria-pressed={active}
-              title={`${t.name}: ${t.desc}`}
-              className={`relative flex h-8 w-8 items-center justify-center rounded-full transition-transform duration-200 active:scale-90 ${
-                active ? "scale-105 ring-2 ring-forest ring-offset-1 ring-offset-white/80" : "opacity-80 hover:scale-105 hover:opacity-100"
-              }`}
-              style={{ backgroundColor: t.primary }}
-            >
-              <span
-                className="h-2.5 w-2.5 rounded-full"
-                style={{ backgroundColor: t.accent }}
-              />
-            </button>
-          );
-        })}
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-label={`Theme options (current: ${current.name})`}
-          className="flex h-8 items-center gap-1 rounded-full px-2.5 text-xs font-semibold text-forest transition-colors hover:bg-forest/10"
-        >
-          <span className="hidden sm:inline">{current.name}</span>
-          <Icon name="ChevronDown" className={`h-3.5 w-3.5 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
-        </button>
-      </div>
+      {/* Compact floating button: shows the current theme colours; opens the full theme menu. */}
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        aria-expanded={open}
+        aria-label={`Colour theme: ${current.name}. Change theme`}
+        title="Change colour theme"
+        className="ml-auto flex h-12 w-12 items-center justify-center rounded-full border border-forest/20 bg-white shadow-[0_12px_34px_-8px_rgb(var(--forest-ink-rgb)/0.32)] transition-transform duration-200 hover:scale-105 active:scale-95"
+      >
+        <span className="relative flex h-8 w-8 items-center justify-center rounded-full" style={{ backgroundColor: current.primary }}>
+          <Icon name="Palette" className="h-4 w-4 text-white" />
+          <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full ring-2 ring-white" style={{ backgroundColor: current.accent }} />
+        </span>
+      </button>
     </div>
   );
 }

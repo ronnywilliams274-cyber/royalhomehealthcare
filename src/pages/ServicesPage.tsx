@@ -52,7 +52,7 @@ export default function ServicesPage() {
               </div>
               <p className="text-lg leading-relaxed text-moss lg:col-span-5">{categories[c].blurb}</p>
             </div>
-            <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid-orphans grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {servicesIn(c).map((s, i) => (
                 <li key={s.slug} data-reveal data-reveal-delay={String((i % 3) * 0.05)}>
                   <ServiceCard s={s} headingLevel={3} />

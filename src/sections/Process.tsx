@@ -59,16 +59,16 @@ export default function Process() {
           ))}
         </ol>
 
-        <div data-reveal className="mt-10 flex flex-col gap-5 rounded-3xl border border-forest/10 bg-white p-7 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+        <div data-reveal className="mt-10 flex flex-col gap-5 rounded-3xl border border-forest/10 bg-white p-7 sm:p-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <div>
             <p className="font-semibold text-forest">Who can refer?</p>
             <p className="mt-1 text-moss">{site.whoCanRefer.join(" · ")}</p>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <a href={site.phoneHref} className="btn btn-primary">
+          <div className="flex flex-wrap gap-3 lg:shrink-0 lg:flex-nowrap">
+            <a href={site.phoneHref} className="btn btn-primary whitespace-nowrap">
               <Icon name="Phone" className="h-4 w-4" /> Call {site.phone}
             </a>
-            <Link to="/referrals" className="btn btn-outline">
+            <Link to="/referrals" className="btn btn-outline whitespace-nowrap">
               Referral information
             </Link>
           </div>

@@ -13,7 +13,7 @@ export default function WhyHome() {
               alt="Close-up of a clinician gently holding the hands of an older patient resting under a soft cream knit blanket."
               width={720}
               height={900}
-              className="aspect-[4/5] rounded-[1.75rem]"
+              className="aspect-[4/5] rounded-[1.75rem] sm:aspect-[3/2] lg:aspect-[4/5]"
             />
           </div>
         </div>

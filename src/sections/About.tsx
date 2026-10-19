@@ -42,27 +42,24 @@ export default function About() {
           </p>
         </div>
 
-        <div className="relative lg:col-span-5 lg:col-start-8 lg:mt-16">
-          <div data-reveal data-reveal-delay="0.1">
+        <div className="lg:col-span-5 lg:col-start-8 lg:mt-16 lg:self-start">
+          <div data-reveal data-reveal-delay="0.1" className="relative">
             <SmartImage
               src={media.companionship}
               alt="A compassionate female nurse in navy scrubs sitting beside a smiling older gentleman on a sofa reviewing a care plan folder."
               width={720}
               height={900}
-              className="aspect-[4/5] rounded-[1.75rem]"
+              className="aspect-[4/5] rounded-[1.75rem] sm:aspect-[4/3] lg:aspect-[4/5]"
               imgClassName="transition-transform duration-700 hover:scale-[1.03]"
             />
+            {/* Sits on the photo (bottom-left), never hanging outside it */}
+            <figure className="on-dark absolute bottom-4 left-4 right-4 max-w-[17rem] rounded-2xl border border-white/15 bg-forest/95 p-5 text-cream shadow-[0_24px_60px_-20px_rgb(var(--forest-ink-rgb)/0.55)] sm:bottom-6 sm:left-6 sm:p-6">
+              <blockquote className="font-serif-display text-xl leading-snug sm:text-2xl">
+                “{site.taglineAlt}.”
+              </blockquote>
+              <figcaption className="mt-2 text-sm text-cream/85 sm:mt-3">Our promise to every family</figcaption>
+            </figure>
           </div>
-          <figure
-            data-reveal
-            data-reveal-delay="0.2"
-            className="on-dark animate-float-gentle absolute -bottom-10 -left-4 max-w-[17rem] rounded-2xl border border-white/15 bg-forest p-6 text-cream shadow-[0_24px_60px_-20px_rgb(var(--forest-ink-rgb)/0.55)] sm:-left-12"
-          >
-            <blockquote className="font-serif-display text-2xl leading-snug">
-              “{site.taglineAlt}.”
-            </blockquote>
-            <figcaption className="mt-3 text-sm text-cream/85">Our promise to every family</figcaption>
-          </figure>
         </div>
       </div>
     </section>

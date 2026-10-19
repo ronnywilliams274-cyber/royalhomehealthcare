@@ -26,8 +26,8 @@ export default function Footer() {
   return (
     <footer className="on-dark bg-forest-ink pb-28 text-cream md:pb-10">
       <div className="container-royal border-t border-white/10 pt-16">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-12 lg:gap-12">
-          <div className="col-span-2 lg:col-span-4">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:grid-cols-12 lg:gap-10">
+          <div className="col-span-2 md:col-span-3 lg:col-span-4">
             <Link to="/" className="inline-flex items-center gap-3" aria-label={`${site.shortName} home`}>
               <Crest className="h-10 w-10 text-gold-light" />
               <span aria-hidden="true" className="font-serif-display text-2xl font-medium">
@@ -62,7 +62,7 @@ export default function Footer() {
             </address>
           </div>
 
-          <nav aria-label="Skilled nursing services" className="lg:col-span-3">
+          <nav aria-label="Skilled nursing services" className="lg:col-span-2">
             <h2 className="eyebrow mb-5 text-gold-light">Skilled nursing</h2>
             <ul className="space-y-1">
               {servicesIn("nursing").map((s) => (
@@ -88,7 +88,7 @@ export default function Footer() {
             </ul>
           </nav>
 
-          <nav aria-label="Company" className="col-span-2 sm:col-span-1 lg:col-span-2">
+          <nav aria-label="Company" className="col-span-2 sm:col-span-1 lg:col-span-3">
             <h2 className="eyebrow mb-5 text-gold-light">Company</h2>
             <ul className="space-y-1">
               {company.map((l) => (

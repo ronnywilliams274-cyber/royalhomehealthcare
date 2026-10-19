@@ -252,6 +252,7 @@
   }
   .h-display {
     @apply font-serif-display font-medium leading-[1.05] tracking-[-0.01em];
+    text-wrap: balance;
   }
   /* Fluid type that still grows with browser zoom (WCAG 1.4.4): rem + small vw component */
   .text-hero {
@@ -301,6 +302,19 @@
   @media (max-height: 480px) {
     html .hero-pad { padding-top: 4.5rem; padding-bottom: 0.75rem; }
     html .text-hero { font-size: 2rem; }
+  }
+  /* Card grids: centre a lone card on the last row instead of leaving it stranded on the left. */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .grid-orphans > li:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc(50% - 0.625rem);
+    }
+  }
+  @media (min-width: 1024px) {
+    .grid-orphans > li:last-child:nth-child(3n + 1) {
+      grid-column-start: 2;
+    }
   }
   .text-h1 {
     font-size: clamp(2.5rem, 1.7rem + 3vw, 4.5rem);
@@ -534,4 +548,39 @@ main#main:focus {
 .on-dark select option {
   color: #2a2a26;
   background: #ffffff;
+}
+
+/* ---------- Payer strip ("We work with") ----------
+   Static, wrapping list by default (no JS, reduced motion, or the footer "Reduce motion" toggle).
+   With JS and motion allowed it becomes a single row that drifts slowly, with a Pause button
+   (WCAG 2.2.2) and a pause on hover / keyboard focus. Only transform is animated. */
+.marquee-track { display: flex; }
+.marquee-list { flex-wrap: wrap; }
+.marquee-dup,
+.marquee-toggle { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.motion-off) .marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  }
+  html.js:not(.motion-off) .marquee-track {
+    width: max-content;
+    animation: marquee 42s linear infinite;
+  }
+  html.js:not(.motion-off) .marquee-list { flex-wrap: nowrap; }
+  html.js:not(.motion-off) .marquee-dup { display: flex; }
+  html.js:not(.motion-off) .marquee-toggle { display: inline-flex; }
+  html.js:not(.motion-off) .marquee:hover .marquee-track,
+  html.js:not(.motion-off) .marquee:focus-within .marquee-track,
+  html.js:not(.motion-off) .marquee[data-paused] .marquee-track {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 767px) {
+  html.js:not(.motion-off) .marquee-track { animation-duration: 30s; }
+}
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
