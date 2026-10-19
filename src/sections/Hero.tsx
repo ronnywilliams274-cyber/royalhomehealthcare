@@ -137,7 +137,7 @@ export default function Hero() {
           type="button"
           onClick={() => setUserPaused((p) => !p)}
           aria-label={userPaused ? "Play background video" : "Pause background video"}
-          className="hero-pause absolute right-4 top-[5.5rem] z-20 flex h-11 items-center gap-1.5 rounded-full border border-white/30 bg-forest-ink/80 px-3.5 text-sm sm:gap-2 sm:px-4 font-medium text-cream transition-colors hover:bg-forest-ink sm:bottom-8 sm:right-8 sm:top-auto"
+          className="hero-pause absolute right-4 top-[5.5rem] z-20 flex h-11 items-center gap-1.5 rounded-full border border-white/30 bg-forest-ink/80 px-3.5 text-sm sm:gap-2 sm:px-4 font-medium text-cream transition-colors hover:bg-forest-ink sm:right-8 sm:top-[8.25rem]"
         >
           <Icon name={userPaused ? "Play" : "Pause"} className="h-4 w-4" />
           <span className="hero-pause-label">
@@ -155,10 +155,10 @@ export default function Hero() {
         </p>
 
         <h1 id="hero-title" {...anim(120)} className="hero-in h-display text-hero max-w-5xl text-cream">
-          Healing feels best <em className="font-medium italic text-gold-light">in your own home.</em>
+          Healing feels best<br className="hidden sm:block" /> <em className="font-medium italic text-gold-light">in your own home.</em>
         </h1>
 
-        <p {...anim(260)} className="hero-in hero-lede mt-3 max-w-xl text-base leading-relaxed text-cream/95 sm:mt-6 sm:text-xl">
+        <p {...anim(260)} className="hero-in hero-lede mt-3 max-w-xl text-base leading-relaxed text-cream/95 sm:mt-6 sm:text-lg lg:max-w-2xl lg:text-xl">
           Experienced nurses, physical therapists, and caring aides right at your front door, working closely with your doctor. We bring wound care, IV therapy, injections, and recovery support to families across Los Angeles, Ventura, San&nbsp;Bernardino, and Orange Counties.
         </p>
 
@@ -171,7 +171,7 @@ export default function Hero() {
           </Link>
         </div>
 
-        <ul {...anim(500)} className="hero-in hero-trust mt-6 grid max-w-3xl grid-cols-2 gap-x-5 gap-y-3 border-t border-white/15 pt-5 text-[0.8125rem] leading-snug text-cream/90 sm:mt-10 sm:gap-x-6 sm:gap-y-4 sm:pt-6 sm:text-sm">
+        <ul {...anim(500)} className="hero-in hero-trust mt-6 grid max-w-xl grid-cols-2 gap-x-5 gap-y-3 border-t border-white/15 pt-5 text-[0.8125rem] leading-snug text-cream/90 sm:mt-10 sm:gap-x-6 sm:gap-y-4 sm:pt-6 sm:text-sm">
           {[
             ["ShieldPlus", "Guided by your doctor"],
             ["Stethoscope", "Licensed RNs & LVNs"],

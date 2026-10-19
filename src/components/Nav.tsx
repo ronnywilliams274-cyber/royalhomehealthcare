@@ -111,8 +111,9 @@ export default function Nav() {
         >
           <Link to="/" className="flex shrink-0 items-center gap-2.5 rounded-full py-1 pr-2 text-cream" aria-label={`${site.shortName} home`}>
             <Crest className="h-9 w-9 text-gold-light" />
-            <span className="font-serif-display text-xl font-medium leading-none sm:text-[1.4rem]" aria-hidden="true">
-              Royal <span className="hidden sm:inline">Home Health Care</span>
+            <span className="font-serif-display text-[1.0625rem] font-medium leading-[1.08] sm:text-[1.4rem] sm:leading-none" aria-hidden="true">
+              <span className="block sm:inline">Royal Home </span>
+              <span className="block sm:inline">Health Care</span>
             </span>
           </Link>
 
