@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { site } from "@/data/site";
-import { PageHero, CtaBand, MedicareBadge } from "@/components/Shared";
+import { PageHero, CtaBand } from "@/components/Shared";
 import SmartImage from "@/components/SmartImage";
 import { media } from "@/config/media";
 import { Icon, type IconName } from "@/components/Icon";
@@ -30,10 +30,9 @@ export default function AboutPage() {
         title={site.tagline + "."}
         intro={
           <p>
-            We are a licensed, Medicare-certified home health agency based in Van Nuys, California, bringing attentive clinical care to families across Los Angeles, Ventura, San Bernardino, and Orange Counties.
+            We are a licensed home health agency based in Van Nuys, California, bringing attentive clinical care to families across Los Angeles, Ventura, San Bernardino, and Orange Counties.
           </p>
         }
-        aside={<MedicareBadge dark />}
       />
 
       <section aria-labelledby="mission-title" className="bg-cream">

@@ -10,7 +10,7 @@ export default function ServiceAreasPage() {
         title="Home health care across four Southern California counties."
         intro={
           <p>
-            All of our care is coordinated from our Van Nuys office in the San Fernando Valley. Because coverage for a specific street address depends on your health plan and clinician availability, give us a quick call and we will confirm right away.
+            All of our care is coordinated from our Van Nuys office in the San Fernando Valley. Because availability for a specific street address depends on our clinicians' schedules, give us a quick call and we will confirm right away.
           </p>
         }
       >
@@ -38,7 +38,7 @@ export default function ServiceAreasPage() {
                       "Skilled nursing, wound care, IV therapy, and injections",
                       "Personalized recovery programs after hospital stays and surgery",
                       "Certified home health aides, plus therapy coordinated by arrangement",
-                      "Medicare, Medi-Cal, and select insurance plans (call us to verify)",
+                      "A registered nurse on call by phone after office hours",
                     ]}
                   />
                 </div>

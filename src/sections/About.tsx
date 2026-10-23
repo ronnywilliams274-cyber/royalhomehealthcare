@@ -17,7 +17,7 @@ export default function About() {
           </h2>
           <div data-reveal data-reveal-delay="0.12" className="mt-8 max-w-xl space-y-5 text-lg leading-relaxed text-charcoal/90">
             <p>
-              Royal Home Health Care, Inc. is a licensed, Medicare-certified home health agency right here in Van Nuys. We believe getting great medical care should not mean sitting in traffic or staying in a hospital room longer than you have to. Our nurses, therapists, and aides bring attentive care and medical supplies straight to your front door.
+              Royal Home Health Care, Inc. is a licensed home health agency right here in Van Nuys. We believe getting great medical care should not mean sitting in traffic or staying in a hospital room longer than you have to. Our nurses, therapists, and aides bring attentive care and medical supplies straight to your front door.
             </p>
             <p>
               Every care plan is shaped around your real life, including your health needs, your daily routine, your family, and your doctor's recommendations. We stay in close touch with your physician so everyone is working together toward your recovery.

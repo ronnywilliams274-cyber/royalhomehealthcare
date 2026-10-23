@@ -1,9 +1,7 @@
 import Hero from "@/sections/Hero";
-import TrustBar from "@/sections/TrustBar";
 import Stats from "@/sections/Stats";
 import About from "@/sections/About";
 import Services from "@/sections/Services";
-import MedicareBand from "@/sections/MedicareBand";
 import Process from "@/sections/Process";
 import WhyHome from "@/sections/WhyHome";
 import Areas from "@/sections/Areas";
@@ -17,11 +15,9 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <TrustBar />
       <About />
       <Stats />
       <Services />
-      <MedicareBand />
       <Process />
       <WhyHome />
       <Areas />
@@ -59,7 +55,6 @@ export function organizationSchema() {
       },
     ],
     areaServed: site.counties.map((c) => ({ "@type": "AdministrativeArea", name: `${c.name}, California` })),
-    paymentAccepted: site.coverage.map((c) => c.name).join(", "),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Home health services",

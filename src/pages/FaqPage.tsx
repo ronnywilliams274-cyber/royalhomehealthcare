@@ -9,7 +9,7 @@ export default function FaqPage() {
       <PageHero
         eyebrow="Frequently asked questions"
         title="Answers for patients and families."
-        intro={<p>Plain-language answers about eligibility, Medicare, our services and your rights. Don't see your question? Call us.</p>}
+        intro={<p>Plain-language answers about getting started, our services and your rights. Don't see your question? Call us.</p>}
         aside={
           <nav aria-label="FAQ topics" className="rounded-3xl border border-white/10 bg-white/[0.05] p-6">
             <p className="mb-3 text-sm font-semibold text-cream">Topics</p>

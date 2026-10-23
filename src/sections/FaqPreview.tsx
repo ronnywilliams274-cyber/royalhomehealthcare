@@ -5,7 +5,7 @@ import { Icon } from "@/components/Icon";
 
 const pick = [
   "How do I know if I qualify?",
-  "What will I pay with Medicare?",
+  "Do I need a doctor's order?",
   "What does “homebound” mean?",
   "Do you provide 24-hour or live-in care?",
   "Who can refer me to Royal Home Health Care?",

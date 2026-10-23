@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Royal Home Health Care, Inc. | Medicare-Certified Home Health in Van Nuys, CA</title>
-    <meta name="description" content="Medicare-certified home health care from Royal Home Health Care, Inc.: skilled nursing, wound care, IV therapy, injections, catheter care and recovery programs at home across Los Angeles, Ventura, San Bernardino and Orange Counties." />
+    <title>Royal Home Health Care, Inc. | Home Health Care in Van Nuys, CA</title>
+    <meta name="description" content="Licensed home health care from Royal Home Health Care, Inc.: skilled nursing, wound care, IV therapy, injections, catheter care and recovery programs at home across Los Angeles, Ventura, San Bernardino and Orange Counties." />
     <meta name="theme-color" content="#12260c" />
     <!--app-head-->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -30,15 +30,13 @@
     </noscript>
     <script>
       /* Runs before the first paint:
-         - restore the visitor's colour theme and "reduce motion" choice (no colour flash)
+         - restore the visitor's "reduce motion" choice
          - "js" class enables the hero entrance animation; if the app hasn't started within
            4 seconds it is removed so nothing ever stays hidden. */
       (function () {
         var html = document.documentElement;
         html.classList.add("js");
         try {
-          var t = localStorage.getItem("rhhc-color-theme");
-          if (t === "sage" || t === "coastal" || t === "azure") html.setAttribute("data-theme", t);
           if (localStorage.getItem("rhhc-motion-off") === "1") html.classList.add("motion-off");
         } catch (e) {}
         setTimeout(function () {

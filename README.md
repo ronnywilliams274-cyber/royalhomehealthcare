@@ -1,6 +1,6 @@
 # Royal Home Health Care, Inc. - Website
 
-Marketing website for **Royal Home Health Care, Inc.**, a licensed, Medicare-certified home health
+Marketing website for **Royal Home Health Care, Inc.**, a licensed home health
 agency at 14328 Victory Blvd., Suite 203, Van Nuys, CA 91401.
 
 Built with **Vite + React 19 + Tailwind CSS 3 + React Router 7**. Every page is **prerendered to
@@ -36,7 +36,6 @@ All facts live in **`src/data/site.ts`** (one file, no code knowledge needed):
 | Field | Why |
 |---|---|
 | `siteUrl` | Your real domain (e.g. `https://www.yourdomain.com`). Enables canonical URLs, social previews and `sitemap.xml`. |
-| `medicare.ccn` | Your CMS Certification Number - shown on the Medicare page and footer. |
 | `licenseNumber` | California license number - shown in the footer. |
 | `compliance.cdph` | **Verify** the CDPH complaint phone/fax numbers (copied from printed materials). |
 
@@ -61,15 +60,15 @@ src/
   pages/                ← one file per page type
   sections/             ← home page sections + footer
   components/           ← header/nav, layout, forms, cards, accessible video player
-  hooks/                ← scroll helpers, reveal animations, theme and reduced-motion preference
+  hooks/                ← scroll helpers, reveal animations, reduced-motion preference
   entry-server.tsx      ← used only by the prerender step
 scripts/prerender.mjs   ← static HTML generation
 public/media/           ← photos & video (see MEDIA-GUIDE.md)
 ```
 
-### Pages (31)
+### Pages (30)
 
-Home · Services · 20 service pages · Medicare-Certified · FAQs · About · Service Areas · Referrals ·
+Home · Services · 20 service pages · FAQs · About · Service Areas · Referrals ·
 Contact · Accessibility Statement · Nondiscrimination & Patient Rights · Site Map · 404
 
 ## Content guardrails

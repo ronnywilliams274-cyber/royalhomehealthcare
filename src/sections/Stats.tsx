@@ -6,7 +6,7 @@ import { site } from "@/data/site";
 const stats: { prefix: string; value: number; suffix: string; label: string; tail?: string }[] = [
   { prefix: "", value: services.length, suffix: "", label: "Home health services under one coordinated plan" },
   { prefix: "", value: site.counties.length, suffix: "", label: "Southern California counties served from Van Nuys" },
-  { prefix: "$", value: 0, suffix: "", label: "Cost for covered home health services with Medicare" },
+  { prefix: "", value: 24, suffix: "/7", label: "A registered nurse on call by phone, day and night" },
   { prefix: "", value: 1, suffix: "", label: "Call to get started:", tail: site.phone },
 ];
 

@@ -41,11 +41,6 @@ export const site = {
       "A registered nurse is always on call by phone after office hours, on weekends, and on holidays.",
   },
 
-  /** Medicare certification. Add your CMS Certification Number (CCN) to display it. */
-  medicare: {
-    certified: true,
-    ccn: null as string | null,
-  },
   /** California license number (shown in the footer and compliance page when set). */
   licenseNumber: null as string | null,
 
@@ -55,16 +50,6 @@ export const site = {
     { slug: "san-bernardino", name: "San Bernardino County", note: "Coordinated directly from our Van Nuys office." },
     { slug: "orange", name: "Orange County", note: "Coordinated directly from our Van Nuys office." },
   ],
-
-  coverage: [
-    { name: "Medicare", note: "Covered home health services at $0 out of pocket for eligible patients" },
-    { name: "Medi-Cal", note: "For eligible Medi-Cal members" },
-    { name: "Private insurance", note: "Accepted for select plans, and we verify your benefits for you" },
-    { name: "Workers' compensation", note: "With an authorized claim" },
-    { name: "Regional centers", note: "For eligible regional center clients" },
-    { name: "Private pay", note: "Talk with us about private pay options" },
-  ],
-  coverageNote: "Coverage depends on your plan and eligibility. Give us a call and we will gladly check your benefits before care begins.",
 
   whoCanRefer: [
     "You or a family member",
@@ -77,7 +62,7 @@ export const site = {
     { title: "Familiar surroundings", body: "You get to heal in your own bed and living room, surrounded by the people and daily routines you love." },
     { title: "Guided by your doctor", body: "Your own physician stays in charge. Every visit follows a care plan built with and signed by your doctor." },
     { title: "A smoother transition home", body: "Coming home from the hospital feels much less stressful when a nurse is right there to review your medications and answer questions." },
-    { title: "Fewer trips back to the hospital", body: "Steady check-ins at home help catch small changes early and keep overall healthcare costs down." },
+    { title: "Fewer trips back to the hospital", body: "Steady check-ins at home help catch small changes early and keep them from turning into bigger problems." },
   ],
 
   compliance: {
@@ -103,10 +88,6 @@ export const site = {
       phone: "1-800-368-1019",
       tdd: "1-800-537-7697",
       href: "https://ocrportal.hhs.gov/ocr/portal/lobby.jsf",
-    },
-    medicareLine: {
-      phone: "1-800-MEDICARE (1-800-633-4227)",
-      tty: "1-877-486-2048",
     },
   },
 

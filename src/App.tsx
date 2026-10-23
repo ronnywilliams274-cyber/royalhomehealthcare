@@ -3,7 +3,6 @@ import Layout from "@/components/Layout";
 import Home from "@/pages/Home";
 import ServicesPage from "@/pages/ServicesPage";
 import ServiceDetailPage from "@/pages/ServiceDetailPage";
-import MedicarePage from "@/pages/MedicarePage";
 import FaqPage from "@/pages/FaqPage";
 import AboutPage from "@/pages/AboutPage";
 import ServiceAreasPage from "@/pages/ServiceAreasPage";
@@ -21,7 +20,6 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="services" element={<ServicesPage />} />
         <Route path="services/:slug" element={<ServiceDetailPage />} />
-        <Route path="medicare-certified" element={<MedicarePage />} />
         <Route path="faq" element={<FaqPage />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="service-areas" element={<ServiceAreasPage />} />

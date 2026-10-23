@@ -72,7 +72,7 @@ export default function AccessibilityPage() {
             </h2>
             <ul className="mt-4 list-disc space-y-2 pl-6 text-lg leading-relaxed text-charcoal/90">
               <li>
-                Links to other websites (for example Medicare.gov or Google Maps) are outside our control and may not meet the
+                Links to other websites (for example Google Maps) are outside our control and may not meet the
                 same standard.
               </li>
               <li>Documents you receive from us in print can be provided in large print or another format on request.</li>

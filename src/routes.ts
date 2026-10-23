@@ -24,9 +24,9 @@ export const staticRoutes: RouteMeta[] = [
   {
     path: "/",
     name: "Home",
-    title: `${site.name} | Medicare-Certified Home Health in Van Nuys, CA`,
+    title: `${site.name} | Home Health Care in Van Nuys, CA`,
     description:
-      "Medicare-certified home health care in Los Angeles, Ventura, San Bernardino and Orange Counties: skilled nursing, wound care, IV therapy, injections and recovery programs at home.",
+      "Licensed home health care in Los Angeles, Ventura, San Bernardino and Orange Counties: skilled nursing, wound care, IV therapy, injections and recovery programs at home.",
   },
   {
     path: "/services",
@@ -36,20 +36,12 @@ export const staticRoutes: RouteMeta[] = [
     description: `Explore all home health services from ${site.name}: ${categories.nursing.label.toLowerCase()}, ${categories.programs.label.toLowerCase()} and home health disciplines.`,
   },
   {
-    path: "/medicare-certified",
-    name: "Medicare-Certified Care",
-    parent: "/",
-    title: `Medicare-Certified Home Health Care | ${brand}`,
-    description:
-      "Royal Home Health Care is a Medicare-certified home health agency. Learn who qualifies, what Medicare covers, what you pay ($0 for covered services) and your rights.",
-  },
-  {
     path: "/faq",
     name: "FAQs",
     parent: "/",
     title: `Frequently Asked Questions | ${brand}`,
     description:
-      "Answers about home health eligibility, Medicare coverage, homebound status, our services, visit schedules, emergencies and your rights as a patient.",
+      "Answers about getting started with home health, homebound status, our services, visit schedules, emergencies and your rights as a patient.",
   },
   {
     path: "/about",
@@ -57,7 +49,7 @@ export const staticRoutes: RouteMeta[] = [
     parent: "/",
     title: `About Us | ${brand}`,
     description:
-      "Royal Home Health Care, Inc. is a licensed, Medicare-certified home health agency in Van Nuys, CA, committed to our patients and their families.",
+      "Royal Home Health Care, Inc. is a licensed home health agency in Van Nuys, CA, committed to our patients and their families.",
   },
   {
     path: "/service-areas",
@@ -65,7 +57,7 @@ export const staticRoutes: RouteMeta[] = [
     parent: "/",
     title: `Service Areas: Los Angeles, Ventura, San Bernardino & Orange Counties | ${brand}`,
     description:
-      "Home health care across Los Angeles, Ventura, San Bernardino and Orange Counties, coordinated from our Van Nuys office. Call to confirm coverage for your address.",
+      "Home health care across Los Angeles, Ventura, San Bernardino and Orange Counties, coordinated from our Van Nuys office. Call to confirm we serve your address.",
   },
   {
     path: "/referrals",

@@ -1,5 +1,5 @@
 import { categories, servicesIn, type ServiceCategory } from "@/data/services";
-import { PageHero, ServiceCard, CtaBand, MedicareBadge } from "@/components/Shared";
+import { PageHero, ServiceCard, CtaBand } from "@/components/Shared";
 import { site } from "@/data/site";
 import { Icon } from "@/components/Icon";
 
@@ -18,7 +18,6 @@ export default function ServicesPage() {
         }
         aside={
           <div className="space-y-4">
-            <MedicareBadge dark />
             <nav aria-label="Jump to a service group" className="rounded-2xl border border-white/10 bg-white/[0.05] p-5">
               <p className="mb-3 text-sm font-semibold text-cream">On this page</p>
               <ul className="space-y-1.5">

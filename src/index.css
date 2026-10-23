@@ -11,9 +11,8 @@
    ========================================================================== */
 
 @layer base {
-  :root,
-  [data-theme="sage"] {
-    /* Theme 1: Botanical Sage (Sunlit Ivory & Healing Emerald) */
+  :root {
+    /* Botanical Sage (Sunlit Ivory & Healing Emerald) - the site's only colour theme */
     --forest: #1b4d2e;
     --forest-rgb: 27 77 46;
     --forest-deep: #153f25;
@@ -68,99 +67,6 @@
     --radius: 0.625rem;
   }
 
-  [data-theme="coastal"] {
-    /* Theme 2: Coastal Care (Pacific Teal, Pearl Aqua & Sunlit Coral-Sand) */
-    --forest: #0d596b;
-    --forest-rgb: 13 89 107;
-    --forest-deep: #094857;
-    --forest-deep-rgb: 9 72 87;
-    --forest-ink: #063744;
-    --forest-ink-rgb: 6 55 68;
-
-    --cream: #f5fbfd;
-    --cream-rgb: 245 251 253;
-    --linen: #e7f4f8;
-    --linen-rgb: 231 244 248;
-    --sage: #c7e3eb;
-    --sage-rgb: 199 227 235;
-    --sage-deep: #94c2cf;
-    --sage-deep-rgb: 148 194 207;
-
-    --charcoal: #132a30;
-    --charcoal-rgb: 19 42 48;
-    --moss: #355963;
-    --moss-rgb: 53 89 99;
-
-    --gold: #d18741;
-    --gold-rgb: 209 135 65;
-    --gold-light: #f5be84;
-    --gold-light-rgb: 245 190 132;
-    --gold-ink: #8c5115;
-    --gold-ink-rgb: 140 81 21;
-
-    --ring-color: var(--forest);
-
-    --background: 195 67% 98%;
-    --foreground: 192 43% 13%;
-    --primary: 191 78% 24%;
-    --primary-foreground: 195 67% 98%;
-    --secondary: 193 45% 85%;
-    --secondary-foreground: 191 78% 24%;
-    --muted: 194 52% 94%;
-    --muted-foreground: 193 30% 30%;
-    --accent: 193 45% 85%;
-    --accent-foreground: 191 78% 24%;
-    --border: 193 35% 84%;
-    --input: 193 28% 72%;
-    --ring: 191 78% 24%;
-  }
-
-  [data-theme="azure"] {
-    /* Theme 3: Sanctuary Blue (Trusted Clinical Azure, Alabaster Sky & Honey Gold) */
-    --forest: #1b4b8a;
-    --forest-rgb: 27 75 138;
-    --forest-deep: #143c70;
-    --forest-deep-rgb: 20 60 112;
-    --forest-ink: #0e2d56;
-    --forest-ink-rgb: 14 45 86;
-
-    --cream: #f7faff;
-    --cream-rgb: 247 250 255;
-    --linen: #eaf1fb;
-    --linen-rgb: 234 241 251;
-    --sage: #ccddf5;
-    --sage-rgb: 204 221 245;
-    --sage-deep: #9cb8e0;
-    --sage-deep-rgb: 156 184 224;
-
-    --charcoal: #162338;
-    --charcoal-rgb: 22 35 56;
-    --moss: #3b5070;
-    --moss-rgb: 59 80 112;
-
-    --gold: #c99238;
-    --gold-rgb: 201 146 56;
-    --gold-light: #f0c475;
-    --gold-light-rgb: 240 196 117;
-    --gold-ink: #825610;
-    --gold-ink-rgb: 130 86 16;
-
-    --ring-color: var(--forest);
-
-    --background: 218 100% 98%;
-    --foreground: 217 44% 15%;
-    --primary: 214 67% 32%;
-    --primary-foreground: 218 100% 98%;
-    --secondary: 215 67% 88%;
-    --secondary-foreground: 214 67% 32%;
-    --muted: 215 68% 95%;
-    --muted-foreground: 216 31% 34%;
-    --accent: 215 67% 88%;
-    --accent-foreground: 214 67% 32%;
-    --border: 215 45% 85%;
-    --input: 215 35% 74%;
-    --ring: 214 67% 32%;
-  }
 
   html {
     -webkit-font-smoothing: antialiased;
@@ -178,16 +84,6 @@
     overflow-x: clip;
     overflow-wrap: break-word; /* long emails/URLs wrap on small screens (WCAG 1.4.10) */
     -webkit-tap-highlight-color: transparent; /* custom :active feedback is used instead */
-  }
-
-  /* Smooth colour change ONLY while the visitor switches theme (see useTheme.ts) - never on
-     page load or while scrolling, so it costs nothing the rest of the time. */
-  html.theme-switching body,
-  html.theme-switching section,
-  html.theme-switching footer,
-  html.theme-switching header > div,
-  html.theme-switching .card {
-    transition: background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease, color 0.35s ease;
   }
 
   a,
@@ -548,39 +444,4 @@ main#main:focus {
 .on-dark select option {
   color: #2a2a26;
   background: #ffffff;
-}
-
-/* ---------- Payer strip ("We work with") ----------
-   Static, wrapping list by default (no JS, reduced motion, or the footer "Reduce motion" toggle).
-   With JS and motion allowed it becomes a single row that drifts slowly, with a Pause button
-   (WCAG 2.2.2) and a pause on hover / keyboard focus. Only transform is animated. */
-.marquee-track { display: flex; }
-.marquee-list { flex-wrap: wrap; }
-.marquee-dup,
-.marquee-toggle { display: none; }
-@media (prefers-reduced-motion: no-preference) {
-  html.js:not(.motion-off) .marquee {
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-  }
-  html.js:not(.motion-off) .marquee-track {
-    width: max-content;
-    animation: marquee 42s linear infinite;
-  }
-  html.js:not(.motion-off) .marquee-list { flex-wrap: nowrap; }
-  html.js:not(.motion-off) .marquee-dup { display: flex; }
-  html.js:not(.motion-off) .marquee-toggle { display: inline-flex; }
-  html.js:not(.motion-off) .marquee:hover .marquee-track,
-  html.js:not(.motion-off) .marquee:focus-within .marquee-track,
-  html.js:not(.motion-off) .marquee[data-paused] .marquee-track {
-    animation-play-state: paused;
-  }
-}
-@media (prefers-reduced-motion: no-preference) and (max-width: 767px) {
-  html.js:not(.motion-off) .marquee-track { animation-duration: 30s; }
-}
-@keyframes marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
 }

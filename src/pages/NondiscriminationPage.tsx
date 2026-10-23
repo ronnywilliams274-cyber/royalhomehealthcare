@@ -69,12 +69,6 @@ export default function NondiscriminationPage() {
                   </li>
                 </ul>
               </div>
-              <div className="rounded-2xl border border-forest/10 bg-white p-6 md:col-span-2">
-                <h3 className="font-serif-display text-2xl font-semibold text-forest">Medicare</h3>
-                <p className="mt-3 text-charcoal/90">
-                  {c.medicareLine.phone}, TTY {c.medicareLine.tty}
-                </p>
-              </div>
             </div>
           </section>
           </div>

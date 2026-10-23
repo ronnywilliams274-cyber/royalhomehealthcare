@@ -112,10 +112,6 @@ export const services: Service[] = [
     ],
     faqs: [
       {
-        q: "Does Medicare cover wound care at home?",
-        a: "Yes. Medicare covers skilled nursing visits for wound care when you meet home health requirements, including being homebound and having a doctor's order. Routine wound dressings and supplies used during your care are included under the home health benefit. We verify your coverage before our first visit.",
-      },
-      {
         q: "How often will a nurse come to care for my wound?",
         a: "Your visit schedule depends on the type of wound and what your doctor orders. Many patients start with several visits a week and taper down to fewer visits as the wound heals.",
       },
@@ -181,10 +177,6 @@ export const services: Service[] = [
       {
         q: "Who supplies the IV medication?",
         a: "A licensed home infusion pharmacy prepares and delivers your medication and pump supplies based on your doctor's prescription. Our team coordinates directly with the pharmacy so everything is at your house when your nurse arrives.",
-      },
-      {
-        q: "Does Medicare cover IV therapy at home?",
-        a: "Original Medicare covers the skilled nursing visits needed to administer IV therapy and care for your line when you qualify for home health. Coverage for the medication itself and pump supplies depends on your specific Part B, Part D, or Medicare Advantage plan. We walk you through all of the details before starting.",
       },
     ],
     related: ["hospital-discharge-care", "post-surgical-recovery", "skilled-nursing"],
@@ -304,10 +296,6 @@ export const services: Service[] = [
         q: "Can you help prevent urinary tract infections?",
         a: "Yes. Gentle sterile insertion, good daily hygiene, plenty of fluids, and keeping the drainage bag below hip level all make a big difference. We also watch for early symptoms so your doctor can treat any issue right away.",
       },
-      {
-        q: "Is catheter care covered by Medicare?",
-        a: "Yes, skilled nursing visits for catheter changes and care are covered under the Medicare home health benefit when you meet eligibility criteria. Call our office and we will confirm your benefits for you.",
-      },
     ],
     related: ["homebound-bedbound-care", "wound-care", "stroke-recovery"],
   },
@@ -352,10 +340,6 @@ export const services: Service[] = [
       "Soreness, redness, or swelling at the injection site that does not fade",
     ],
     faqs: [
-      {
-        q: "Does Medicare cover B12 injections at home?",
-        a: "Medicare can cover home health nursing visits for B12 injections when you have a qualifying medical diagnosis like pernicious anemia and meet standard home health requirements. Call us and we will verify your coverage with your doctor's office.",
-      },
       {
         q: "How often will I need injections?",
         a: "Your doctor sets your schedule based on your lab results. Some patients start with weekly or biweekly doses to build their levels back up, then move to a monthly maintenance dose.",
@@ -418,10 +402,6 @@ export const services: Service[] = [
         q: "Will a nurse come every day to give my insulin?",
         a: "Because home health care consists of part-time, intermittent visits, a nurse typically cannot be there for multiple daily doses over the long term. Instead, we focus on helping you or a family caregiver feel confident giving the injections, while our nurses visit to check your blood sugars, review your technique, and coordinate with your doctor.",
       },
-      {
-        q: "Does Medicare cover diabetic injection teaching?",
-        a: "Yes. Skilled nursing visits for diabetes education, blood sugar monitoring, and injection training are covered under Medicare home health when you meet eligibility requirements. We check your benefits before care begins.",
-      },
     ],
     related: ["diabetes-management", "wound-care", "b12-injections"],
   },
@@ -475,11 +455,11 @@ export const services: Service[] = [
     faqs: [
       {
         q: "How soon after I get home will the first visit happen?",
-        a: "Medicare guidelines call for your first home health visit within 48 hours of your referral or your return home, or on the specific start date ordered by your doctor. We reach out as soon as we receive your referral to schedule a time that works for you.",
+        a: "We aim to make your first home health visit within 48 hours of your referral or your return home, or on the specific start date ordered by your doctor. We reach out as soon as we receive your referral to schedule a time that works for you.",
       },
       {
         q: "Can the hospital refer me directly to Royal?",
-        a: "Yes. Hospital discharge planners and case managers send referrals to our intake team every day. If you have Medicare, you also have the right to choose your own home health agency. Just let your discharge planner know you would like Royal Home Health Care.",
+        a: "Yes. Hospital discharge planners and case managers send referrals to our intake team every day. You also have the right to choose your own home health agency. Just let your discharge planner know you would like Royal Home Health Care.",
       },
       {
         q: "What if I need help with bathing and getting dressed at first?",
@@ -541,7 +521,7 @@ export const services: Service[] = [
       },
       {
         q: "Do I qualify as homebound right after surgery?",
-        a: "After major surgery, most patients find that leaving the house takes a taxing physical effort or requires a walker and another person's help. For that recovery period, you typically meet Medicare's homebound requirement. Give us a call and we will check your eligibility.",
+        a: "After major surgery, most patients find that leaving the house takes a taxing physical effort or requires a walker and another person's help. For that recovery period, you are usually considered homebound. Give us a call and we will talk it through with you.",
       },
     ],
     related: ["wound-care", "fall-risk-mobility", "physical-therapy"],
@@ -652,10 +632,6 @@ export const services: Service[] = [
         q: "Do your nurses check my feet?",
         a: "Yes, every time we visit. Reduced circulation and nerve sensitivity can make it easy to miss a small blister on your foot, so we check carefully and show you or a family member what to look for between visits.",
       },
-      {
-        q: "Does Medicare cover diabetes management at home?",
-        a: "Yes. Skilled nursing visits for diabetes teaching, medication management, and diabetic wound care are covered under Medicare home health when you meet eligibility criteria.",
-      },
     ],
     related: ["diabetic-injections", "wound-care", "cardiac-care"],
   },
@@ -699,12 +675,12 @@ export const services: Service[] = [
     ],
     faqs: [
       {
-        q: "What does “homebound” mean for Medicare?",
-        a: "Medicare considers you homebound if your doctor recommends staying home because of your condition, or if leaving the house requires a walker, wheelchair, special transportation, or another person's assistance and takes a taxing effort. You can still leave home for doctor visits, religious services, adult day care, and occasional family milestones.",
+        q: "What does “homebound” mean?",
+        a: "You are considered homebound if your doctor recommends staying home because of your condition, or if leaving the house requires a walker, wheelchair, special transportation, or another person's assistance and takes a taxing effort. You can still leave home for doctor visits, religious services, adult day care, and occasional family milestones.",
       },
       {
         q: "Can you help us get a hospital bed or pressure mattress?",
-        a: "Yes. Your doctor can order durable medical equipment like a hospital bed, overbed table, or pressure-relieving mattress. Our nurses help identify what will make care safer and coordinate the order with your doctor and a medical equipment supplier. Under Original Medicare, you typically pay 20% of the approved equipment cost after your Part B deductible.",
+        a: "Yes. Your doctor can order durable medical equipment like a hospital bed, overbed table, or pressure-relieving mattress. Our nurses help identify what will make care safer and coordinate the order with your doctor and a medical equipment supplier.",
       },
       {
         q: "Do you provide 24-hour or live-in care?",
@@ -883,7 +859,7 @@ export const services: Service[] = [
       "Our certified home health aides are there for the everyday personal routines that help you feel refreshed and comfortable. Whether helping with a warm shower, getting dressed, or moving safely from bed to chair, they treat you with patience and genuine warmth.",
     overview: [
       "Home health aides provide hands-on personal care as part of your overall home health plan, always supervised by a registered nurse. Because aides spend unhurried time helping with daily routines, they are also wonderful at noticing small changes in skin, appetite, or energy and letting your nurse know right away.",
-      "Under Medicare rules, home health aide visits are covered when you are also receiving skilled nursing or rehabilitation therapy. Visits are scheduled on a part-time, intermittent basis rather than 24-hour live-in care.",
+      "Home health aide visits are provided alongside skilled nursing or rehabilitation therapy. Visits are scheduled on a part-time, intermittent basis rather than 24-hour live-in care.",
     ],
     includes: [
       "Safe assistance with showers, tub baths, or gentle bed baths",
@@ -899,10 +875,6 @@ export const services: Service[] = [
       "Families who welcome extra help with a loved one's personal care routine",
     ],
     faqs: [
-      {
-        q: "Does Medicare cover home health aide visits?",
-        a: "Yes, when you are also receiving skilled nursing, physical therapy, speech therapy, or continuing occupational therapy under a Medicare home health plan. Medicare does not cover personal aide care when it is the only service needed.",
-      },
       {
         q: "Who supervises the home health aides?",
         a: "One of our registered nurses creates the personal care instructions for your aide and supervises their visits.",
@@ -945,10 +917,6 @@ export const services: Service[] = [
       "Anyone who has fallen recently or feels wobbly on their feet",
     ],
     faqs: [
-      {
-        q: "Does Medicare cover physical therapy at home?",
-        a: "Yes, when your doctor orders physical therapy as part of your home health care plan and you meet Medicare home health eligibility criteria.",
-      },
     ],
     related: ["fall-risk-mobility", "post-surgical-recovery", "stroke-recovery"],
   },
@@ -1053,10 +1021,6 @@ export const services: Service[] = [
       "Family caregivers feeling stretched thin who need local support resources",
     ],
     faqs: [
-      {
-        q: "Does Medicare cover medical social services?",
-        a: "Yes, when ordered by your doctor as part of an active Medicare home health plan of care.",
-      },
     ],
     related: ["homebound-bedbound-care", "hospital-discharge-care", "home-health-aides"],
   },
@@ -1073,7 +1037,7 @@ export const services: Service[] = [
     intro:
       "Tracking down sterile wound dressings, catheter kits, or a walker should not fall on your family's shoulders while you are recovering. We coordinate the medical supplies and equipment your care plan requires and arrange delivery to your door.",
     overview: [
-      "Routine medical supplies used during your home health care, such as sterile gauze, specialty wound dressings, and catheter care supplies, are included as part of your home health plan. We keep track of what you have on hand so your nurse always has what is needed.",
+      "Routine medical supplies used during your home health care, such as sterile gauze, specialty wound dressings, and catheter care supplies, are coordinated as part of your home health plan. We keep track of what you have on hand so your nurse always has what is needed.",
       "When you also need durable medical equipment like a walker, wheelchair, commode, or hospital bed, we help your doctor submit the order and coordinate delivery with a trusted medical equipment supplier.",
     ],
     includes: [
@@ -1087,10 +1051,6 @@ export const services: Service[] = [
       "Patients who need mobility or bedroom equipment to stay safe at home",
     ],
     faqs: [
-      {
-        q: "Does Medicare pay for medical supplies?",
-        a: "Yes. Routine medical supplies used as part of your home health plan are covered under the Medicare home health benefit. For durable medical equipment like walkers and hospital beds, Original Medicare typically covers 80% of the approved amount after you meet your Part B deductible.",
-      },
     ],
     related: ["wound-care", "catheter-care", "homebound-bedbound-care"],
   },

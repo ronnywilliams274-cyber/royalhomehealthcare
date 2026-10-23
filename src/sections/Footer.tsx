@@ -1,14 +1,11 @@
 import { Link } from "react-router";
-import { Crest } from "@/components/Crest";
 import { site } from "@/data/site";
 import { servicesIn } from "@/data/services";
 import { Icon } from "@/components/Icon";
 import { setUserMotionOff, useUserMotionOff } from "@/hooks/useMotion";
-import { ThemeSwatches } from "@/components/ThemeSwitcher";
 
 const company = [
   { label: "About us", to: "/about" },
-  { label: "Medicare-certified care", to: "/medicare-certified" },
   { label: "Service areas", to: "/service-areas" },
   { label: "Referrals", to: "/referrals" },
   { label: "FAQs", to: "/faq" },
@@ -28,14 +25,13 @@ export default function Footer() {
       <div className="container-royal border-t border-white/10 pt-16">
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:grid-cols-12 lg:gap-10">
           <div className="col-span-2 md:col-span-3 lg:col-span-4">
-            <Link to="/" className="inline-flex items-center gap-3" aria-label={`${site.shortName} home`}>
-              <Crest className="h-10 w-10 text-gold-light" />
+            <Link to="/" className="inline-flex items-center" aria-label={`${site.shortName} home`}>
               <span aria-hidden="true" className="font-serif-display text-2xl font-medium">
                 {site.name}
               </span>
             </Link>
             <p className="mt-5 max-w-sm leading-relaxed text-cream/85">
-              Licensed, Medicare-certified home health care for families across Southern California. {site.tagline}.
+              Licensed home health care for families across Southern California. {site.tagline}.
             </p>
             <address className="mt-6 space-y-2 not-italic text-cream/90">
               <p>
@@ -106,13 +102,8 @@ export default function Footer() {
           <p className="lg:col-span-8">
             <strong className="text-cream">In an emergency, call 911.</strong> Office hours: {site.hours.label}. {site.hours.onCall}
             {site.licenseNumber && <> California license #{site.licenseNumber}.</>}
-            {site.medicare.ccn && <> Medicare CCN {site.medicare.ccn}.</>}
           </p>
           <div className="flex flex-wrap items-center gap-4 lg:col-span-4 lg:justify-end">
-            <div className="flex items-center gap-3 sm:hidden">
-              <span className="text-cream/85">Colour theme</span>
-              <ThemeSwatches />
-            </div>
             <button
               type="button"
               onClick={() => setUserMotionOff(!motionOff)}

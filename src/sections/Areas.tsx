@@ -4,7 +4,7 @@ import { Icon } from "@/components/Icon";
 
 export default function Areas() {
   return (
-    <section id="coverage" aria-labelledby="areas-title" className="bg-cream">
+    <section id="service-areas" aria-labelledby="areas-title" className="bg-cream">
       <div className="container-royal section grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <p data-reveal className="eyebrow mb-5 text-gold-ink">
@@ -15,7 +15,7 @@ export default function Areas() {
           </h2>
           <p data-reveal data-reveal-delay="0.1" className="mt-6 max-w-md text-lg leading-relaxed text-moss">
             Care is coordinated from our office at {site.address.street}, {site.address.city}. Call us to confirm
-            coverage for your address.
+            we serve your address.
           </p>
           <p data-reveal className="mt-8">
             <Link to="/service-areas" className="link-arrow">

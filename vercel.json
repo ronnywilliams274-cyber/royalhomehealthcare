@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/medicare-certified", "destination": "/", "permanent": true },
+    { "source": "/medicare-certified/", "destination": "/", "permanent": true }
+  ]
+}

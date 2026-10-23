@@ -154,6 +154,7 @@ export default function ServiceDetailPage() {
       )}
 
       {/* FAQs */}
+      {s.faqs.length > 0 && (
       <section aria-labelledby="svc-faq-title" className="bg-linen">
         <div className="container-royal grid gap-10 py-20 lg:grid-cols-12 lg:py-24">
           <div className="lg:col-span-4">
@@ -173,6 +174,7 @@ export default function ServiceDetailPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Related */}
       {related.length > 0 && (
@@ -206,13 +208,15 @@ export default function ServiceDetailPage() {
           provider: { "@type": "MedicalBusiness", name: site.name, telephone: "+1-818-630-5702" },
         }}
       />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: s.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-        }}
-      />
+      {s.faqs.length > 0 && (
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: s.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+          }}
+        />
+      )}
     </>
   );
 }
@@ -303,7 +307,7 @@ function QuickFacts({ s }: { s: Service }) {
   const facts = [
     { icon: "Stethoscope" as const, label: "Provided by", value: s.byArrangement ? "Licensed partners, coordinated by Royal" : s.category === "core" && s.slug === "home-health-aides" ? "Certified home health aides, supervised by an RN" : "Registered nurses and your Royal care team" },
     { icon: "ClipboardCheck" as const, label: "Ordered by", value: "Your physician or allowed practitioner" },
-    { icon: "BadgeCheck" as const, label: "Coverage", value: "Medicare-certified; Medi-Cal and other plans" },
+    { icon: "Clock" as const, label: "Availability", value: `${site.hours.short}, with a nurse on call after hours` },
     { icon: "MapPin" as const, label: "Where", value: "In your home, across 4 Southern California counties" },
   ];
   return (

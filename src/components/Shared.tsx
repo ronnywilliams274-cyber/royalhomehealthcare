@@ -276,22 +276,6 @@ export function FaqList({ items }: { items: readonly { q: string; a: string; lin
 }
 
 /* ------------------------------------------------------------------ */
-/* Medicare badge                                                      */
-/* ------------------------------------------------------------------ */
-export function MedicareBadge({ dark = false }: { dark?: boolean }) {
-  return (
-    <span
-      className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold ${
-        dark ? "border-gold-light/40 bg-white/[0.06] text-cream" : "border-forest/20 bg-white text-forest"
-      }`}
-    >
-      <Icon name="BadgeCheck" className={`h-5 w-5 ${dark ? "text-gold-light" : "text-gold-ink"}`} />
-      Medicare-Certified Home Health Agency
-    </span>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /* Check list                                                          */
 /* ------------------------------------------------------------------ */
 export function CheckList({ items, dark = false, cols = 1 }: { items: readonly string[]; dark?: boolean; cols?: 1 | 2 }) {

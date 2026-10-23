@@ -3,10 +3,8 @@ import { Link, NavLink, useLocation } from "react-router";
 import { site } from "@/data/site";
 import { categories, servicesIn, type ServiceCategory } from "@/data/services";
 import { Icon } from "@/components/Icon";
-import { Crest } from "@/components/Crest";
 
 const primary = [
-  { label: "Medicare", to: "/medicare-certified" },
   { label: "About", to: "/about" },
   { label: "Service Areas", to: "/service-areas" },
   { label: "FAQs", to: "/faq" },
@@ -109,9 +107,8 @@ export default function Nav() {
               : "border-white/15 bg-forest-ink/70"
           }`}
         >
-          <Link to="/" className="flex shrink-0 items-center gap-2.5 rounded-full py-1 pr-2 text-cream" aria-label={`${site.shortName} home`}>
-            <Crest className="h-9 w-9 text-gold-light" />
-            <span className="font-serif-display text-[1.0625rem] font-medium leading-[1.08] sm:text-[1.4rem] sm:leading-none" aria-hidden="true">
+          <Link to="/" className="flex shrink-0 items-center rounded-full py-1 pl-1 pr-2 text-cream sm:pl-0" aria-label={`${site.shortName} home`}>
+            <span className="font-serif-display text-[1.125rem] font-medium leading-[1.08] sm:text-[1.4rem] sm:leading-none" aria-hidden="true">
               <span className="block sm:inline">Royal Home </span>
               <span className="block sm:inline">Health Care</span>
             </span>

@@ -3,7 +3,6 @@ import { Outlet, useLocation } from "react-router";
 import Nav from "@/components/Nav";
 import Footer from "@/sections/Footer";
 import MobileCallBar from "@/components/MobileCallBar";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { scrollToTopInstant, scrollToElement } from "@/hooks/scroll";
 import { useScrollAnimations } from "@/hooks/useScrollAnimations";
 import { getRouteMeta } from "@/routes";
@@ -71,7 +70,6 @@ export default function Layout() {
         </main>
         <Footer />
       </div>
-      <ThemeSwitcher />
       <MobileCallBar />
       {/* Polite live region announces page changes to screen reader users */}
       <p className="sr-only" aria-live="polite" aria-atomic="true">

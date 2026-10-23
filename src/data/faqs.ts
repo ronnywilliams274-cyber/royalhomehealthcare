@@ -1,6 +1,5 @@
 /**
  * Frequently asked questions, grouped for the FAQ page.
- * Medicare facts are based on Medicare.gov ("Home health services"). Re-check yearly.
  */
 export interface Faq {
   q: string;
@@ -26,8 +25,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "How do I know if I qualify?",
-        a: "Anyone under a doctor's care who needs skilled medical support at home may qualify. For Medicare to cover it, you need part-time or intermittent skilled care, you must be considered homebound, and your doctor or allowed provider needs to see you and sign off on a home health care plan. Give us a call and one of our registered nurses will gladly talk through your situation and check your eligibility.",
-        link: { href: "/medicare-certified", label: "See Medicare eligibility" },
+        a: "Anyone under a doctor's care who needs skilled medical support at home may qualify. In general, you need part-time or intermittent skilled care, leaving home takes a considerable effort, and your doctor or allowed provider needs to see you and sign off on a home health care plan. Give us a call and one of our registered nurses will gladly talk through your situation with you.",
       },
       {
         q: "Who can refer me to Royal Home Health Care?",
@@ -35,43 +33,16 @@ export const faqGroups: FaqGroup[] = [
         link: { href: "/referrals", label: "How referrals work" },
       },
       {
+        q: "What does “homebound” mean?",
+        a: "Being homebound does not mean you are stuck in bed all day. It simply means leaving home is not recommended because of your health condition, or you need support like a walker, wheelchair, special transportation, or another person's help to go out, and leaving takes a real physical effort. You can still leave home for doctor visits, religious services, adult day care, and occasional family outings.",
+      },
+      {
         q: "Do I need a doctor's order?",
         a: "Yes, home health care always requires orders from your physician or another licensed provider. If you do not have orders yet, just call our office. We will coordinate directly with your doctor's team for you.",
       },
       {
         q: "How quickly can care begin?",
-        a: "We usually return calls the same business day. Under Medicare guidelines, your first nursing visit happens within 48 hours of your referral or your return home from the hospital, or on the specific start date your doctor orders.",
-      },
-    ],
-  },
-  {
-    id: "medicare-payment",
-    title: "Medicare, insurance & cost",
-    items: [
-      {
-        q: "Is Royal Home Health Care Medicare-certified?",
-        a: "Yes. Royal Home Health Care, Inc. is a Medicare-certified home health agency. That means we meet strict federal health and safety standards and are approved to care for patients covered by Medicare.",
-        link: { href: "/medicare-certified", label: "What Medicare certification means" },
-      },
-      {
-        q: "What will I pay with Medicare?",
-        a: "If you qualify under Original Medicare, you pay $0 out of pocket for covered home health visits. If your doctor orders durable medical equipment like a walker, wheelchair, or hospital bed, Medicare typically covers 80% and you pay 20% of the Medicare-approved amount after meeting your Part B deductible.",
-      },
-      {
-        q: "What does “homebound” mean?",
-        a: "Being homebound does not mean you are stuck in bed all day. It simply means leaving home is not recommended because of your health condition, or you need support like a walker, wheelchair, special transportation, or another person's help to go out, and leaving takes a real physical effort. You can still leave home for doctor visits, religious services, adult day care, and occasional family outings.",
-      },
-      {
-        q: "Do you accept Medi-Cal or private insurance?",
-        a: "We work with Medicare, Medi-Cal, select private insurance plans, workers' compensation, regional centers, and private pay. Because every plan is a little different, call our office and we will verify your exact benefits before any visits begin.",
-      },
-      {
-        q: "I have a Medicare Advantage plan. Can you still help?",
-        a: "Many families in Southern California have Medicare Advantage plans, which each have their own network rules and authorizations. Give us a quick call with your member card handy and we will check right away whether we can provide your care.",
-      },
-      {
-        q: "What doesn't Medicare cover?",
-        a: "Medicare does not cover round-the-clock 24-hour care at home, meal delivery, general housekeeping like grocery shopping or cleaning unrelated to your medical care plan, or personal care like bathing when that is the only help you need.",
+        a: "We usually return calls the same business day. We aim to make your first nursing visit within 48 hours of your referral or your return home from the hospital, or on the specific start date your doctor orders.",
       },
     ],
   },
@@ -108,7 +79,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "What areas do you serve?",
-        a: "We care for patients across Los Angeles, Ventura, San Bernardino, and Orange Counties, all coordinated from our office in Van Nuys. Give us a call with your ZIP code and we will confirm coverage for your neighborhood.",
+        a: "We care for patients across Los Angeles, Ventura, San Bernardino, and Orange Counties, all coordinated from our office in Van Nuys. Give us a call with your ZIP code and we will confirm we serve your neighborhood.",
         link: { href: "/service-areas", label: "See service areas" },
       },
     ],
@@ -123,7 +94,7 @@ export const faqGroups: FaqGroup[] = [
       },
       {
         q: "Can I choose my home health agency?",
-        a: "Yes, the choice is yours. Under Medicare rules, you have the legal right to choose which Medicare-certified home health agency cares for you. Simply let your doctor or hospital discharge planner know that you want Royal Home Health Care.",
+        a: "Yes, the choice is yours. You have the right to choose which home health agency cares for you. Simply let your doctor or hospital discharge planner know that you want Royal Home Health Care.",
       },
       {
         q: "Do you offer help for people with disabilities or language needs?",

@@ -149,9 +149,9 @@ export default function Hero() {
       <div className="container-royal hero-pad relative z-10">
         <p {...anim(0)} className="hero-in hero-eyebrow eyebrow mb-3 flex sm:mb-5 flex-wrap items-center gap-x-3 gap-y-2 text-cream">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold-light/40 bg-forest-ink/40 px-3 py-1.5 text-gold-light">
-            <Icon name="BadgeCheck" className="h-4 w-4" /> Medicare-certified
+            <Icon name="BadgeCheck" className="h-4 w-4" /> Licensed home health agency
           </span>
-          <span>Licensed home health agency in Van Nuys, California</span>
+          <span>Serving families from Van Nuys, California</span>
         </p>
 
         <h1 id="hero-title" {...anim(120)} className="hero-in h-display text-hero max-w-5xl text-cream">

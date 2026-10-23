@@ -7,11 +7,9 @@ import { steps } from "@/sections/Process";
 
 const include = [
   "Patient name, date of birth, address and phone number",
-  "Insurance information (Medicare number or plan details)",
   "Primary and secondary diagnoses",
   "Orders for the services needed (nursing, therapy, aide, etc.)",
   "Recent history & physical or discharge summary",
-  "Face-to-face encounter documentation (for Medicare patients)",
   "Medication list and any wound, IV or catheter orders",
   "Ordering physician's name, NPI, phone and fax",
 ];
@@ -74,7 +72,7 @@ export default function ReferralsPage() {
               ))}
             </ol>
             <p className="mt-10 rounded-2xl border border-forest/15 bg-white p-5 leading-relaxed text-moss">
-              Medicare requires the initial visit within 48 hours of referral or the patient's return home, or on the start of
+              We aim to make the first visit within 48 hours of referral or the patient's return home, or on the start of
               care date you order. {site.hours.onCall}
             </p>
           </div>
