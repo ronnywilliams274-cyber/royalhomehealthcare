@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { site } from "@/data/site";
 import { servicesIn } from "@/data/services";
 import { Icon } from "@/components/Icon";
+import { JsonLd } from "@/components/Shared";
 import { setUserMotionOff, useUserMotionOff } from "@/hooks/useMotion";
 
 const company = [
@@ -116,21 +117,57 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-cream/80 lg:flex-row lg:items-center lg:justify-between">
-          <p>
-            © <span suppressHydrationWarning>{new Date().getFullYear()}</span> {site.name} All rights reserved.
+        <div className="mt-8 flex flex-col gap-5 border-t border-white/10 pt-7 text-sm text-cream/80 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2">
+            <p>
+              © <span suppressHydrationWarning>{new Date().getFullYear()}</span> {site.name} All rights reserved.
+            </p>
+            <ul className="flex flex-wrap gap-x-6 gap-y-1">
+              {legal.map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to} className="inline-block py-1.5 underline underline-offset-4 hover:text-white">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p className="text-base font-medium text-cream sm:text-[1.0625rem]">
+            <a
+              href="https://embratechnologies.org"
+              target="_blank"
+              rel="noopener"
+              title="Embra Technologies (Embra Tech) | Custom Web Design, Software Development & SEO"
+              className="embra-credit-link group"
+            >
+              <span className="text-cream/95">Built by</span>
+              <strong className="embra-shine-text font-serif-display text-xl font-semibold tracking-wide sm:text-[1.35rem]">
+                Embra Technologies
+              </strong>
+              <Icon
+                name="ExternalLink"
+                className="h-4 w-4 text-gold-light transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </a>
           </p>
-          <ul className="flex flex-wrap gap-x-6 gap-y-1">
-            {legal.map((l) => (
-              <li key={l.to}>
-                <Link to={l.to} className="inline-block py-1.5 underline underline-offset-4 hover:text-white">
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: site.name,
+          ...(site.siteUrl ? { url: site.siteUrl } : {}),
+          creator: {
+            "@type": "Organization",
+            name: "Embra Technologies",
+            alternateName: "Embra Tech",
+            url: "https://embratechnologies.org",
+            description: "Custom web design, software development, and SEO engineering by Embra Technologies.",
+          },
+        }}
+      />
     </footer>
   );
 }
