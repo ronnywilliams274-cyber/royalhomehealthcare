@@ -22,8 +22,10 @@ export const site = {
   phone: "(818) 630-5702",
   phoneHref: "tel:+18186305702",
   fax: "(818) 235-0155",
-  email: "royalhomehealthinc@gmail.com",
-  emailHref: "mailto:royalhomehealthinc@gmail.com",
+  email: "info@royalcareathome.com",
+  emailHref: "mailto:info@royalcareathome.com",
+  formEndpoint: "https://formsubmit.co/ajax/info@royalcareathome.com",
+  formAction: "https://formsubmit.co/info@royalcareathome.com",
 
   address: {
     street: "14328 Victory Blvd., Suite 203",

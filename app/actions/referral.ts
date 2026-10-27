@@ -24,23 +24,28 @@ export async function submitReferral(
     return { ok: false, error: "Please shorten your entry and try again." };
   }
 
-  const payload = { name, phone, whoFor, message, preferredTime, submittedAt: new Date().toISOString() };
-  const webhook = process.env.REFERRAL_WEBHOOK_URL;
+  const payload = {
+    _subject: `New Referral Request from ${name} — Royal Home Health Care`,
+    _template: "table",
+    _captcha: "false",
+    name,
+    phone,
+    whoFor,
+    message,
+    preferredTime,
+    submittedAt: new Date().toISOString(),
+  };
+  const webhook = "https://formsubmit.co/ajax/info@royalcareathome.com";
 
-  if (webhook) {
-    try {
-      const res = await fetch(webhook, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error(`Webhook responded ${res.status}`);
-    } catch {
-      return { ok: false, error: "Something went wrong sending your request. Please call us instead." };
-    }
-  } else {
-    // No webhook configured: validate-and-log so the form still works in dev.
-    console.log("[referral]", JSON.stringify(payload));
+  try {
+    const res = await fetch(webhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error(`Webhook responded ${res.status}`);
+  } catch {
+    return { ok: false, error: "Something went wrong sending your request. Please call us instead." };
   }
 
   return { ok: true, error: null };

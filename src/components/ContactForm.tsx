@@ -8,8 +8,8 @@ import { Icon } from "@/components/Icon";
  * visible labels, autocomplete tokens, "(required)" in text, an error summary that
  * receives focus, inline errors tied to fields, and status messages announced politely.
  *
- * Delivery: if VITE_FORM_ENDPOINT is set (e.g. a Formspree URL) the form POSTs JSON there.
- * Otherwise it opens the visitor's email app with the message pre-filled.
+ * Delivery: all submissions are sent directly to info@royalcareathome.com (`site.formEndpoint`),
+ * with a native HTML POST fallback to `site.formAction`.
  */
 type Fields = { name: string; phone: string; email: string; role: string; service: string; zip: string; message: string };
 type Errors = Partial<Record<keyof Fields, string>>;
@@ -22,28 +22,39 @@ const roles = [
   "Other",
 ];
 
-const endpoint: string =
-  (import.meta as unknown as { env?: Record<string, string | undefined> }).env?.VITE_FORM_ENDPOINT ?? "";
-
 export default function ContactForm({ tone = "light", heading = "Send us a message" }: { tone?: "light" | "dark"; heading?: string }) {
   const uid = useId();
   const id = (k: string) => `${uid}-${k}`;
   const [f, setF] = useState<Fields>({ name: "", phone: "", email: "", role: "", service: "", zip: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<{ kind: "idle" | "sending" | "sent" | "mailto" | "error"; text?: string }>({ kind: "idle" });
+  const [status, setStatus] = useState<{ kind: "idle" | "sending" | "sent" | "error"; text?: string }>({ kind: "idle" });
   const summaryRef = useRef<HTMLDivElement>(null);
+  const honeyRef = useRef<HTMLInputElement>(null);
   const dark = tone === "dark";
 
-  const set = (k: keyof Fields) => (e: { target: { value: string } }) => setF((p) => ({ ...p, [k]: e.target.value }));
+  const set = (k: keyof Fields) => (e: { target: { value: string } }) => {
+    const val = e.target.value;
+    setF((p) => ({ ...p, [k]: val }));
+    setErrors((prev) => {
+      if (!prev[k]) return prev;
+      const next = { ...prev };
+      delete next[k];
+      return next;
+    });
+    if (status.kind === "error") setStatus({ kind: "idle" });
+  };
 
   function validate(): Errors {
     const e: Errors = {};
     if (!f.name.trim()) e.name = "Enter your name.";
     const digits = f.phone.replace(/\D/g, "");
+    const validPhone = digits.length === 10 || (digits.length === 11 && digits.startsWith("1"));
     if (!digits) e.phone = "Enter a phone number so we can call you back.";
-    else if (digits.length < 10) e.phone = "Enter a 10-digit phone number, for example (818) 555-0123.";
+    else if (!validPhone) e.phone = "Enter a 10-digit phone number, for example (818) 555-0123.";
     if (f.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim()))
       e.email = "Enter an email address in the format name@example.com, or leave it blank.";
+    if (f.zip.trim() && !/^\d{5}(-\d{4})?$/.test(f.zip.trim()))
+      e.zip = "Enter a 5-digit ZIP code, for example 91401, or leave it blank.";
     return e;
   }
 
@@ -57,37 +68,54 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
       return;
     }
 
-    const lines: string[] = [`Name: ${f.name}`, `Phone: ${f.phone}`];
-    if (f.email) lines.push(`Email: ${f.email}`);
-    if (f.role) lines.push(`I am: ${f.role}`);
-    if (f.service) lines.push(`Interested in: ${f.service}`);
-    if (f.zip) lines.push(`ZIP code: ${f.zip}`);
-    if (f.message) lines.push("", f.message);
+    const cleanName = f.name.trim();
+    const cleanPhone = f.phone.trim();
+    const cleanEmail = f.email.trim();
+    const cleanZip = f.zip.trim();
+    const cleanMessage = f.message.trim();
+    const firstName = cleanName.split(/\s+/)[0] || cleanName;
 
-    if (endpoint) {
-      setStatus({ kind: "sending" });
-      try {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({ ...f, _subject: `Website inquiry from ${f.name}` }),
-        });
-        if (!res.ok) throw new Error(String(res.status));
-        setStatus({ kind: "sent", text: `Thank you, ${f.name.split(" ")[0]}. We received your message and will call you back, usually the same business day.` });
-        setF({ name: "", phone: "", email: "", role: "", service: "", zip: "", message: "" });
-      } catch {
-        setStatus({ kind: "error", text: `Sorry, your message did not go through. Please give us a call at ${site.phone}.` });
-      }
+    if (honeyRef.current?.value) {
+      setStatus({
+        kind: "sent",
+        text: `Thank you, ${firstName}. We received your message and will call you back, usually the same business day.`,
+      });
+      setF({ name: "", phone: "", email: "", role: "", service: "", zip: "", message: "" });
       return;
     }
 
-    const subject = encodeURIComponent(`Home health inquiry from ${f.name}`);
-    const body = encodeURIComponent(lines.join("\n"));
-    window.location.href = `${site.emailHref}?subject=${subject}&body=${body}`;
-    setStatus({
-      kind: "mailto",
-      text: `Your email app should open with your message ready to send. If it didn't open, email ${site.email} or call ${site.phone}.`,
-    });
+    const payload: Record<string, string> = {
+      _subject: `New Home Health Inquiry from ${cleanName} — ${site.shortName}`,
+      _template: "table",
+      _captcha: "false",
+      Name: cleanName,
+      Phone: cleanPhone,
+      ...(cleanEmail ? { Email: cleanEmail, _replyto: cleanEmail } : {}),
+      ...(f.role ? { "Caller Role": f.role } : {}),
+      ...(cleanZip ? { "ZIP Code": cleanZip } : {}),
+      ...(f.service ? { "Service Interested In": f.service } : {}),
+      ...(cleanMessage ? { Message: cleanMessage } : {}),
+    };
+
+    setStatus({ kind: "sending" });
+    try {
+      const res = await fetch(site.formEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setStatus({
+        kind: "sent",
+        text: `Thank you, ${firstName}. We received your message and will call you back, usually the same business day.`,
+      });
+      setF({ name: "", phone: "", email: "", role: "", service: "", zip: "", message: "" });
+    } catch {
+      setStatus({
+        kind: "error",
+        text: `Sorry, your message did not go through. Please email us directly at ${site.email} or call ${site.phone}.`,
+      });
+    }
   }
 
   const errorList = Object.entries(errors) as [keyof Fields, string][];
@@ -106,7 +134,21 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
     [hasHint ? id(`${k}-hint`) : "", errors[k] ? id(`${k}-err`) : ""].filter(Boolean).join(" ") || undefined;
 
   return (
-    <form noValidate onSubmit={onSubmit} aria-labelledby={id("title")} className={dark ? "on-dark" : ""}>
+    <form action={site.formAction} method="POST" noValidate onSubmit={onSubmit} aria-labelledby={id("title")} className={dark ? "on-dark" : ""}>
+      <input type="hidden" name="_subject" value={`New Home Health Inquiry — ${site.shortName}`} />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input
+        ref={honeyRef}
+        type="text"
+        name="_honey"
+        defaultValue=""
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        aria-label="Leave this field blank"
+        hidden
+      />
       <h2 id={id("title")} className={`font-serif-display text-3xl font-semibold ${dark ? "text-cream" : "text-forest"}`}>
         {heading}
       </h2>
@@ -169,7 +211,7 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
           <select id={id("role")} name="role" value={f.role} onChange={set("role")} className={input("role")}>
             <option value="">Choose one</option>
             {roles.map((r) => (
-              <option key={r}>{r}</option>
+              <option key={r} value={r}>{r}</option>
             ))}
           </select>
         </div>
@@ -178,7 +220,8 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
           <label htmlFor={id("zip")} className={label}>
             ZIP code <span className="font-normal">(optional)</span>
           </label>
-          <input id={id("zip")} name="zip" inputMode="text" autoComplete="postal-code" maxLength={10} value={f.zip} onChange={set("zip")} className={input("zip")} />
+          <input id={id("zip")} name="zip" inputMode="text" autoComplete="postal-code" maxLength={10} aria-invalid={!!errors.zip} aria-describedby={describedBy("zip")} value={f.zip} onChange={set("zip")} className={input("zip")} />
+          {errors.zip && <p id={id("zip-err")} className={err}><Icon name="TriangleAlert" className="mt-0.5 h-4 w-4 shrink-0" />{errors.zip}</p>}
         </div>
 
         <div className="sm:col-span-2">
@@ -188,7 +231,7 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
           <select id={id("service")} name="service" value={f.service} onChange={set("service")} className={input("service")}>
             <option value="">Not sure yet</option>
             {services.map((s) => (
-              <option key={s.slug}>{s.title}</option>
+              <option key={s.slug} value={s.title}>{s.title}</option>
             ))}
           </select>
         </div>

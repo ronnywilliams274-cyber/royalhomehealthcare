@@ -12,7 +12,7 @@ export const site = {
     phoneDisplay: "(818) 630-5702",
     phoneHref: "tel:+18186305702",
     fax: "(818) 235-0155",
-    email: "royalhomehealthinc@gmail.com",
+    email: "info@royalcareathome.com",
   },
 
   address: {
