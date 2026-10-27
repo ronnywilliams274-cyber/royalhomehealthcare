@@ -16,9 +16,14 @@ const app = (
   </StrictMode>
 )
 
-// Production pages are prerendered to static HTML (scripts/prerender.mjs) and hydrated here.
-// In development (`npm run dev`) the root is empty, so we render from scratch.
-if (root.firstElementChild) hydrateRoot(root, app)
-else createRoot(root).render(app)
+// Production pages are prerendered to static HTML (scripts/prerender.mjs) and hydrated here
+// when the prerendered route matches the current URL pathname.
+const currentPath = window.location.pathname.replace(/\/+$/, '') || '/'
+if (root.firstElementChild && root.dataset.prerenderPath === currentPath) {
+  hydrateRoot(root, app)
+} else {
+  root.innerHTML = ''
+  createRoot(root).render(app)
+}
 
 ;(window as Window & { __rhhcReady?: boolean }).__rhhcReady = true

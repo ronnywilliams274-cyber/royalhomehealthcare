@@ -13,10 +13,10 @@ export default function FaqPage() {
         aside={
           <nav aria-label="FAQ topics" className="rounded-3xl border border-white/10 bg-white/[0.05] p-6">
             <p className="mb-3 text-sm font-semibold text-cream">Topics</p>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               {faqGroups.map((g) => (
                 <li key={g.id}>
-                  <a href={`#${g.id}`} className="inline-flex items-center gap-2 text-cream/90 underline decoration-cream/30 underline-offset-4 hover:decoration-cream">
+                  <a href={`#${g.id}`} className="inline-flex items-center gap-2 py-1 text-cream/90 underline decoration-cream/30 underline-offset-4 hover:decoration-cream">
                     <Icon name="ArrowRight" className="h-4 w-4 text-gold-light" />
                     {g.title}
                     <span className="sr-only">({g.items.length} questions)</span>

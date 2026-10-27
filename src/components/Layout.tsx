@@ -60,12 +60,39 @@ export default function Layout() {
 
   return (
     <>
-      <a href="#main" className="skip-link">
+      <a
+        href="#main"
+        className="skip-link"
+        onClick={(e) => {
+          const main = document.getElementById("main");
+          if (main) {
+            e.preventDefault();
+            focusElement(main);
+            scrollToElement(main);
+          }
+        }}
+      >
         Skip to main content
       </a>
       <Nav />
       <div ref={mainRef}>
-        <main id="main" tabIndex={-1} className="outline-none">
+        <main
+          id="main"
+          tabIndex={-1}
+          className="outline-none"
+          onClick={(e) => {
+            if (e.defaultPrevented) return;
+            const link = (e.target as HTMLElement | null)?.closest?.('a[href^="#"]') as HTMLAnchorElement | null;
+            if (!link) return;
+            const rawHash = link.getAttribute("href");
+            if (!rawHash || rawHash === "#") return;
+            const el = document.getElementById(decodeURIComponent(rawHash.slice(1)));
+            if (el) {
+              scrollToElement(el);
+              focusElement(el);
+            }
+          }}
+        >
           <Outlet />
         </main>
         <Footer />

@@ -8,6 +8,7 @@ import { useSyncExternalStore } from "react";
  */
 const KEY = "rhhc-motion-off";
 const listeners = new Set<() => void>();
+let hydrated = false;
 
 function osReduced(): boolean {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -44,6 +45,10 @@ export function setUserMotionOff(off: boolean) {
 
 function subscribe(cb: () => void) {
   listeners.add(cb);
+  if (!hydrated) {
+    hydrated = true;
+    if (isMotionOff()) queueMicrotask(cb);
+  }
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
   mq.addEventListener("change", cb);
   return () => {
@@ -52,14 +57,14 @@ function subscribe(cb: () => void) {
   };
 }
 
-/** true when animations should not play. Server render assumes motion is off. */
+/** true when animations should not play. Returns false during initial hydration to match SSR HTML. */
 export function useMotionOff(): boolean {
-  return useSyncExternalStore(subscribe, isMotionOff, () => true);
+  return useSyncExternalStore(subscribe, () => (hydrated ? isMotionOff() : false), () => false);
 }
 
 /** true only when the *visitor* switched motion off on this site (not the OS setting). */
 export function useUserMotionOff(): boolean {
-  return useSyncExternalStore(subscribe, userOff, () => false);
+  return useSyncExternalStore(subscribe, () => (hydrated ? userOff() : false), () => false);
 }
 
 export function initMotionClass() {

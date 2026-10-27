@@ -3,7 +3,7 @@ import { site } from "@/data/site";
 import { servicesIn } from "@/data/services";
 import { Icon } from "@/components/Icon";
 import { JsonLd } from "@/components/Shared";
-import { setUserMotionOff, useUserMotionOff } from "@/hooks/useMotion";
+import { setUserMotionOff, useMotionOff } from "@/hooks/useMotion";
 
 const company = [
   { label: "About us", to: "/about" },
@@ -20,16 +20,17 @@ const legal = [
 ];
 
 export default function Footer() {
-  const motionOff = useUserMotionOff();
+  const motionOff = useMotionOff();
   return (
     <footer className="on-dark bg-forest-ink pb-28 text-cream md:pb-10">
       <div className="container-royal border-t border-white/10 pt-16">
         <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:grid-cols-12 lg:gap-10">
           <div className="col-span-2 md:col-span-3 lg:col-span-4">
-            <Link to="/" className="inline-flex items-center" aria-label={`${site.shortName} home`}>
-              <span aria-hidden="true" className="font-serif-display text-2xl font-medium">
+            <Link to="/" className="inline-flex items-center">
+              <span className="font-serif-display text-2xl font-medium">
                 {site.name}
               </span>
+              <span className="sr-only"> — Home</span>
             </Link>
             <p className="mt-5 max-w-sm leading-relaxed text-cream/85">
               Licensed home health care for families across Southern California. {site.tagline}.
@@ -41,7 +42,7 @@ export default function Footer() {
                 {site.address.city}, {site.address.state} {site.address.zip}
               </p>
               <p>
-                <a href={site.phoneHref} className="inline-flex items-center gap-2 font-semibold underline-offset-4 hover:underline">
+                <a href={site.phoneHref} className="inline-flex items-center gap-2 font-semibold underline decoration-cream/40 underline-offset-4 hover:decoration-cream">
                   <Icon name="Phone" className="h-4 w-4 text-gold-light" />
                   {site.phone}
                 </a>
@@ -51,7 +52,7 @@ export default function Footer() {
                 Fax {site.fax}
               </p>
               <p>
-                <a href={site.emailHref} className="inline-flex items-center gap-2 break-all underline-offset-4 hover:underline">
+                <a href={site.emailHref} className="inline-flex items-center gap-2 break-all underline decoration-cream/40 underline-offset-4 hover:decoration-cream">
                   <Icon name="Mail" className="h-4 w-4 shrink-0 text-gold-light" />
                   {site.email}
                 </a>
@@ -109,7 +110,7 @@ export default function Footer() {
               type="button"
               onClick={() => setUserMotionOff(!motionOff)}
               aria-pressed={motionOff}
-              className="inline-flex min-h-[2.75rem] items-center gap-2 rounded-full border border-white/25 px-4 font-medium text-cream hover:bg-white/10"
+              className="inline-flex min-h-[2.75rem] items-center gap-2 rounded-full border border-white/40 px-4 font-medium text-cream hover:bg-white/10"
             >
               <Icon name={motionOff ? "Play" : "Pause"} className="h-4 w-4" />
               Reduce motion
@@ -137,14 +138,14 @@ export default function Footer() {
             <a
               href="https://embratechnologies.org"
               target="_blank"
-              rel="noopener"
-              title="Embra Technologies (Embra Tech) | Custom Web Design, Software Development & SEO"
+              rel="noopener noreferrer"
               className="embra-credit-link group"
             >
-              <span className="text-cream/95">Built by</span>
+              <span className="text-cream/95">Built by </span>
               <strong className="embra-shine-text font-serif-display text-xl font-semibold tracking-wide sm:text-[1.35rem]">
                 Embra Technologies
               </strong>
+              <span className="sr-only"> (opens in a new tab)</span>
               <Icon
                 name="ExternalLink"
                 className="h-4 w-4 text-gold-light transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

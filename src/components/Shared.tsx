@@ -39,7 +39,7 @@ export function Breadcrumbs() {
                   </span>
                 ) : (
                   <>
-                    <Link to={r.path} className="underline decoration-cream/40 underline-offset-4 hover:decoration-cream">
+                    <Link to={r.path} className="inline-block py-1 underline decoration-cream/40 underline-offset-4 hover:decoration-cream">
                       {r.name}
                     </Link>
                     <span aria-hidden="true" className="text-cream/60">
@@ -252,7 +252,7 @@ export function FaqList({ items }: { items: readonly { q: string; a: string; lin
             <span className="font-serif-display text-xl font-semibold leading-snug text-forest sm:text-2xl">{f.q}</span>
             <span
               aria-hidden="true"
-              className="faq-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-forest/25 text-forest transition-transform duration-300 group-open:bg-forest group-open:text-cream"
+              className="faq-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-forest/55 text-forest transition-transform duration-300 group-open:bg-forest group-open:text-cream"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M7 1v12M1 7h12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
@@ -263,7 +263,7 @@ export function FaqList({ items }: { items: readonly { q: string; a: string; lin
             <p>{f.a}</p>
             {f.link && (
               <p className="mt-3">
-                <Link to={f.link.href} className="font-semibold text-forest">
+                <Link to={f.link.href} className="inline-block py-1 font-semibold text-forest">
                   {f.link.label}
                 </Link>
               </p>

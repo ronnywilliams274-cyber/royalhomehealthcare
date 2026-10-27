@@ -30,7 +30,9 @@ export default function MobileCallBar() {
   const onContact = pathname.replace(/\/+$/, "") === "/contact";
 
   return (
-    <div
+    <nav
+      aria-label="Quick contact actions"
+      data-mobile-callbar
       className={`on-dark no-print fixed inset-x-0 bottom-0 z-40 border-t border-white/15 bg-forest-ink px-3 py-2.5 shadow-[0_-12px_32px_-12px_rgb(var(--forest-ink-rgb)/0.45)] transition-transform duration-200 md:hidden ${
         typing ? "translate-y-full" : "translate-y-0"
       }`}
@@ -54,6 +56,6 @@ export default function MobileCallBar() {
           </Link>
         )}
       </div>
-    </div>
+    </nav>
   );
 }

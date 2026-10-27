@@ -75,6 +75,9 @@ export default function Hero() {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
+    v.defaultMuted = true;
+    v.muted = true;
+    v.setAttribute("muted", "");
     if (paused || !inView) v.pause();
     else v.play().catch(() => {});
   }, [paused, inView, isMobile, showVideo]);
@@ -105,6 +108,7 @@ export default function Hero() {
           <video
             key={isMobile ? "m" : "d"}
             ref={videoRef}
+            aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover"
             autoPlay={!paused}
             muted
@@ -128,24 +132,9 @@ export default function Hero() {
           </video>
         )}
         {/* readability scrim - adapts to active theme color while keeping text contrast above 4.5:1 */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(var(--forest-ink-rgb)/0.68)_0%,rgb(var(--forest-ink-rgb)/0.62)_40%,rgb(var(--forest-ink-rgb)/0.92)_100%)] sm:bg-[linear-gradient(90deg,rgb(var(--forest-ink-rgb)/0.88)_0%,rgb(var(--forest-ink-rgb)/0.68)_55%,rgb(var(--forest-ink-rgb)/0.35)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(var(--forest-ink-rgb)/0.74)_0%,rgb(var(--forest-ink-rgb)/0.72)_45%,rgb(var(--forest-ink-rgb)/0.92)_100%)] sm:bg-[linear-gradient(90deg,rgb(var(--forest-ink-rgb)/0.90)_0%,rgb(var(--forest-ink-rgb)/0.76)_58%,rgb(var(--forest-ink-rgb)/0.55)_100%)]" />
       </div>
 
-      {/* Pause / play all background motion */}
-      {showVideo && (
-        <button
-          type="button"
-          onClick={() => setUserPaused((p) => !p)}
-          aria-label={userPaused ? "Play background video" : "Pause background video"}
-          className="hero-pause absolute right-4 top-[5.5rem] z-20 flex h-11 items-center gap-1.5 rounded-full border border-white/30 bg-forest-ink/80 px-3.5 text-sm sm:gap-2 sm:px-4 font-medium text-cream transition-colors hover:bg-forest-ink sm:right-8 sm:top-[8.25rem]"
-        >
-          <Icon name={userPaused ? "Play" : "Pause"} className="h-4 w-4" />
-          <span className="hero-pause-label">
-            {userPaused ? "Play" : "Pause"}
-            <span className="hidden sm:inline"> background video</span>
-          </span>
-        </button>
-      )}
       <div className="container-royal hero-pad relative z-10">
         <p {...anim(0)} className="hero-in hero-eyebrow eyebrow mb-3 flex sm:mb-5 flex-wrap items-center gap-x-3 gap-y-2 text-cream">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold-light/40 bg-forest-ink/40 px-3 py-1.5 text-gold-light">
@@ -186,6 +175,20 @@ export default function Hero() {
         </ul>
       </div>
 
+      {/* Pause / play all background motion - placed after primary hero content for logical focus order */}
+      {showVideo && (
+        <button
+          type="button"
+          onClick={() => setUserPaused((p) => !p)}
+          className="hero-pause absolute right-4 top-[5.5rem] z-20 flex h-11 items-center gap-1.5 rounded-full border border-white/40 bg-forest-ink/85 px-3.5 text-sm font-medium text-cream transition-colors hover:bg-forest-ink sm:bottom-8 sm:right-8 sm:top-auto sm:gap-2 sm:px-4"
+        >
+          <Icon name={userPaused ? "Play" : "Pause"} className="h-4 w-4" />
+          <span className="hero-pause-label">
+            {userPaused ? "Play" : "Pause"}
+            <span className="sr-only sm:not-sr-only"> background video</span>
+          </span>
+        </button>
+      )}
     </section>
   );
 }

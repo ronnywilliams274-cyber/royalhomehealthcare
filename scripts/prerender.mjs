@@ -129,7 +129,7 @@ function page(meta, html) {
     .replace("<!--app-head-->", () => headTags(meta));
   out = out.includes("<!--app-html-->")
     ? out.replace("<!--app-html-->", () => html)
-    : out.replace(/<div id="root">\s*<\/div>/, () => `<div id="root">${html}</div>`);
+    : out.replace(/<div id="root">\s*<\/div>/, () => `<div id="root" data-prerender-path="${esc(meta.path)}">${html}</div>`);
   return out;
 }
 

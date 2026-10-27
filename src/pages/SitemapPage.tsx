@@ -15,10 +15,10 @@ export default function SitemapPage() {
             <h2 id="sm-main" className="font-serif-display text-2xl font-semibold text-forest">
               Main pages
             </h2>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4 space-y-1">
               {staticRoutes.map((r) => (
                 <li key={r.path}>
-                  <Link to={r.path} className="text-forest underline decoration-forest/30 underline-offset-4 hover:decoration-forest">
+                  <Link to={r.path} className="inline-block py-1 text-forest underline decoration-forest/30 underline-offset-4 hover:decoration-forest">
                     {r.name}
                   </Link>
                 </li>
@@ -30,10 +30,10 @@ export default function SitemapPage() {
               <h2 id={`sm-${c}`} className="font-serif-display text-2xl font-semibold text-forest">
                 {categories[c].label}
               </h2>
-              <ul className="mt-4 space-y-2">
+              <ul className="mt-4 space-y-1">
                 {servicesIn(c).map((s) => (
                   <li key={s.slug}>
-                    <Link to={`/services/${s.slug}`} className="text-forest underline decoration-forest/30 underline-offset-4 hover:decoration-forest">
+                    <Link to={`/services/${s.slug}`} className="inline-block py-1 text-forest underline decoration-forest/30 underline-offset-4 hover:decoration-forest">
                       {s.title}
                     </Link>
                   </li>

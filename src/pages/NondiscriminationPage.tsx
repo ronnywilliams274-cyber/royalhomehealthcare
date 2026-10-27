@@ -38,8 +38,8 @@ export default function NondiscriminationPage() {
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-charcoal/90">
               We want to make things right. Please start by calling our office at <a href={site.phoneHref}>{site.phone}</a> and
-              asking for the administrator, or write to us at {site.address.street}, {site.address.city}, {site.address.state}{" "}
-              {site.address.zip}. You will not be treated differently for filing a complaint. You may also contact:
+              asking for the Administrator (who serves as our Civil Rights, Section 504, and Section 1557 Coordinator), or write to us at {site.address.street}, {site.address.city}, {site.address.state}{" "}
+              {site.address.zip}. You will not be treated differently or retaliated against for filing a complaint. You may also contact:
             </p>
 
             <div className="mt-8 grid gap-6 md:grid-cols-2">

@@ -31,10 +31,11 @@ export default function Nav() {
   const menuBtn = useRef<HTMLButtonElement>(null);
   const panelId = useId();
 
-  // Close menus when the page changes
+  // Close menus and reveal header when the page changes
   useEffect(() => {
     setServicesOpen(false);
     setMobileOpen(false);
+    setHidden(false);
   }, [pathname]);
 
   // Scroll state, read at most once per frame and only re-rendering when something changes.
@@ -107,11 +108,12 @@ export default function Nav() {
               : "border-white/15 bg-forest-ink/70"
           }`}
         >
-          <Link to="/" className="flex shrink-0 items-center rounded-full py-1 pl-1 pr-2 text-cream sm:pl-0" aria-label={`${site.shortName} home`}>
-            <span className="font-serif-display text-[1.125rem] font-medium leading-[1.08] sm:text-[1.4rem] sm:leading-none" aria-hidden="true">
+          <Link to="/" className="flex shrink-0 items-center rounded-full py-1 pl-1 pr-2 text-cream sm:pl-0">
+            <span className="font-serif-display text-[1.125rem] font-medium leading-[1.08] sm:text-[1.4rem] sm:leading-none">
               <span className="block sm:inline">Royal Home </span>
               <span className="block sm:inline">Health Care</span>
             </span>
+            <span className="sr-only"> — Home</span>
           </Link>
 
           <nav aria-label="Main" className="hidden xl:block">
@@ -196,7 +198,7 @@ export default function Nav() {
               onClick={() => setMobileOpen(true)}
               aria-haspopup="dialog"
               aria-expanded={mobileOpen}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-cream xl:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/40 text-cream xl:hidden"
             >
               <Icon name="Menu" className="h-5 w-5" />
               <span className="sr-only">Open menu</span>
@@ -227,6 +229,21 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
     if (!dialog) return;
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
+    // Mark background landmarks inert and aria-hidden while the modal dialog is open
+    const bgEls = Array.from(
+      document.querySelectorAll<HTMLElement>("header[data-site-header], main#main, footer, [data-mobile-callbar]")
+    );
+    const prevStates = bgEls.map((el) => ({
+      el,
+      inert: el.inert,
+      ariaHidden: el.getAttribute("aria-hidden"),
+    }));
+    bgEls.forEach((el) => {
+      el.inert = true;
+      el.setAttribute("aria-hidden", "true");
+    });
+
     dialog.querySelector<HTMLElement>("[data-autofocus]")?.focus();
 
     const onKey = (e: KeyboardEvent) => {
@@ -255,6 +272,11 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
+      prevStates.forEach(({ el, inert, ariaHidden }) => {
+        el.inert = inert;
+        if (ariaHidden === null) el.removeAttribute("aria-hidden");
+        else el.setAttribute("aria-hidden", ariaHidden);
+      });
     };
   }, [onClose]);
 
@@ -277,7 +299,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
             type="button"
             data-autofocus
             onClick={onClose}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/40"
           >
             <Icon name="X" className="h-5 w-5" />
             <span className="sr-only">Close menu</span>

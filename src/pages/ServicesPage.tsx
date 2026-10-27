@@ -20,10 +20,10 @@ export default function ServicesPage() {
           <div className="space-y-4">
             <nav aria-label="Jump to a service group" className="rounded-2xl border border-white/10 bg-white/[0.05] p-5">
               <p className="mb-3 text-sm font-semibold text-cream">On this page</p>
-              <ul className="space-y-1.5">
+              <ul className="space-y-1">
                 {order.map((c) => (
                   <li key={c}>
-                    <a href={`#${c}`} className="inline-flex items-center gap-2 text-cream/90 underline decoration-cream/30 underline-offset-4 hover:decoration-cream">
+                    <a href={`#${c}`} className="inline-flex items-center gap-2 py-1 text-cream/90 underline decoration-cream/30 underline-offset-4 hover:decoration-cream">
                       <Icon name="ArrowRight" className="h-4 w-4 text-gold-light" />
                       {categories[c].label}
                     </a>

@@ -69,9 +69,9 @@ export const site = {
     /** The agency's own nondiscrimination statement (from its printed materials). Have counsel
      *  review it against the current HHS Section 1557 notice requirements. */
     statement:
-      "Royal Home Health Care, Inc. complies with applicable civil rights laws and does not discriminate on the basis of race, color, disability, age, religion, pregnancy, childbirth, national origin, or sexual orientation in the provision of services or employment.",
+      "Royal Home Health Care, Inc. complies with applicable federal and state civil rights laws and does not discriminate on the basis of race, color, national origin, age, disability, sex (including pregnancy, childbirth, sexual orientation, and gender identity), or religion in the provision of services or employment.",
     laws:
-      "This includes obligations under Title VI of the Civil Rights Act of 1964, Section 504 of the Rehabilitation Act of 1973, and the Age Discrimination Act of 1975.",
+      "This includes obligations under Title VI of the Civil Rights Act of 1964, Section 504 of the Rehabilitation Act of 1973, the Age Discrimination Act of 1975, and Section 1557 of the Affordable Care Act (45 CFR Part 92).",
     /**
      * State complaint contacts. These numbers come from the agency's printed materials.
      * VERIFY with the California Department of Public Health before launch.

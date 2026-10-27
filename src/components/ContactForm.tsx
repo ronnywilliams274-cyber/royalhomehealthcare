@@ -118,7 +118,7 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
         <div
           ref={summaryRef}
           tabIndex={-1}
-          role="alert"
+          role="region"
           aria-labelledby={id("errtitle")}
           className={`mt-6 rounded-xl border-2 p-4 ${dark ? "border-[#ffb4a8] bg-[#ffb4a8]/10" : "border-[#b42318] bg-[#b42318]/[0.06]"}`}
         >
@@ -128,7 +128,7 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
           <ul className="mt-2 list-disc space-y-1 pl-5">
             {errorList.map(([k, msg]) => (
               <li key={k}>
-                <a href={`#${id(k)}`} className={`underline ${dark ? "text-[#ffb4a8]" : "text-[#b42318]"}`} onClick={(e) => { e.preventDefault(); document.getElementById(id(k))?.focus(); }}>
+                <a href={`#${id(k)}`} className={`inline-block py-1 underline ${dark ? "text-[#ffb4a8]" : "text-[#b42318]"}`} onClick={(e) => { e.preventDefault(); document.getElementById(id(k))?.focus(); }}>
                   {msg}
                 </a>
               </li>
@@ -178,7 +178,7 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
           <label htmlFor={id("zip")} className={label}>
             ZIP code <span className="font-normal">(optional)</span>
           </label>
-          <input id={id("zip")} name="zip" inputMode="numeric" autoComplete="postal-code" maxLength={10} value={f.zip} onChange={set("zip")} className={input("zip")} />
+          <input id={id("zip")} name="zip" inputMode="text" autoComplete="postal-code" maxLength={10} value={f.zip} onChange={set("zip")} className={input("zip")} />
         </div>
 
         <div className="sm:col-span-2">

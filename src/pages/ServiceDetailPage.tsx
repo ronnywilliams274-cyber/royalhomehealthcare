@@ -313,12 +313,12 @@ function QuickFacts({ s }: { s: Service }) {
   return (
     <dl className="grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10">
       {facts.map((f) => (
-        <div key={f.label} className="flex gap-4 bg-forest-deep/90 p-5">
-          <Icon name={f.icon} className="mt-0.5 h-5 w-5 shrink-0 text-gold-light" />
-          <div>
-            <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/80">{f.label}</dt>
-            <dd className="mt-1 text-cream">{f.value}</dd>
-          </div>
+        <div key={f.label} className="relative bg-forest-deep/90 p-5 pl-14">
+          <dt className="text-xs font-semibold uppercase tracking-[0.18em] text-cream/80">
+            <Icon name={f.icon} className="absolute left-5 top-[1.375rem] h-5 w-5 text-gold-light" />
+            {f.label}
+          </dt>
+          <dd className="mt-1 text-cream">{f.value}</dd>
         </div>
       ))}
     </dl>
