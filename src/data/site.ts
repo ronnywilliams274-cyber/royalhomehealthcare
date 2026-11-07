@@ -24,8 +24,9 @@ export const site = {
   fax: "(818) 235-0155",
   email: "info@royalcareathome.com",
   emailHref: "mailto:info@royalcareathome.com",
-  formEndpoint: "https://formsubmit.co/ajax/info@royalcareathome.com",
-  formAction: "https://formsubmit.co/info@royalcareathome.com",
+  /** Lead form delivery (see api/lead.js). The recipient, info@royalcareathome.com, is fixed on the server. */
+  formEndpoint: "/api/lead",
+  formAction: "/api/lead",
 
   address: {
     street: "14328 Victory Blvd., Suite 203",
@@ -96,9 +97,9 @@ export const site = {
   formNotice:
     "For your privacy, please leave out detailed medical history in this form. For referrals and medical records, give us a call or send a fax.",
 
-  /** Optional: an HTTPS endpoint (Formspree, Basin, your CRM) that accepts form POSTs.
-   *  Set VITE_FORM_ENDPOINT in a .env file. Without it, the form opens the visitor's email app. */
-  formEndpointEnvVar: "VITE_FORM_ENDPOINT",
+  /** Optional: Web3Forms access key for info@royalcareathome.com (get one free at web3forms.com).
+   *  Set VITE_WEB3FORMS_ACCESS_KEY in Vercel. Without it, the form delivers through /api/lead. */
+  formEndpointEnvVar: "VITE_WEB3FORMS_ACCESS_KEY",
 
   /** Date of the most recent accessibility review (shown on the Accessibility page). */
   accessibilityReviewed: "October 2026",

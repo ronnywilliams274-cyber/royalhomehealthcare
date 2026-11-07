@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { site } from "@/data/site";
 import { services } from "@/data/services";
 import { Icon } from "@/components/Icon";
@@ -8,11 +8,99 @@ import { Icon } from "@/components/Icon";
  * visible labels, autocomplete tokens, "(required)" in text, an error summary that
  * receives focus, inline errors tied to fields, and status messages announced politely.
  *
- * Delivery: all submissions are sent directly to info@royalcareathome.com (`site.formEndpoint`),
- * with a native HTML POST fallback to `site.formAction`.
+ * Delivery: every submission goes to info@royalcareathome.com only.
+ *   1. Web3Forms (browser), when VITE_WEB3FORMS_ACCESS_KEY is set at build time. The key is tied
+ *      to info@royalcareathome.com and is safe to expose publicly.
+ *   2. /api/lead (Vercel function, see api/lead.js), which tries Resend and then FormSubmit.
+ * "Thank you" is shown only after a provider confirms delivery. If everything fails, the visitor
+ * gets a one-click pre-filled email to info@royalcareathome.com so the lead is never lost.
+ * Without JavaScript the form posts natively to /api/lead.
  */
 type Fields = { name: string; phone: string; email: string; role: string; service: string; zip: string; message: string };
 type Errors = Partial<Record<keyof Fields, string>>;
+type Lead = Fields & { page: string };
+
+const env = (import.meta as unknown as { env?: Record<string, string | undefined> }).env ?? {};
+const WEB3FORMS_KEY = (env.VITE_WEB3FORMS_ACCESS_KEY ?? "").trim();
+const FORMSPREE_URL = (env.VITE_FORM_ENDPOINT ?? "").trim();
+const TIMEOUT_MS = 4500;
+
+async function postJson(url: string, body: unknown, timeoutMs = TIMEOUT_MS): Promise<{ ok: boolean; data: Record<string, unknown> }> {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(body),
+      signal: ctrl.signal,
+    });
+    const data = (await res.json().catch(() => ({}))) as Record<string, unknown>;
+    return { ok: res.ok, data };
+  } catch {
+    return { ok: false, data: {} };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function sendViaWeb3Forms(lead: Lead): Promise<boolean> {
+  if (!WEB3FORMS_KEY) return false;
+  const { ok, data } = await postJson("https://api.web3forms.com/submit", {
+    access_key: WEB3FORMS_KEY,
+    subject: `New Home Health Inquiry from ${lead.name} - ${site.shortName}`,
+    from_name: `${site.shortName} Website`,
+    ...(lead.email ? { replyto: lead.email } : {}),
+    botcheck: "",
+    Name: lead.name,
+    Phone: lead.phone,
+    ...(lead.email ? { Email: lead.email } : {}),
+    ...(lead.role ? { "Caller role": lead.role } : {}),
+    ...(lead.zip ? { "ZIP code": lead.zip } : {}),
+    ...(lead.service ? { "Service interested in": lead.service } : {}),
+    ...(lead.message ? { Message: lead.message } : {}),
+    ...(lead.page ? { "Submitted from": lead.page } : {}),
+  });
+  return ok && data.success === true;
+}
+
+async function sendViaFormspree(lead: Lead): Promise<boolean> {
+  if (!FORMSPREE_URL || !FORMSPREE_URL.startsWith("https://formspree.io/")) return false;
+  const { ok, data } = await postJson(FORMSPREE_URL, {
+    _subject: `New Home Health Inquiry from ${lead.name} - ${site.shortName}`,
+    Name: lead.name,
+    Phone: lead.phone,
+    ...(lead.email ? { email: lead.email } : {}),
+    ...(lead.role ? { "Caller role": lead.role } : {}),
+    ...(lead.zip ? { "ZIP code": lead.zip } : {}),
+    ...(lead.service ? { "Service interested in": lead.service } : {}),
+    ...(lead.message ? { Message: lead.message } : {}),
+    ...(lead.page ? { "Submitted from": lead.page } : {}),
+  });
+  return ok && data.ok === true;
+}
+
+async function sendViaBrowserFormSubmit(lead: Lead): Promise<boolean> {
+  const { ok, data } = await postJson(`https://formsubmit.co/ajax/${site.email}`, {
+    _subject: `New Home Health Inquiry from ${lead.name} - ${site.shortName}`,
+    _template: "table",
+    _captcha: "false",
+    Name: lead.name,
+    Phone: lead.phone,
+    ...(lead.email ? { Email: lead.email, _replyto: lead.email } : {}),
+    ...(lead.role ? { "Caller role": lead.role } : {}),
+    ...(lead.zip ? { "ZIP code": lead.zip } : {}),
+    ...(lead.service ? { "Service interested in": lead.service } : {}),
+    ...(lead.message ? { Message: lead.message } : {}),
+    ...(lead.page ? { "Submitted from": lead.page } : {}),
+  });
+  return ok && (data.success === true || data.success === "true");
+}
+
+async function sendViaApi(lead: Lead): Promise<{ ok: boolean; emailed: boolean }> {
+  const { ok, data } = await postJson(site.formEndpoint, lead, 5500);
+  return { ok: ok && data.ok === true, emailed: ok && data.emailed === true };
+}
 
 const roles = [
   "Patient",
@@ -27,10 +115,19 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
   const id = (k: string) => `${uid}-${k}`;
   const [f, setF] = useState<Fields>({ name: "", phone: "", email: "", role: "", service: "", zip: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<{ kind: "idle" | "sending" | "sent" | "error"; text?: string }>({ kind: "idle" });
+  const [status, setStatus] = useState<{ kind: "idle" | "sending" | "sent" | "error"; text?: string; mailtoHref?: string }>({ kind: "idle" });
   const summaryRef = useRef<HTMLDivElement>(null);
   const honeyRef = useRef<HTMLInputElement>(null);
   const dark = tone === "dark";
+
+  // Result of a no-JavaScript submission, which /api/lead redirects back here with ?sent=1 / ?error=1.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    if (q.get("sent") === "1")
+      setStatus({ kind: "sent", text: "Thank you. We received your message and will call you back, usually the same business day." });
+    else if (q.get("error") === "1")
+      setStatus({ kind: "error", text: `Sorry, your message did not go through. Please call ${site.phone} or email ${site.email}.` });
+  }, []);
 
   const set = (k: keyof Fields) => (e: { target: { value: string } }) => {
     const val = e.target.value;
@@ -84,38 +181,54 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
       return;
     }
 
-    const payload: Record<string, string> = {
-      _subject: `New Home Health Inquiry from ${cleanName} — ${site.shortName}`,
-      _template: "table",
-      _captcha: "false",
-      Name: cleanName,
-      Phone: cleanPhone,
-      ...(cleanEmail ? { Email: cleanEmail, _replyto: cleanEmail } : {}),
-      ...(f.role ? { "Caller Role": f.role } : {}),
-      ...(cleanZip ? { "ZIP Code": cleanZip } : {}),
-      ...(f.service ? { "Service Interested In": f.service } : {}),
-      ...(cleanMessage ? { Message: cleanMessage } : {}),
+    const lead = {
+      name: cleanName,
+      phone: cleanPhone,
+      email: cleanEmail,
+      role: f.role,
+      zip: cleanZip,
+      service: f.service,
+      message: cleanMessage,
+      page: typeof window !== "undefined" ? window.location.pathname : "",
     };
 
     setStatus({ kind: "sending" });
-    try {
-      const res = await fetch(site.formEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error(String(res.status));
+    const [w3, fs, apiRes, browserFs] = await Promise.all([
+      sendViaWeb3Forms(lead),
+      sendViaFormspree(lead),
+      sendViaApi(lead),
+      sendViaBrowserFormSubmit(lead),
+    ]);
+    const emailed = w3 || fs || apiRes.emailed || browserFs;
+
+    if (emailed) {
       setStatus({
         kind: "sent",
-        text: `Thank you, ${firstName}. We received your message and will call you back, usually the same business day.`,
+        text: `Thank you, ${firstName}. Your message has been sent to ${site.email} and we will call you back, usually the same business day.`,
       });
       setF({ name: "", phone: "", email: "", role: "", service: "", zip: "", message: "" });
-    } catch {
-      setStatus({
-        kind: "error",
-        text: `Sorry, your message did not go through. Please email us directly at ${site.email} or call ${site.phone}.`,
-      });
+      return;
     }
+
+    // If background email relays (e.g. FormSubmit) are unreachable, /api/lead still logs the lead
+    // on the server AND we open the visitor's email client pre-addressed to info@royalcareathome.com.
+    const bodyLines = [
+      `Name: ${lead.name}`,
+      `Phone: ${lead.phone}`,
+      lead.email && `Email: ${lead.email}`,
+      lead.role && `I am: ${lead.role}`,
+      lead.service && `Interested in: ${lead.service}`,
+      lead.zip && `ZIP code: ${lead.zip}`,
+      lead.message && `\n${lead.message}`,
+    ].filter(Boolean);
+    const mailtoHref = `${site.emailHref}?subject=${encodeURIComponent(`Home health inquiry from ${lead.name}`)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+    window.location.href = mailtoHref;
+    setStatus({
+      kind: "sent",
+      text: `Thank you, ${firstName}. We recorded your inquiry for ${site.email}. If your email app didn't open automatically, click below to send directly to ${site.email} or call ${site.phone}.`,
+      mailtoHref,
+    });
+    setF({ name: "", phone: "", email: "", role: "", service: "", zip: "", message: "" });
   }
 
   const errorList = Object.entries(errors) as [keyof Fields, string][];
@@ -135,9 +248,6 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
 
   return (
     <form action={site.formAction} method="POST" noValidate onSubmit={onSubmit} aria-labelledby={id("title")} className={dark ? "on-dark" : ""}>
-      <input type="hidden" name="_subject" value={`New Home Health Inquiry — ${site.shortName}`} />
-      <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_captcha" value="false" />
       <input
         ref={honeyRef}
         type="text"
@@ -258,6 +368,12 @@ export default function ContactForm({ tone = "light", heading = "Send us a messa
             <Icon name={status.kind === "error" ? "TriangleAlert" : "Check"} className="mt-1 h-4 w-4 shrink-0" />
             {status.text}
           </p>
+        )}
+        {status.mailtoHref && (
+          <a href={status.mailtoHref} className={`btn mt-3 w-full sm:w-auto ${dark ? "btn-outline-light" : "btn-outline"}`}>
+            <Icon name="Mail" className="h-4 w-4" />
+            Email {site.email}
+          </a>
         )}
       </div>
     </form>
