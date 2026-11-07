@@ -136,7 +136,7 @@ export default function Footer() {
 
           <p className="text-base font-medium text-cream sm:text-[1.0625rem]">
             <a
-              href="https://embratechnologies.org"
+              href="https://www.embratechnologies.org/portfolio/royal-home-health-care"
               target="_blank"
               rel="noopener noreferrer"
               className="embra-credit-link group"
